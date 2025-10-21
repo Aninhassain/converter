@@ -27,8 +27,10 @@ export default function Home() {
             
             <div className="bg-white rounded-xl shadow-lg p-8 text-center hover:shadow-xl transition-shadow">
               <Ruler className="h-12 w-12 text-green-600 mx-auto mb-4" />
+              <Link href="/converters">
               <h3 className="text-xl font-semibold text-gray-800 mb-2">Unit Converters</h3>
               <p className="text-gray-600">Convert between different units of measurement.</p>
+              </Link>
             </div>
             
             <div className="bg-white rounded-xl shadow-lg p-8 text-center hover:shadow-xl transition-shadow">
