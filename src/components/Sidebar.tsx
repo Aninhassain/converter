@@ -15,7 +15,8 @@ import {
   FaSyncAlt,
   FaSquare,
   FaCube,
-  FaDollarSign
+  FaDollarSign,
+  FaTachometerAlt
 } from 'react-icons/fa';
 
 // Type definitions
@@ -137,6 +138,7 @@ const Sidebar = () => {
             { text: "Temperature", href: "/temperature" },
             { text: "Area", href: "/area" },
             { text: "Volume", href: "/volume" },
+            { text: "Pressure", href: "/pressure" },
             { text: "Currency", href: "/currency" }
           ]}
         </SidebarDropdownItem>
@@ -146,6 +148,7 @@ const Sidebar = () => {
         <SidebarItem icon={FaWeightHanging} text="Weight & Mass" href="/weight" />
         <SidebarItem icon={FaSquare} text="Area" href="/area" />
         <SidebarItem icon={FaCube} text="Volume" href="/volume" />
+        <SidebarItem icon={FaTachometerAlt} text="Pressure" href="/pressure" />
         <SidebarItem icon={FaDollarSign} text="Currency" href="/currency" />
       </nav>
 

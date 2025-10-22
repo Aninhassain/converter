@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { Calculator, Ruler, Thermometer, Scale, Box } from "lucide-react";
+import { Calculator, Ruler, Thermometer, Scale, Box, Gauge } from "lucide-react";
 
 export default function Home() {
   return (
@@ -51,6 +51,14 @@ export default function Home() {
               <Box className="h-12 w-12 text-orange-600 mx-auto mb-4" />
               <h3 className="text-xl font-semibold text-gray-800 mb-2">Volume</h3>
               <p className="text-gray-600">Convert between liters, gallons, cubic meters, and more.</p>
+            </div>
+            
+            <div className="bg-white rounded-xl shadow-lg p-8 text-center hover:shadow-xl transition-shadow">
+              <Link href="/pressure">
+                <Gauge className="h-12 w-12 text-indigo-600 mx-auto mb-4" />
+                <h3 className="text-xl font-semibold text-gray-800 mb-2">Pressure</h3>
+                <p className="text-gray-600">Convert between Pascal, PSI, Bar, Atmosphere, and more.</p>
+              </Link>
             </div>
           </div>
 

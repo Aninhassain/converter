@@ -8,7 +8,7 @@ const Header = () => {
         <div className="flex items-center justify-between">
           <Link href="/" className="flex items-center gap-3 hover:opacity-90 transition-opacity">
             <Calculator className="h-8 w-8" />
-            <h1 className="text-3xl font-bold" style={{ fontFamily: 'Montserrat, sans-serif' }}>
+            <h1 className="text-3xl font-bold">
               <span className="font-bold">AAA </span>
               <span className="font-normal"> CONVERTER</span>
             </h1>
