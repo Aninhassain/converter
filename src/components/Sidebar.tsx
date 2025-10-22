@@ -14,7 +14,8 @@ import {
   FaCog,
   FaSyncAlt,
   FaSquare,
-  FaCube
+  FaCube,
+  FaDollarSign
 } from 'react-icons/fa';
 
 // Type definitions
@@ -38,7 +39,7 @@ interface SidebarItemProps {
 
 // This is a sub-component to keep our code clean (DRY)
 // It manages its own open/closed state
-const SidebarDropdownItem = ({ icon: Icon, text, href, children }: SidebarDropdownItemProps) => {
+const SidebarDropdownItem = ({ icon: Icon, text, href, children }: SidebarDropdownItemProps & { children?: ChildItem[] }) => {
   const [isOpen, setIsOpen] = useState(false);
   const pathname = usePathname();
   const isActive = pathname === href || (children && children.some((child: ChildItem) => pathname === child.href));
@@ -117,7 +118,7 @@ const Sidebar = () => {
       <div className="flex flex-col items-center pt-2 pb-8">
         <FaCalculator size={28} className="mb-2.5" />
         <h1 className="text-sm font-semibold tracking-widest uppercase">
-          ConverterHub
+          AAA Converter
         </h1>
       </div>
 
@@ -129,43 +130,25 @@ const Sidebar = () => {
           icon={FaRulerCombined} 
           text="Unit Converters" 
           href="/converters"
-          children={[
+        >
+          {[
             { text: "Length", href: "/length" },
             { text: "Weight & Mass", href: "/weight" },
             { text: "Temperature", href: "/temperature" },
             { text: "Area", href: "/area" },
-            { text: "Volume", href: "/volume" }
+            { text: "Volume", href: "/volume" },
+            { text: "Currency", href: "/currency" }
           ]}
-        />
+        </SidebarDropdownItem>
         
         <SidebarItem icon={FaThermometerHalf} text="Temperature" href="/temperature" />
         <SidebarItem icon={FaRulerHorizontal} text="Length" href="/length" />
         <SidebarItem icon={FaWeightHanging} text="Weight & Mass" href="/weight" />
         <SidebarItem icon={FaSquare} text="Area" href="/area" />
         <SidebarItem icon={FaCube} text="Volume" href="/volume" />
+        <SidebarItem icon={FaDollarSign} text="Currency" href="/currency" />
       </nav>
 
-      {/* 3. Footer */}
-      <div className="flex flex-col items-center">
-        {/* Settings Link */}
-        <a
-          href="https://github.com/Aninhassain/converter"
-          target="_blank"
-          rel="noopener noreferrer"
-          className="flex items-center text-gray-300 hover:text-white transition-colors mb-7"
-        >
-          <FaCog className="mr-3" size={16} />
-          <span className="text-sm">GitHub</span>
-        </a>
-
-        {/* Bottom Logo */}
-        <div className="flex flex-col items-center">
-          <FaSyncAlt size={24} className="text-gray-400" />
-          <span className="text-xs font-bold text-gray-400 mt-2 tracking-wider uppercase">
-            ConverterHub
-          </span>
-        </div>
-      </div>
     </aside>
   );
 };

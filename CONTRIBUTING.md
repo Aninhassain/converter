@@ -1,6 +1,6 @@
-# Contributing to ConverterHub 🚀
+# Contributing to AAA Converter 🚀
 
-Thank you for your interest in contributing to ConverterHub! This document provides guidelines and information for contributors.
+Thank you for your interest in contributing to AAA Converter! This document provides guidelines and information for contributors.
 
 ## 📋 Table of Contents
 
@@ -289,8 +289,8 @@ If you need help or have questions:
 
 ## 📄 License
 
-By contributing to ConverterHub, you agree that your contributions will be licensed under the MIT License.
+By contributing to AAA Converter, you agree that your contributions will be licensed under the MIT License.
 
 ---
 
-Thank you for contributing to ConverterHub! 🎉
+Thank you for contributing to AAA Converter! 🎉

@@ -9,7 +9,7 @@ export default function Home() {
           {/* Hero Section */}
           <div className="text-center mb-16">
             <h1 className="text-5xl font-bold text-gray-900 mb-6">
-              Welcome to <span className="text-blue-600">ConverterHub</span>
+              Welcome to <span className="text-blue-600">AAA Converter</span>
             </h1>
             <p className="text-xl text-gray-600 mb-8 max-w-2xl mx-auto">
               Your comprehensive platform for all types of unit conversions. 
@@ -20,16 +20,18 @@ export default function Home() {
           {/* Features Grid */}
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-8 mb-16">
             <div className="bg-white rounded-xl shadow-lg p-8 text-center hover:shadow-xl transition-shadow">
-              <Calculator className="h-12 w-12 text-blue-600 mx-auto mb-4" />
-              <h3 className="text-xl font-semibold text-gray-800 mb-2">Currency Converter</h3>
-              <p className="text-gray-600">Convert between different currencies with real-time exchange rates.</p>
+              <Link href="/currency">
+                <Calculator className="h-12 w-12 text-blue-600 mx-auto mb-4" />
+                <h3 className="text-xl font-semibold text-gray-800 mb-2">Currency Converter</h3>
+                <p className="text-gray-600">Convert between different currencies with real-time exchange rates.</p>
+              </Link>
             </div>
             
             <div className="bg-white rounded-xl shadow-lg p-8 text-center hover:shadow-xl transition-shadow">
-              <Ruler className="h-12 w-12 text-green-600 mx-auto mb-4" />
               <Link href="/converters">
-              <h3 className="text-xl font-semibold text-gray-800 mb-2">Unit Converters</h3>
-              <p className="text-gray-600">Convert between different units of measurement.</p>
+                <Ruler className="h-12 w-12 text-green-600 mx-auto mb-4" />
+                <h3 className="text-xl font-semibold text-gray-800 mb-2">Unit Converters</h3>
+                <p className="text-gray-600">Convert between different units of measurement.</p>
               </Link>
             </div>
             

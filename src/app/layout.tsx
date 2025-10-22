@@ -15,7 +15,7 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "ConverterHub.net",
+  title: "AAA Converter",
   description: "Your comprehensive unit converter platform",
 };
 

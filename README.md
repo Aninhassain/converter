@@ -1,4 +1,4 @@
-# ConverterHub 🧮
+# AAA Converter 🧮
 
 A comprehensive unit conversion platform built with Next.js, TypeScript, and Tailwind CSS. Convert between different units of measurement including length, weight, temperature, area, and volume.
 
@@ -16,7 +16,7 @@ A comprehensive unit conversion platform built with Next.js, TypeScript, and Tai
 
 ## 🚀 Live Demo
 
-[Visit ConverterHub](https://your-domain.com) (Replace with your actual domain)
+[Visit AAA Converter](https://your-domain.com) (Replace with your actual domain)
 
 ## 🛠️ Tech Stack
 
