@@ -1,5 +1,5 @@
 import Link from 'next/link';
-import { Ruler, Scale, Thermometer, Square, Box, Gauge } from 'lucide-react';
+import { Ruler, Scale, Thermometer, Square, Box, Gauge, Fuel, Wrench, RotateCcw } from 'lucide-react';
 
 export default function Converters() {
   return (
@@ -61,6 +61,39 @@ export default function Converters() {
                 </div>
                 <p className="text-gray-600">Convert between liters, gallons, cubic meters, and more.</p>
                 <div className="mt-3 text-orange-600 font-medium">Try it now →</div>
+              </div>
+            </Link>
+            
+            <Link href="/fuel-consumption" className="block">
+              <div className="bg-white rounded-lg shadow-md p-6 hover:shadow-lg transition-all duration-300 hover:scale-105">
+                <div className="flex items-center gap-3 mb-4">
+                  <Fuel className="h-6 w-6 text-green-600" />
+                  <h3 className="text-xl font-semibold text-gray-800">Fuel Consumption</h3>
+                </div>
+                <p className="text-gray-600">Convert between L/100km, mpg, km/L, and more.</p>
+                <div className="mt-3 text-green-600 font-medium">Try it now →</div>
+              </div>
+            </Link>
+            
+            <Link href="/torque" className="block">
+              <div className="bg-white rounded-lg shadow-md p-6 hover:shadow-lg transition-all duration-300 hover:scale-105">
+                <div className="flex items-center gap-3 mb-4">
+                  <Wrench className="h-6 w-6 text-purple-600" />
+                  <h3 className="text-xl font-semibold text-gray-800">Torque</h3>
+                </div>
+                <p className="text-gray-600">Convert between N·m, lbf·ft, kgf·m, and more.</p>
+                <div className="mt-3 text-purple-600 font-medium">Try it now →</div>
+              </div>
+            </Link>
+            
+            <Link href="/angle" className="block">
+              <div className="bg-white rounded-lg shadow-md p-6 hover:shadow-lg transition-all duration-300 hover:scale-105">
+                <div className="flex items-center gap-3 mb-4">
+                  <RotateCcw className="h-6 w-6 text-blue-600" />
+                  <h3 className="text-xl font-semibold text-gray-800">Angle</h3>
+                </div>
+                <p className="text-gray-600">Convert between degrees, radians, grads, and more.</p>
+                <div className="mt-3 text-blue-600 font-medium">Try it now →</div>
               </div>
             </Link>
             

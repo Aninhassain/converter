@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { Calculator, Ruler, Thermometer, Scale, Box, Gauge } from "lucide-react";
+import { Calculator, Ruler, Thermometer, Scale, Box, Gauge, Fuel, Wrench, RotateCcw } from "lucide-react";
 
 export default function Home() {
   return (
@@ -58,6 +58,30 @@ export default function Home() {
                 <Gauge className="h-12 w-12 text-indigo-600 mx-auto mb-4" />
                 <h3 className="text-xl font-semibold text-gray-800 mb-2">Pressure</h3>
                 <p className="text-gray-600">Convert between Pascal, PSI, Bar, Atmosphere, and more.</p>
+              </Link>
+            </div>
+            
+            <div className="bg-white rounded-xl shadow-lg p-8 text-center hover:shadow-xl transition-shadow">
+              <Link href="/fuel-consumption">
+                <Fuel className="h-12 w-12 text-green-600 mx-auto mb-4" />
+                <h3 className="text-xl font-semibold text-gray-800 mb-2">Fuel Consumption</h3>
+                <p className="text-gray-600">Convert between L/100km, mpg, km/L, and more.</p>
+              </Link>
+            </div>
+            
+            <div className="bg-white rounded-xl shadow-lg p-8 text-center hover:shadow-xl transition-shadow">
+              <Link href="/torque">
+                <Wrench className="h-12 w-12 text-purple-600 mx-auto mb-4" />
+                <h3 className="text-xl font-semibold text-gray-800 mb-2">Torque</h3>
+                <p className="text-gray-600">Convert between N·m, lbf·ft, kgf·m, and more.</p>
+              </Link>
+            </div>
+            
+            <div className="bg-white rounded-xl shadow-lg p-8 text-center hover:shadow-xl transition-shadow">
+              <Link href="/angle">
+                <RotateCcw className="h-12 w-12 text-blue-600 mx-auto mb-4" />
+                <h3 className="text-xl font-semibold text-gray-800 mb-2">Angle</h3>
+                <p className="text-gray-600">Convert between degrees, radians, grads, and more.</p>
               </Link>
             </div>
           </div>
