@@ -1,5 +1,5 @@
 import Link from 'next/link';
-import { Ruler, Scale, Thermometer, Square, Box, Gauge, Fuel, Wrench, RotateCcw } from 'lucide-react';
+import { Ruler, Scale, Thermometer, Square, Box, Gauge, Fuel, Wrench, RotateCcw, Hash } from 'lucide-react';
 
 export default function Converters() {
   return (
@@ -94,6 +94,17 @@ export default function Converters() {
                 </div>
                 <p className="text-gray-600">Convert between degrees, radians, grads, and more.</p>
                 <div className="mt-3 text-blue-600 font-medium">Try it now →</div>
+              </div>
+            </Link>
+            
+            <Link href="/number-converter" className="block">
+              <div className="bg-white rounded-lg shadow-md p-6 hover:shadow-lg transition-all duration-300 hover:scale-105">
+                <div className="flex items-center gap-3 mb-4">
+                  <Hash className="h-6 w-6 text-green-600" />
+                  <h3 className="text-xl font-semibold text-gray-800">Numbers Converter</h3>
+                </div>
+                <p className="text-gray-600">Convert between different number bases (2-36).</p>
+                <div className="mt-3 text-green-600 font-medium">Try it now →</div>
               </div>
             </Link>
             

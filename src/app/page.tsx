@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { Calculator, Ruler, Thermometer, Scale, Box, Gauge, Fuel, Wrench, RotateCcw } from "lucide-react";
+import { Calculator, Ruler, Thermometer, Scale, Box, Gauge, Fuel, Wrench, RotateCcw, Hash } from "lucide-react";
 
 export default function Home() {
   return (
@@ -82,6 +82,14 @@ export default function Home() {
                 <RotateCcw className="h-12 w-12 text-blue-600 mx-auto mb-4" />
                 <h3 className="text-xl font-semibold text-gray-800 mb-2">Angle</h3>
                 <p className="text-gray-600">Convert between degrees, radians, grads, and more.</p>
+              </Link>
+            </div>
+            
+            <div className="bg-white rounded-xl shadow-lg p-8 text-center hover:shadow-xl transition-shadow">
+              <Link href="/number-converter">
+                <Hash className="h-12 w-12 text-green-600 mx-auto mb-4" />
+                <h3 className="text-xl font-semibold text-gray-800 mb-2">Numbers Converter</h3>
+                <p className="text-gray-600">Convert between different number bases (2-36).</p>
               </Link>
             </div>
           </div>
