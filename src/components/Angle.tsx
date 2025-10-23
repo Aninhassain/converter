@@ -282,8 +282,8 @@ const Angle = () => {
                 </div>
                 <div>
                   <h4 className="font-semibold text-gray-700 mb-2">Minutes & Seconds</h4>
-                  <p className="text-sm text-gray-600">1° = 60' = 3600"</p>
-                  <p className="text-sm text-gray-600">1' = 60"</p>
+                  <p className="text-sm text-gray-600">1° = 60&apos; = 3600&ldquo;</p>
+                  <p className="text-sm text-gray-600">1&apos; = 60&ldquo;</p>
                 </div>
                 <div>
                   <h4 className="font-semibold text-gray-700 mb-2">Special Units</h4>

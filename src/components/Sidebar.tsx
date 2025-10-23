@@ -11,8 +11,6 @@ import {
   FaWeightHanging,
   FaRulerHorizontal,
   FaChevronDown,
-  FaCog,
-  FaSyncAlt,
   FaSquare,
   FaCube,
   FaDollarSign,

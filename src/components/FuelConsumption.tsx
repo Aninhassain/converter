@@ -34,31 +34,31 @@ const FuelConsumption = () => {
     { value: 'nautical_mile_per_gallon_uk', label: 'Nautical Mile per Gallon (UK)', symbol: 'n.mile/gal (UK)' }
   ];
 
-  // Conversion factors to L/100km (base unit for fuel consumption)
-  const conversionFactors: { [key: string]: number } = {
-    // Metric units
-    meter_per_liter: 100000, // 1 m/L = 100,000 L/100km
-    kilometer_per_liter: 100, // 1 km/L = 100 L/100km
-    liter_per_100km: 1, // Base unit
-    liter_per_km: 0.01, // 1 L/km = 0.01 L/100km
-    
-    // US units
-    mile_per_gallon_us: 235.214583, // 1 mpg (US) = 235.214583 L/100km
-    gallon_per_100mile_us: 2.35214583, // 1 gal/100 mi (US) = 2.35214583 L/100km
-    
-    // UK units
-    mile_per_gallon_uk: 282.480936, // 1 mpg (UK) = 282.480936 L/100km
-    gallon_per_100mile_uk: 2.82480936, // 1 gal/100 mi (UK) = 2.82480936 L/100km
-    
-    // Additional metric variations
-    meter_per_cubic_meter: 100000, // Same as m/L
-    kilometer_per_cubic_meter: 100, // Same as km/L
-    
-    // Nautical units
-    nautical_mile_per_liter: 185.2, // 1 n.mile/L = 185.2 L/100km
-    nautical_mile_per_gallon_us: 204.545, // 1 n.mile/gal (US) = 204.545 L/100km
-    nautical_mile_per_gallon_uk: 245.454, // 1 n.mile/gal (UK) = 245.454 L/100km
-  };
+  // Conversion factors to L/100km (base unit for fuel consumption) - kept for reference
+  // const conversionFactors: { [key: string]: number } = {
+  //   // Metric units
+  //   meter_per_liter: 100000, // 1 m/L = 100,000 L/100km
+  //   kilometer_per_liter: 100, // 1 km/L = 100 L/100km
+  //   liter_per_100km: 1, // Base unit
+  //   liter_per_km: 0.01, // 1 L/km = 0.01 L/100km
+  //   
+  //   // US units
+  //   mile_per_gallon_us: 235.214583, // 1 mpg (US) = 235.214583 L/100km
+  //   gallon_per_100mile_us: 2.35214583, // 1 gal/100 mi (US) = 2.35214583 L/100km
+  //   
+  //   // UK units
+  //   mile_per_gallon_uk: 282.480936, // 1 mpg (UK) = 282.480936 L/100km
+  //   gallon_per_100mile_uk: 2.82480936, // 1 gal/100 mi (UK) = 2.82480936 L/100km
+  //   
+  //   // Additional metric variations
+  //   meter_per_cubic_meter: 100000, // Same as m/L
+  //   kilometer_per_cubic_meter: 100, // Same as km/L
+  //   
+  //   // Nautical units
+  //   nautical_mile_per_liter: 185.2, // 1 n.mile/L = 185.2 L/100km
+  //   nautical_mile_per_gallon_us: 204.545, // 1 n.mile/gal (US) = 204.545 L/100km
+  //   nautical_mile_per_gallon_uk: 245.454, // 1 n.mile/gal (UK) = 245.454 L/100km
+  // };
 
   const convertFuelConsumption = (value: number, from: string, to: string): number => {
     if (from === to) return value;

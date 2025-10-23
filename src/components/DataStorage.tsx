@@ -321,7 +321,7 @@ const DataStorage = () => {
               <div className="bg-white rounded-lg p-4 shadow-md">
                 <h4 className="font-semibold text-gray-700 mb-2">Storage Media</h4>
                 <ul className="text-sm text-gray-600 space-y-1">
-                  <li>Floppy 3.5" HD: 1.44 MB</li>
+                  <li>Floppy 3.5&ldquo; HD: 1.44 MB</li>
                   <li>CD-ROM: 650-700 MB</li>
                   <li>DVD: 4.7-17 GB</li>
                   <li>Blu-ray: 25-50 GB</li>
@@ -346,8 +346,8 @@ const DataStorage = () => {
               <div className="bg-white rounded-lg p-4 shadow-md">
                 <h4 className="font-semibold text-gray-700 mb-2">Legacy Media</h4>
                 <ul className="text-sm text-gray-600 space-y-1">
-                  <li>Floppy 5.25": 360 KB - 1.2 MB</li>
-                  <li>Floppy 3.5": 720 KB - 2.88 MB</li>
+                  <li>Floppy 5.25&ldquo;: 360 KB - 1.2 MB</li>
+                  <li>Floppy 3.5&ldquo;: 720 KB - 2.88 MB</li>
                   <li>Zip Disk: 100-750 MB</li>
                   <li>Jaz Disk: 1-2 GB</li>
                 </ul>

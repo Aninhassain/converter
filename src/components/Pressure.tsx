@@ -96,7 +96,7 @@ const Pressure = () => {
     } else {
       setToValue('');
     }
-  }, [fromValue, fromUnit, toUnit]);
+  }, [fromValue, fromUnit, toUnit, pressureUnits]);
 
   const handleFromValueChange = (value: string) => {
     setFromValue(value);

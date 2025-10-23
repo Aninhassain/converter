@@ -39,7 +39,7 @@ const NumberConverter = () => {
       
       // Convert from decimal to target base
       return decimal.toString(toBase).toUpperCase();
-    } catch (error) {
+    } catch {
       return 'Invalid input';
     }
   };
