@@ -205,8 +205,8 @@ const Angle = () => {
                 <ul className="text-sm text-gray-600 space-y-1">
                   <li>1° = π/180 rad ≈ 0.0175 rad</li>
                   <li>1 rad = 180/π° ≈ 57.296°</li>
-                  <li>1° = 60' (minutes)</li>
-                  <li>1' = 60" (seconds)</li>
+                  <li>1° = 60&apos; (minutes)</li>
+                  <li>1&apos; = 60&ldquo; (seconds)</li>
                 </ul>
               </div>
               <div className="bg-white rounded-lg p-4 shadow-md">
