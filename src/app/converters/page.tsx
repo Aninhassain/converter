@@ -1,5 +1,5 @@
 import Link from 'next/link';
-import { Ruler, Scale, Thermometer, Square, Box, Gauge, Fuel, Wrench, RotateCcw, Hash } from 'lucide-react';
+import { Ruler, Scale, Thermometer, Square, Box, Gauge, Fuel, Wrench, RotateCcw, Hash, HardDrive } from 'lucide-react';
 
 export default function Converters() {
   return (
@@ -105,6 +105,17 @@ export default function Converters() {
                 </div>
                 <p className="text-gray-600">Convert between different number bases (2-36).</p>
                 <div className="mt-3 text-green-600 font-medium">Try it now →</div>
+              </div>
+            </Link>
+            
+            <Link href="/data-storage" className="block">
+              <div className="bg-white rounded-lg shadow-md p-6 hover:shadow-lg transition-all duration-300 hover:scale-105">
+                <div className="flex items-center gap-3 mb-4">
+                  <HardDrive className="h-6 w-6 text-indigo-600" />
+                  <h3 className="text-xl font-semibold text-gray-800">Data Storage</h3>
+                </div>
+                <p className="text-gray-600">Convert between bits, bytes, KB, MB, GB, and more.</p>
+                <div className="mt-3 text-indigo-600 font-medium">Try it now →</div>
               </div>
             </Link>
             
