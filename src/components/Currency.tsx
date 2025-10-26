@@ -361,8 +361,8 @@ const Currency = () => {
           <div className="text-center mt-4">
             <a 
               href="https://www.exchangerate-api.com" 
-              target="_blank" 
-              rel="noopener noreferrer"
+              // target="_blank" 
+              // rel="noopener noreferrer"
               className="text-xs text-gray-500 hover:text-gray-700"
             >
               Rates By ExchangeRate-API

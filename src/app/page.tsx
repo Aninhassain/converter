@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { Calculator, Ruler, Thermometer, Scale, Box, Gauge, Fuel, Wrench, RotateCcw, Hash, HardDrive } from "lucide-react";
+import { Calculator, Ruler, Thermometer, Scale, Box, Gauge, Fuel, Wrench, RotateCcw, Hash, HardDrive, Zap, Type } from "lucide-react";
 
 export default function Home() {
   return (
@@ -12,7 +12,7 @@ export default function Home() {
               Welcome to <span className="text-blue-600">AAA Converter</span>
             </h1>
             <p className="text-xl text-gray-600 mb-8 max-w-2xl mx-auto">
-              Your comprehensive platform for all types of unit conversions. 
+              Your comprehensive platform for all types of unit conversions.
               From length and weight to temperature and currency conversions.
             </p>
           </div>
@@ -26,7 +26,7 @@ export default function Home() {
                 <p className="text-gray-600">Convert between different currencies with real-time exchange rates.</p>
               </Link>
             </div>
-            
+
             <div className="bg-white rounded-xl shadow-lg p-8 text-center hover:shadow-xl transition-shadow">
               <Link href="/converters">
                 <Ruler className="h-12 w-12 text-green-600 mx-auto mb-4" />
@@ -34,25 +34,25 @@ export default function Home() {
                 <p className="text-gray-600">Convert between different units of measurement.</p>
               </Link>
             </div>
-            
+
             <div className="bg-white rounded-xl shadow-lg p-8 text-center hover:shadow-xl transition-shadow">
               <Thermometer className="h-12 w-12 text-red-600 mx-auto mb-4" />
               <h3 className="text-xl font-semibold text-gray-800 mb-2">Temperature</h3>
               <p className="text-gray-600">Convert between Celsius, Fahrenheit, and Kelvin.</p>
             </div>
-            
+
             <div className="bg-white rounded-xl shadow-lg p-8 text-center hover:shadow-xl transition-shadow">
               <Scale className="h-12 w-12 text-purple-600 mx-auto mb-4" />
               <h3 className="text-xl font-semibold text-gray-800 mb-2">Weight & Mass</h3>
               <p className="text-gray-600">Convert between kilograms, pounds, ounces, and more.</p>
             </div>
-            
+
             <div className="bg-white rounded-xl shadow-lg p-8 text-center hover:shadow-xl transition-shadow">
               <Box className="h-12 w-12 text-orange-600 mx-auto mb-4" />
               <h3 className="text-xl font-semibold text-gray-800 mb-2">Volume</h3>
               <p className="text-gray-600">Convert between liters, gallons, cubic meters, and more.</p>
             </div>
-            
+
             <div className="bg-white rounded-xl shadow-lg p-8 text-center hover:shadow-xl transition-shadow">
               <Link href="/pressure">
                 <Gauge className="h-12 w-12 text-indigo-600 mx-auto mb-4" />
@@ -60,7 +60,7 @@ export default function Home() {
                 <p className="text-gray-600">Convert between Pascal, PSI, Bar, Atmosphere, and more.</p>
               </Link>
             </div>
-            
+
             <div className="bg-white rounded-xl shadow-lg p-8 text-center hover:shadow-xl transition-shadow">
               <Link href="/fuel-consumption">
                 <Fuel className="h-12 w-12 text-green-600 mx-auto mb-4" />
@@ -68,7 +68,7 @@ export default function Home() {
                 <p className="text-gray-600">Convert between L/100km, mpg, km/L, and more.</p>
               </Link>
             </div>
-            
+
             <div className="bg-white rounded-xl shadow-lg p-8 text-center hover:shadow-xl transition-shadow">
               <Link href="/torque">
                 <Wrench className="h-12 w-12 text-purple-600 mx-auto mb-4" />
@@ -76,7 +76,7 @@ export default function Home() {
                 <p className="text-gray-600">Convert between N·m, lbf·ft, kgf·m, and more.</p>
               </Link>
             </div>
-            
+
             <div className="bg-white rounded-xl shadow-lg p-8 text-center hover:shadow-xl transition-shadow">
               <Link href="/angle">
                 <RotateCcw className="h-12 w-12 text-blue-600 mx-auto mb-4" />
@@ -84,7 +84,7 @@ export default function Home() {
                 <p className="text-gray-600">Convert between degrees, radians, grads, and more.</p>
               </Link>
             </div>
-            
+
             <div className="bg-white rounded-xl shadow-lg p-8 text-center hover:shadow-xl transition-shadow">
               <Link href="/number-converter">
                 <Hash className="h-12 w-12 text-green-600 mx-auto mb-4" />
@@ -92,7 +92,7 @@ export default function Home() {
                 <p className="text-gray-600">Convert between different number bases (2-36).</p>
               </Link>
             </div>
-            
+
             <div className="bg-white rounded-xl shadow-lg p-8 text-center hover:shadow-xl transition-shadow">
               <Link href="/data-storage">
                 <HardDrive className="h-12 w-12 text-indigo-600 mx-auto mb-4" />
@@ -100,11 +100,27 @@ export default function Home() {
                 <p className="text-gray-600">Convert between bits, bytes, KB, MB, GB, and more.</p>
               </Link>
             </div>
+          
+          <div className="bg-white rounded-xl shadow-lg p-8 text-center hover:shadow-xl transition-shadow">
+            <Link href="/force">
+              <Zap className="h-12 w-12 text-orange-600 mx-auto mb-4" />
+              <h3 className="text-xl font-semibold text-gray-800 mb-2">Force Converter</h3>
+              <p className="text-gray-600">Convert between Newton, kN, lbf, dyne, kgf, and more.</p>
+            </Link>
           </div>
+          <div className="bg-white rounded-xl shadow-lg p-8 text-center hover:shadow-xl transition-shadow">
+            <Link href="/case">
+              <Type className="h-12 w-12 text-orange-600 mx-auto mb-4" />
+              <h3 className="text-xl font-semibold text-gray-800 mb-2">Case Converter</h3>
+              <p className="text-gray-600">Convert between UPPERCASE, lowercase, Title Case, camelCase, snake_case, kebab-case and more.</p>
+            </Link>
+          </div>
+          </div>
+
 
           {/* CTA Section */}
           <div className="text-center">
-            <Link 
+            <Link
               href="/converters"
               className="inline-flex items-center gap-2 bg-blue-600 text-white px-8 py-4 rounded-lg text-lg font-semibold hover:bg-blue-700 transition-colors"
             >
