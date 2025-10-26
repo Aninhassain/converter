@@ -1,6 +1,6 @@
-'use client';
+"use client";
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useMemo } from 'react';
 import { Gauge } from 'lucide-react';
 
 const Pressure = () => {
@@ -9,8 +9,8 @@ const Pressure = () => {
   const [fromUnit, setFromUnit] = useState<string>('pascal');
   const [toUnit, setToUnit] = useState<string>('kilopascal');
 
-  // Comprehensive pressure units list
-  const pressureUnits = [
+  // Comprehensive pressure units list (memoized so it doesn't change each render)
+  const pressureUnits = useMemo(() => [
     { name: 'pascal', symbol: 'Pa', factor: 1 },
     { name: 'kilopascal', symbol: 'kPa', factor: 1000 },
     { name: 'bar', symbol: 'bar', factor: 100000 },
@@ -63,15 +63,19 @@ const Pressure = () => {
     { name: 'inch water (60°F)', symbol: 'inAq', factor: 248.843 },
     { name: 'foot water (60°F)', symbol: 'ftAq', factor: 2986.12 },
     { name: 'atmosphere technical', symbol: 'at', factor: 98066.5 },
-  ];
+  ], []);
 
   // Sort the list alphabetically by name, but keep common units at the top
-  const sortedPressureUnits = pressureUnits.sort((a, b) => {
+  const sortedPressureUnits = useMemo(() => {
+    const units = [...pressureUnits];
     const commonUnits = ['pascal', 'kilopascal', 'bar', 'psi', 'Standard atmosphere'];
-    if (commonUnits.includes(a.name) && !commonUnits.includes(b.name)) return -1;
-    if (!commonUnits.includes(a.name) && commonUnits.includes(b.name)) return 1;
-    return a.name.localeCompare(b.name);
-  });
+    units.sort((a, b) => {
+      if (commonUnits.includes(a.name) && !commonUnits.includes(b.name)) return -1;
+      if (!commonUnits.includes(a.name) && commonUnits.includes(b.name)) return 1;
+      return a.name.localeCompare(b.name);
+    });
+    return units;
+  }, [pressureUnits]);
 
   useEffect(() => {
     const numValue = parseFloat(fromValue);

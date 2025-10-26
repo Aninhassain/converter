@@ -301,7 +301,8 @@ const Sidebar = () => {
           icon={FaRulerCombined}
           text="Unit Converters"
           href="/converters"
-          children={[
+        >
+          {[
             { text: "Length", href: "/length" },
             { text: "Weight & Mass", href: "/weight" },
             { text: "Temperature", href: "/temperature" },
@@ -312,7 +313,7 @@ const Sidebar = () => {
             { text: "Currency", href: "/currency" },
             { text: "Moment of Inertia", href: "/moment-of-inertia" },
           ]}
-        />
+        </SidebarDropdownItem>
 
         {/* Optional individual links */}
         <SidebarItem icon={FaThermometerHalf} text="Temperature" href="/temperature" />
