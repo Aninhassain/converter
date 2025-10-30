@@ -1,7 +1,7 @@
 'use client';
 
 import { useState } from 'react';
-import { Vial } from 'lucide-react';
+import { Droplets } from 'lucide-react';
 
 const Density = () => {
   const [fromValue, setFromValue] = useState<string>('');
@@ -88,7 +88,7 @@ const Density = () => {
           {/* Header */}
           <div className="text-center mb-8">
             <div className="flex items-center justify-center gap-3 mb-4">
-              <Vial className="h-8 w-8 text-purple-600" />
+              <Droplets className="h-8 w-8 text-purple-600" />
               <h1 className="text-4xl font-bold text-gray-900">Density Converter</h1>
             </div>
             <p className="text-lg text-gray-600">
