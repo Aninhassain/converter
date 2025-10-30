@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { Calculator, Ruler, Thermometer, Scale, Box, Gauge, Fuel, Wrench, RotateCcw, Hash, HardDrive, Zap, Type, Clock } from "lucide-react";
+import { Calculator, Ruler, Thermometer, Scale, Box, Gauge, Fuel, Wrench, RotateCcw, Hash, HardDrive, Zap, Type, Clock, Droplets, Waves, Filter } from "lucide-react";
 
 export default function Home() {
   return (
@@ -120,6 +120,38 @@ export default function Home() {
               <Clock className="h-12 w-12 text-violet-600 mx-auto mb-4" />
               <h3 className="text-xl font-semibold text-gray-800 mb-2">Time Converter</h3>
               <p className="text-gray-600">Convert between seconds, minutes, hours, days, weeks, months, years and more</p>
+            </Link>
+          </div>
+
+          <div className="bg-white rounded-xl shadow-lg p-8 text-center hover:shadow-xl transition-shadow">
+            <Link href="/viscosity-dynamic">
+              <Droplets className="h-12 w-12 text-blue-500 mx-auto mb-4" />
+              <h3 className="text-xl font-semibold text-gray-800 mb-2">Dynamic Viscosity</h3>
+              <p className="text-gray-600">Convert between pascal-second, poise, centipoise, and more</p>
+            </Link>
+          </div>
+
+          <div className="bg-white rounded-xl shadow-lg p-8 text-center hover:shadow-xl transition-shadow">
+            <Link href="/viscosity-kinematic">
+              <Droplets className="h-12 w-12 text-indigo-500 mx-auto mb-4" />
+              <h3 className="text-xl font-semibold text-gray-800 mb-2">Kinematic Viscosity</h3>
+              <p className="text-gray-600">Convert between stokes, square meter/second, and more</p>
+            </Link>
+          </div>
+
+          <div className="bg-white rounded-xl shadow-lg p-8 text-center hover:shadow-xl transition-shadow">
+            <Link href="/surface-tension">
+              <Waves className="h-12 w-12 text-cyan-500 mx-auto mb-4" />
+              <h3 className="text-xl font-semibold text-gray-800 mb-2">Surface Tension</h3>
+              <p className="text-gray-600">Convert between newton/meter, dyne/centimeter, and more</p>
+            </Link>
+          </div>
+
+          <div className="bg-white rounded-xl shadow-lg p-8 text-center hover:shadow-xl transition-shadow">
+            <Link href="/permeability">
+              <Filter className="h-12 w-12 text-teal-500 mx-auto mb-4" />
+              <h3 className="text-xl font-semibold text-gray-800 mb-2">Permeability</h3>
+              <p className="text-gray-600">Convert between darcy, square meter, millidarcy, and more</p>
             </Link>
           </div>
           </div>

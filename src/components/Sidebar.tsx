@@ -179,7 +179,9 @@ import {
   FaBolt,
   FaKeyboard,
   FaVial,
-  FaClock
+  FaClock,
+  FaTint,
+  FaWater
 } from "react-icons/fa";
 
 interface ChildItem {
@@ -330,6 +332,19 @@ const Sidebar = () => {
         <SidebarItem icon={FaDollarSign} text="Currency" href="/currency" />
         <SidebarItem icon={FaBalanceScale} text="Moment of Inertia" href="/moment-of-inertia" />
         <SidebarItem icon={FaClock} text="Time" href="/time" />
+
+        <SidebarDropdownItem
+          icon={FaWater}
+          text="Viscosity & Surface"
+          href="/viscosity"
+        >
+          {[
+            { text: "Dynamic Viscosity", href: "/viscosity-dynamic" },
+            { text: "Kinematic Viscosity", href: "/viscosity-kinematic" },
+            { text: "Surface Tension", href: "/surface-tension" },
+            { text: "Permeability", href: "/permeability" },
+          ]}
+        </SidebarDropdownItem>
       </nav>
     </aside>
   );
