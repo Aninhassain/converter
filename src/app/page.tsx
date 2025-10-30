@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { Calculator, Ruler, Thermometer, Scale, Box, Gauge, Fuel, Wrench, RotateCcw, Hash, HardDrive, Zap, Type } from "lucide-react";
+import { Calculator, Ruler, Thermometer, Scale, Box, Gauge, Fuel, Wrench, RotateCcw, Hash, HardDrive, Zap, Type, Clock } from "lucide-react";
 
 export default function Home() {
   return (
@@ -112,7 +112,14 @@ export default function Home() {
             <Link href="/case">
               <Type className="h-12 w-12 text-orange-600 mx-auto mb-4" />
               <h3 className="text-xl font-semibold text-gray-800 mb-2">Case Converter</h3>
-              <p className="text-gray-600">Convert between UPPERCASE, lowercase, Title Case, camelCase, snake_case, kebab-case and more.</p>
+              <p className="text-gray-600">Convert between UPPERCASE, lowercase, Title Case, camelCase, snake_case, kebab-case and more</p>
+            </Link>
+          </div>
+          <div className="bg-white rounded-xl shadow-lg p-8 text-center hover:shadow-xl transition-shadow">
+            <Link href="/time">
+              <Clock className="h-12 w-12 text-violet-600 mx-auto mb-4" />
+              <h3 className="text-xl font-semibold text-gray-800 mb-2">Time Converter</h3>
+              <p className="text-gray-600">Convert between seconds, minutes, hours, days, weeks, months, years and more</p>
             </Link>
           </div>
           </div>

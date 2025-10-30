@@ -176,7 +176,10 @@ import {
   FaDollarSign,
   FaTachometerAlt,
   FaBalanceScale,
-  FaBolt
+  FaBolt,
+  FaKeyboard,
+  FaVial,
+  FaClock
 } from "react-icons/fa";
 
 interface ChildItem {
@@ -309,7 +312,8 @@ const Sidebar = () => {
             { text: "Area", href: "/area" },
             { text: "Volume", href: "/volume" },
             { text: "Pressure", href: "/pressure" },
-            { text: "Force", href: "/force" }, // ✅ New addition
+            { text: "Force", href: "/force" },
+            { text: "Time", href: "/time" },
             { text: "Currency", href: "/currency" },
             { text: "Moment of Inertia", href: "/moment-of-inertia" },
           ]}
@@ -325,6 +329,7 @@ const Sidebar = () => {
         <SidebarItem icon={FaBolt} text="Force" href="/force" />
         <SidebarItem icon={FaDollarSign} text="Currency" href="/currency" />
         <SidebarItem icon={FaBalanceScale} text="Moment of Inertia" href="/moment-of-inertia" />
+        <SidebarItem icon={FaClock} text="Time" href="/time" />
       </nav>
     </aside>
   );
