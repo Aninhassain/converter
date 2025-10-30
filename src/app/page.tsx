@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { Calculator, Ruler, Thermometer, Scale, Box, Gauge, Fuel, Wrench, RotateCcw, Hash, HardDrive, Zap, Type, Clock, Droplets, Waves, Filter, Sun, Flashlight, Lightbulb, Image, Radio } from "lucide-react";
+import { Calculator, Ruler, Thermometer, Scale, Box, Gauge, Fuel, Wrench, RotateCcw, Hash, HardDrive, Zap, Type, Clock, Droplets, Waves, Filter, Sun, Flashlight, Lightbulb, Image, Radio, AlertTriangle, Activity, ShieldAlert, Volume2 } from "lucide-react";
 
 export default function Home() {
   return (
@@ -192,6 +192,46 @@ export default function Home() {
               <Radio className="h-12 w-12 text-purple-500 mx-auto mb-4" />
               <h3 className="text-xl font-semibold text-gray-800 mb-2">Frequency & Wavelength</h3>
               <p className="text-gray-600">Convert between frequency and wavelength units</p>
+            </Link>
+          </div>
+          {/* Radiation & Sound Section */}
+          <div className="bg-white rounded-xl shadow-lg p-8 text-center hover:shadow-xl transition-shadow">
+            <Link href="/radiation">
+              <Zap className="h-12 w-12 text-yellow-600 mx-auto mb-4" />
+              <h3 className="text-xl font-semibold text-gray-800 mb-2">Radiation Dose</h3>
+              <p className="text-gray-600">Convert between sievert, rem, gray, rad, and more</p>
+            </Link>
+          </div>
+
+          <div className="bg-white rounded-xl shadow-lg p-8 text-center hover:shadow-xl transition-shadow">
+            <Link href="/radiation-activity">
+              <Activity className="h-12 w-12 text-orange-600 mx-auto mb-4" />
+              <h3 className="text-xl font-semibold text-gray-800 mb-2">Radiation Activity</h3>
+              <p className="text-gray-600">Convert between becquerel, curie, rutherford, and more</p>
+            </Link>
+          </div>
+
+          <div className="bg-white rounded-xl shadow-lg p-8 text-center hover:shadow-xl transition-shadow">
+            <Link href="/radiation-exposure">
+              <AlertTriangle className="h-12 w-12 text-red-600 mx-auto mb-4" />
+              <h3 className="text-xl font-semibold text-gray-800 mb-2">Radiation Exposure</h3>
+              <p className="text-gray-600">Convert between roentgen, C/kg, exposure rates, and more</p>
+            </Link>
+          </div>
+
+          <div className="bg-white rounded-xl shadow-lg p-8 text-center hover:shadow-xl transition-shadow">
+            <Link href="/radiation-absorbed-dose">
+              <ShieldAlert className="h-12 w-12 text-violet-600 mx-auto mb-4" />
+              <h3 className="text-xl font-semibold text-gray-800 mb-2">Absorbed Dose</h3>
+              <p className="text-gray-600">Convert between gray, rad, joule/kg, and more</p>
+            </Link>
+          </div>
+
+          <div className="bg-white rounded-xl shadow-lg p-8 text-center hover:shadow-xl transition-shadow">
+            <Link href="/sound">
+              <Volume2 className="h-12 w-12 text-blue-600 mx-auto mb-4" />
+              <h3 className="text-xl font-semibold text-gray-800 mb-2">Sound Level</h3>
+              <p className="text-gray-600">Convert between decibel, phon, SPL, pascal, and more</p>
             </Link>
           </div>
           </div>
