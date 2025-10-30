@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { Calculator, Ruler, Thermometer, Scale, Box, Gauge, Fuel, Wrench, RotateCcw, Hash, HardDrive, Zap, Type, Clock, Droplets, Waves, Filter } from "lucide-react";
+import { Calculator, Ruler, Thermometer, Scale, Box, Gauge, Fuel, Wrench, RotateCcw, Hash, HardDrive, Zap, Type, Clock, Droplets, Waves, Filter, Sun, Flashlight, Lightbulb, Image, Radio } from "lucide-react";
 
 export default function Home() {
   return (
@@ -34,7 +34,7 @@ export default function Home() {
                 <p className="text-gray-600">Convert between different units of measurement.</p>
               </Link>
             </div>
-
+{/* 
             <div className="bg-white rounded-xl shadow-lg p-8 text-center hover:shadow-xl transition-shadow">
               <Thermometer className="h-12 w-12 text-red-600 mx-auto mb-4" />
               <h3 className="text-xl font-semibold text-gray-800 mb-2">Temperature</h3>
@@ -51,7 +51,7 @@ export default function Home() {
               <Box className="h-12 w-12 text-orange-600 mx-auto mb-4" />
               <h3 className="text-xl font-semibold text-gray-800 mb-2">Volume</h3>
               <p className="text-gray-600">Convert between liters, gallons, cubic meters, and more.</p>
-            </div>
+            </div> */}
 
             <div className="bg-white rounded-xl shadow-lg p-8 text-center hover:shadow-xl transition-shadow">
               <Link href="/pressure">
@@ -152,6 +152,46 @@ export default function Home() {
               <Filter className="h-12 w-12 text-teal-500 mx-auto mb-4" />
               <h3 className="text-xl font-semibold text-gray-800 mb-2">Permeability</h3>
               <p className="text-gray-600">Convert between darcy, square meter, millidarcy, and more</p>
+            </Link>
+          </div>
+
+          <div className="bg-white rounded-xl shadow-lg p-8 text-center hover:shadow-xl transition-shadow">
+            <Link href="/luminance">
+              <Sun className="h-12 w-12 text-yellow-500 mx-auto mb-4" />
+              <h3 className="text-xl font-semibold text-gray-800 mb-2">Luminance</h3>
+              <p className="text-gray-600">Convert between cd/m², nit, foot-lambert, and more</p>
+            </Link>
+          </div>
+
+          <div className="bg-white rounded-xl shadow-lg p-8 text-center hover:shadow-xl transition-shadow">
+            <Link href="/luminous-intensity">
+              <Flashlight className="h-12 w-12 text-amber-500 mx-auto mb-4" />
+              <h3 className="text-xl font-semibold text-gray-800 mb-2">Luminous Intensity</h3>
+              <p className="text-gray-600">Convert between candela, candlepower, Hefner candle, and more</p>
+            </Link>
+          </div>
+
+          <div className="bg-white rounded-xl shadow-lg p-8 text-center hover:shadow-xl transition-shadow">
+            <Link href="/illumination">
+              <Lightbulb className="h-12 w-12 text-orange-500 mx-auto mb-4" />
+              <h3 className="text-xl font-semibold text-gray-800 mb-2">Illumination</h3>
+              <p className="text-gray-600">Convert between lux, foot-candle, phot, nox, and more</p>
+            </Link>
+          </div>
+
+          <div className="bg-white rounded-xl shadow-lg p-8 text-center hover:shadow-xl transition-shadow">
+            <Link href="/image-resolution">
+              <Image className="h-12 w-12 text-blue-500 mx-auto mb-4" />
+              <h3 className="text-xl font-semibold text-gray-800 mb-2">Image Resolution</h3>
+              <p className="text-gray-600">Convert between megapixels, 4K, Full HD, and more</p>
+            </Link>
+          </div>
+
+          <div className="bg-white rounded-xl shadow-lg p-8 text-center hover:shadow-xl transition-shadow">
+            <Link href="/frequency-wavelength">
+              <Radio className="h-12 w-12 text-purple-500 mx-auto mb-4" />
+              <h3 className="text-xl font-semibold text-gray-800 mb-2">Frequency & Wavelength</h3>
+              <p className="text-gray-600">Convert between frequency and wavelength units</p>
             </Link>
           </div>
           </div>
