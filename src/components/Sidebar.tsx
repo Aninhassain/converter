@@ -322,6 +322,20 @@ const Sidebar = () => {
           ]}
         </SidebarDropdownItem>
 
+        {/* Misc / Developer shortcuts */}
+        <SidebarDropdownItem
+          icon={FaKeyboard}
+          text="Miscellaneous"
+          href="/misc"
+        >
+          {[
+            { text: "Prefixes", href: "/prefixes" },
+            { text: "Data Transfer", href: "/data-transfer" },
+            { text: "Typography", href: "/typography" },
+            { text: "Lumber Volume", href: "/volume-lumber" }
+          ]}
+        </SidebarDropdownItem>
+
         {/* Basic Unit Converters */}
         <SidebarItem icon={FaThermometerHalf} text="Temperature" href="/temperature" />
         <SidebarItem icon={FaRulerHorizontal} text="Length" href="/length" />

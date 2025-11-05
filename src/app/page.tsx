@@ -315,6 +315,38 @@ export default function Home() {
               <p className="text-gray-600">Convert between ohm, kiloohm, megaohm, abohm, statohm, and more</p>
             </Link>
           </div>
+          
+          <div className="bg-white rounded-xl shadow-lg p-8 text-center hover:shadow-xl transition-shadow">
+            <Link href="/prefixes">
+              <Hash className="h-12 w-12 text-indigo-500 mx-auto mb-4" />
+              <h3 className="text-xl font-semibold text-gray-800 mb-2">SI Prefixes</h3>
+              <p className="text-gray-600">Convert values between SI prefixes (k, M, m, µ, etc.).</p>
+            </Link>
+          </div>
+
+          <div className="bg-white rounded-xl shadow-lg p-8 text-center hover:shadow-xl transition-shadow">
+            <Link href="/data-transfer">
+              <HardDrive className="h-12 w-12 text-sky-500 mx-auto mb-4" />
+              <h3 className="text-xl font-semibold text-gray-800 mb-2">Data Transfer</h3>
+              <p className="text-gray-600">Convert between bits, bytes, kibibytes, megabits, and more.</p>
+            </Link>
+          </div>
+
+          <div className="bg-white rounded-xl shadow-lg p-8 text-center hover:shadow-xl transition-shadow">
+            <Link href="/typography">
+              <Type className="h-12 w-12 text-rose-500 mx-auto mb-4" />
+              <h3 className="text-xl font-semibold text-gray-800 mb-2">Typography</h3>
+              <p className="text-gray-600">Convert font sizes between px, em, rem, pt and percent.</p>
+            </Link>
+          </div>
+
+          <div className="bg-white rounded-xl shadow-lg p-8 text-center hover:shadow-xl transition-shadow">
+            <Link href="/volume-lumber">
+              <Box className="h-12 w-12 text-green-500 mx-auto mb-4" />
+              <h3 className="text-xl font-semibold text-gray-800 mb-2">Lumber Volume</h3>
+              <p className="text-gray-600">Convert board foot, cubic inch, cubic foot and cubic meter.</p>
+            </Link>
+          </div>
           </div>
 
 
