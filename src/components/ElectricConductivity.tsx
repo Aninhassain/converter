@@ -1,0 +1,70 @@
+'use client';
+
+import { useState } from 'react';
+import { Filter } from 'lucide-react';
+
+const ElectricConductivity = () => {
+  const [fromValue, setFromValue] = useState<string>('1');
+  const [toValue, setToValue] = useState<string>('');
+  const [fromUnit, setFromUnit] = useState<string>('siemens-per-meter');
+  const [toUnit, setToUnit] = useState<string>('siemens-per-centimeter');
+
+  const units = [
+    { value: 'siemens-per-meter', label: 'Siemens/meter [S/m]', factor: 1 },
+    { value: 'siemens-per-centimeter', label: 'Siemens/centimeter [S/cm]', factor: 100 },
+    { value: 'milli-siemens-per-meter', label: 'Millisiemens/meter [mS/m]', factor: 0.001 },
+    { value: 'microsiemens-per-meter', label: 'Microsiemens/meter [µS/m]', factor: 1e-6 }
+  ];
+
+  const factorMap = units.reduce((acc, u) => { acc[u.value] = u.factor; return acc; }, {} as Record<string, number>);
+
+  const convert = (value: number, from: string, to: string) => {
+    const base = value * factorMap[from];
+    return base / factorMap[to];
+  };
+
+  const update = (val: string) => {
+    setFromValue(val);
+    if (val === '') { setToValue(''); return; }
+    const n = parseFloat(val);
+    if (!isNaN(n)) {
+      const out = convert(n, fromUnit, toUnit);
+      setToValue(Math.abs(out) < 1e-6 || Math.abs(out) > 1e6 ? out.toExponential(6) : String(out));
+    }
+  };
+
+  return (
+    <div className="min-h-screen bg-gradient-to-br from-emerald-50 to-teal-100 py-8">
+      <div className="container mx-auto px-4">
+        <div className="max-w-3xl mx-auto">
+          <div className="text-center mb-6">
+            <div className="flex items-center justify-center gap-3 mb-4">
+              <Filter className="h-8 w-8 text-teal-600" />
+              <h1 className="text-3xl font-bold text-gray-900">Electric Conductivity Converter</h1>
+            </div>
+            <p className="text-gray-600">Convert between conductivity units (S/m, S/cm, mS/m).</p>
+          </div>
+
+          <div className="bg-white rounded-xl shadow p-6">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+              <div>
+                <input type="number" value={fromValue} onChange={(e) => update(e.target.value)} className="w-full p-3 border rounded" />
+                <select value={fromUnit} onChange={(e) => { setFromUnit(e.target.value); update(fromValue); }} className="w-full p-3 border rounded mt-2">
+                  {units.map(u => <option key={u.value} value={u.value}>{u.label}</option>)}
+                </select>
+              </div>
+              <div>
+                <input type="text" value={toValue} readOnly className="w-full p-3 border rounded bg-gray-50" />
+                <select value={toUnit} onChange={(e) => { setToUnit(e.target.value); update(fromValue); }} className="w-full p-3 border rounded mt-2">
+                  {units.map(u => <option key={u.value} value={u.value}>{u.label}</option>)}
+                </select>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+};
+
+export default ElectricConductivity;

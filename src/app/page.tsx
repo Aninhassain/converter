@@ -317,6 +317,69 @@ export default function Home() {
           </div>
           
           <div className="bg-white rounded-xl shadow-lg p-8 text-center hover:shadow-xl transition-shadow">
+            <Link href="/electric-conductance">
+              <Zap className="h-12 w-12 text-yellow-500 mx-auto mb-4" />
+              <h3 className="text-xl font-semibold text-gray-800 mb-2">Electric Conductance</h3>
+              <p className="text-gray-600">Convert between siemens, millisiemens, microsiemens and more</p>
+            </Link>
+          </div>
+
+          <div className="bg-white rounded-xl shadow-lg p-8 text-center hover:shadow-xl transition-shadow">
+            <Link href="/electric-conductivity">
+              <Filter className="h-12 w-12 text-teal-500 mx-auto mb-4" />
+              <h3 className="text-xl font-semibold text-gray-800 mb-2">Electric Conductivity</h3>
+              <p className="text-gray-600">Convert between S/m, S/cm, mS/m and more</p>
+            </Link>
+          </div>
+
+          <div className="bg-white rounded-xl shadow-lg p-8 text-center hover:shadow-xl transition-shadow">
+            <Link href="/electrostatic-capacitance">
+              <ShieldAlert className="h-12 w-12 text-violet-600 mx-auto mb-4" />
+              <h3 className="text-xl font-semibold text-gray-800 mb-2">Electrostatic Capacitance</h3>
+              <p className="text-gray-600">Convert between farad, microfarad, nanofarad, picofarad and more</p>
+            </Link>
+          </div>
+
+          <div className="bg-white rounded-xl shadow-lg p-8 text-center hover:shadow-xl transition-shadow">
+            <Link href="/inductance">
+              <RotateCcw className="h-12 w-12 text-indigo-600 mx-auto mb-4" />
+              <h3 className="text-xl font-semibold text-gray-800 mb-2">Inductance</h3>
+              <p className="text-gray-600">Convert between henry, millihenry, microhenry, and more</p>
+            </Link>
+          </div>
+
+          <div className="bg-white rounded-xl shadow-lg p-8 text-center hover:shadow-xl transition-shadow">
+            <Link href="/magnetomotive-force">
+              <Activity className="h-12 w-12 text-yellow-600 mx-auto mb-4" />
+              <h3 className="text-xl font-semibold text-gray-800 mb-2">Magnetomotive Force</h3>
+              <p className="text-gray-600">Convert between ampere-turn and gilbert</p>
+            </Link>
+          </div>
+
+          <div className="bg-white rounded-xl shadow-lg p-8 text-center hover:shadow-xl transition-shadow">
+            <Link href="/magnetic-field-strength">
+              <Sun className="h-12 w-12 text-cyan-500 mx-auto mb-4" />
+              <h3 className="text-xl font-semibold text-gray-800 mb-2">Magnetic Field Strength</h3>
+              <p className="text-gray-600">Convert between A/m and oersted (Oe)</p>
+            </Link>
+          </div>
+
+          <div className="bg-white rounded-xl shadow-lg p-8 text-center hover:shadow-xl transition-shadow">
+            <Link href="/magnetic-flux">
+              <Waves className="h-12 w-12 text-pink-500 mx-auto mb-4" />
+              <h3 className="text-xl font-semibold text-gray-800 mb-2">Magnetic Flux</h3>
+              <p className="text-gray-600">Convert between weber and maxwell</p>
+            </Link>
+          </div>
+
+          <div className="bg-white rounded-xl shadow-lg p-8 text-center hover:shadow-xl transition-shadow">
+            <Link href="/magnetic-flux-density">
+              <Gauge className="h-12 w-12 text-cyan-600 mx-auto mb-4" />
+              <h3 className="text-xl font-semibold text-gray-800 mb-2">Magnetic Flux Density</h3>
+              <p className="text-gray-600">Convert between tesla and gauss</p>
+            </Link>
+          </div>
+          <div className="bg-white rounded-xl shadow-lg p-8 text-center hover:shadow-xl transition-shadow">
             <Link href="/prefixes">
               <Hash className="h-12 w-12 text-indigo-500 mx-auto mb-4" />
               <h3 className="text-xl font-semibold text-gray-800 mb-2">SI Prefixes</h3>
