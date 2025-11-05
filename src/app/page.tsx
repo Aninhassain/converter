@@ -234,6 +234,87 @@ export default function Home() {
               <p className="text-gray-600">Convert between decibel, phon, SPL, pascal, and more</p>
             </Link>
           </div>
+
+          {/* Electrical & Magnetic Section */}
+          <div className="bg-white rounded-xl shadow-lg p-8 text-center hover:shadow-xl transition-shadow">
+            <Link href="/electric-charge">
+              <Zap className="h-12 w-12 text-yellow-500 mx-auto mb-4" />
+              <h3 className="text-xl font-semibold text-gray-800 mb-2">Electric Charge</h3>
+              <p className="text-gray-600">Convert between coulomb, ampere-hour, elementary charge, and more</p>
+            </Link>
+          </div>
+
+          <div className="bg-white rounded-xl shadow-lg p-8 text-center hover:shadow-xl transition-shadow">
+            <Link href="/linear-charge-density">
+              <Zap className="h-12 w-12 text-orange-500 mx-auto mb-4" />
+              <h3 className="text-xl font-semibold text-gray-800 mb-2">Linear Charge Density</h3>
+              <p className="text-gray-600">Convert between coulomb/meter, coulomb/centimeter, and more</p>
+            </Link>
+          </div>
+
+          <div className="bg-white rounded-xl shadow-lg p-8 text-center hover:shadow-xl transition-shadow">
+            <Link href="/surface-charge-density">
+              <Zap className="h-12 w-12 text-red-500 mx-auto mb-4" />
+              <h3 className="text-xl font-semibold text-gray-800 mb-2">Surface Charge Density</h3>
+              <p className="text-gray-600">Convert between coulomb/square meter, coulomb/square centimeter, and more</p>
+            </Link>
+          </div>
+
+          <div className="bg-white rounded-xl shadow-lg p-8 text-center hover:shadow-xl transition-shadow">
+            <Link href="/volume-charge-density">
+              <Zap className="h-12 w-12 text-violet-500 mx-auto mb-4" />
+              <h3 className="text-xl font-semibold text-gray-800 mb-2">Volume Charge Density</h3>
+              <p className="text-gray-600">Convert between coulomb/cubic meter, coulomb/cubic centimeter, and more</p>
+            </Link>
+          </div>
+
+          <div className="bg-white rounded-xl shadow-lg p-8 text-center hover:shadow-xl transition-shadow">
+            <Link href="/electric-current">
+              <Zap className="h-12 w-12 text-blue-500 mx-auto mb-4" />
+              <h3 className="text-xl font-semibold text-gray-800 mb-2">Electric Current</h3>
+              <p className="text-gray-600">Convert between ampere, milliampere, coulomb/second, and more</p>
+            </Link>
+          </div>
+
+          <div className="bg-white rounded-xl shadow-lg p-8 text-center hover:shadow-xl transition-shadow">
+            <Link href="/linear-current-density">
+              <Zap className="h-12 w-12 text-indigo-500 mx-auto mb-4" />
+              <h3 className="text-xl font-semibold text-gray-800 mb-2">Linear Current Density</h3>
+              <p className="text-gray-600">Convert between ampere/meter, ampere/centimeter, and more</p>
+            </Link>
+          </div>
+
+          <div className="bg-white rounded-xl shadow-lg p-8 text-center hover:shadow-xl transition-shadow">
+            <Link href="/surface-current-density">
+              <Zap className="h-12 w-12 text-purple-500 mx-auto mb-4" />
+              <h3 className="text-xl font-semibold text-gray-800 mb-2">Surface Current Density</h3>
+              <p className="text-gray-600">Convert between ampere/square meter, ampere/square centimeter, and more</p>
+            </Link>
+          </div>
+
+          <div className="bg-white rounded-xl shadow-lg p-8 text-center hover:shadow-xl transition-shadow">
+            <Link href="/electric-field-strength">
+              <Zap className="h-12 w-12 text-teal-500 mx-auto mb-4" />
+              <h3 className="text-xl font-semibold text-gray-800 mb-2">Electric Field Strength</h3>
+              <p className="text-gray-600">Convert between volt/meter, newton/coulomb, statvolt/centimeter, and more</p>
+            </Link>
+          </div>
+
+          <div className="bg-white rounded-xl shadow-lg p-8 text-center hover:shadow-xl transition-shadow">
+            <Link href="/electric-potential">
+              <Zap className="h-12 w-12 text-cyan-500 mx-auto mb-4" />
+              <h3 className="text-xl font-semibold text-gray-800 mb-2">Electric Potential</h3>
+              <p className="text-gray-600">Convert between volt, kilovolt, statvolt, abvolt, and more</p>
+            </Link>
+          </div>
+
+          <div className="bg-white rounded-xl shadow-lg p-8 text-center hover:shadow-xl transition-shadow">
+            <Link href="/electric-resistance">
+              <Zap className="h-12 w-12 text-pink-500 mx-auto mb-4" />
+              <h3 className="text-xl font-semibold text-gray-800 mb-2">Electric Resistance</h3>
+              <p className="text-gray-600">Convert between ohm, kiloohm, megaohm, abohm, statohm, and more</p>
+            </Link>
+          </div>
           </div>
 
 

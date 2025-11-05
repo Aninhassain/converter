@@ -181,7 +181,8 @@ import {
   FaVial,
   FaClock,
   FaTint,
-  FaWater
+  FaWater,
+  FaBatteryQuarter
 } from "react-icons/fa";
 
 interface ChildItem {
@@ -321,7 +322,7 @@ const Sidebar = () => {
           ]}
         </SidebarDropdownItem>
 
-        {/* Optional individual links */}
+        {/* Basic Unit Converters */}
         <SidebarItem icon={FaThermometerHalf} text="Temperature" href="/temperature" />
         <SidebarItem icon={FaRulerHorizontal} text="Length" href="/length" />
         <SidebarItem icon={FaWeightHanging} text="Weight & Mass" href="/weight" />
@@ -333,6 +334,7 @@ const Sidebar = () => {
         <SidebarItem icon={FaBalanceScale} text="Moment of Inertia" href="/moment-of-inertia" />
         <SidebarItem icon={FaClock} text="Time" href="/time" />
 
+        {/* Fluid Related Converters */}
         <SidebarDropdownItem
           icon={FaWater}
           text="Viscosity & Surface"
@@ -343,6 +345,35 @@ const Sidebar = () => {
             { text: "Kinematic Viscosity", href: "/viscosity-kinematic" },
             { text: "Surface Tension", href: "/surface-tension" },
             { text: "Permeability", href: "/permeability" },
+          ]}
+        </SidebarDropdownItem>
+
+        {/* Electrical Converters */}
+        <SidebarDropdownItem
+          icon={FaBatteryQuarter}
+          text="Electrical & Magnetic"
+          href="/electrical"
+        >
+          {[
+            { text: "Electric Charge", href: "/electric-charge" },
+            { text: "Linear Charge Density", href: "/linear-charge-density" },
+            { text: "Surface Charge Density", href: "/surface-charge-density" },
+            { text: "Volume Charge Density", href: "/volume-charge-density" },
+            { text: "Electric Current", href: "/electric-current" },
+            { text: "Linear Current Density", href: "/linear-current-density" },
+            { text: "Surface Current Density", href: "/surface-current-density" },
+            { text: "Electric Field Strength", href: "/electric-field-strength" },
+            { text: "Electric Potential", href: "/electric-potential" },
+            { text: "Electric Resistance", href: "/electric-resistance" },
+            { text: "Electric Resistivity", href: "/electric-resistivity" },
+            { text: "Electric Conductance", href: "/electric-conductance" },
+            { text: "Electric Conductivity", href: "/electric-conductivity" },
+            { text: "Electrostatic Capacitance", href: "/electrostatic-capacitance" },
+            { text: "Inductance", href: "/inductance" },
+            { text: "Magnetomotive Force", href: "/magnetomotive-force" },
+            { text: "Magnetic Field Strength", href: "/magnetic-field-strength" },
+            { text: "Magnetic Flux", href: "/magnetic-flux" },
+            { text: "Magnetic Flux Density", href: "/magnetic-flux-density" }
           ]}
         </SidebarDropdownItem>
       </nav>
