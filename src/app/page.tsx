@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { Calculator, Ruler, Thermometer, Scale, Box, Gauge, Fuel, Wrench, RotateCcw, RotateCw, Hash, HardDrive, Zap, Type, Clock, Droplets, Waves, Filter, Sun, Flashlight, Lightbulb, Image, Radio, AlertTriangle, Activity, ShieldAlert, Volume2 } from "lucide-react";
+import { Calculator, Ruler, Thermometer, Scale, Box, Gauge, Fuel, Wrench, RotateCcw, RotateCw, Hash, HardDrive, Zap, Type, Clock, Droplets, Waves, Filter, Sun, Flashlight, Lightbulb, Image, Radio, AlertTriangle, Activity, ShieldAlert, Volume2, Flame } from "lucide-react";
 
 export default function Home() {
   return (
@@ -513,6 +513,63 @@ export default function Home() {
               <Box className="h-12 w-12 text-yellow-600 mx-auto mb-4" />
               <h3 className="text-xl font-semibold text-gray-800 mb-2">Volume (Dry)</h3>
               <p className="text-gray-600">Convert between liters, bushels, pecks, and dry gallons</p>
+            </Link>
+          </div>
+
+          {/* Thermal Properties Section */}
+          <div className="bg-white rounded-xl shadow-lg p-8 text-center hover:shadow-xl transition-shadow">
+            <Link href="/thermal-expansion">
+              <Thermometer className="h-12 w-12 text-orange-600 mx-auto mb-4" />
+              <h3 className="text-xl font-semibold text-gray-800 mb-2">Thermal Expansion</h3>
+              <p className="text-gray-600">Convert thermal expansion coefficients between K⁻¹, °C⁻¹, and °F⁻¹</p>
+            </Link>
+          </div>
+
+          <div className="bg-white rounded-xl shadow-lg p-8 text-center hover:shadow-xl transition-shadow">
+            <Link href="/thermal-resistance">
+              <Thermometer className="h-12 w-12 text-amber-600 mx-auto mb-4" />
+              <h3 className="text-xl font-semibold text-gray-800 mb-2">Thermal Resistance</h3>
+              <p className="text-gray-600">Convert thermal resistance between K/W, °C/W, °F/W, and more</p>
+            </Link>
+          </div>
+
+          <div className="bg-white rounded-xl shadow-lg p-8 text-center hover:shadow-xl transition-shadow">
+            <Link href="/thermal-conductivity">
+              <Thermometer className="h-12 w-12 text-red-600 mx-auto mb-4" />
+              <h3 className="text-xl font-semibold text-gray-800 mb-2">Thermal Conductivity</h3>
+              <p className="text-gray-600">Convert between W/(m·K), W/(cm·°C), cal/(s·cm·°C), and more</p>
+            </Link>
+          </div>
+
+          <div className="bg-white rounded-xl shadow-lg p-8 text-center hover:shadow-xl transition-shadow">
+            <Link href="/specific-heat-capacity">
+              <Flame className="h-12 w-12 text-yellow-600 mx-auto mb-4" />
+              <h3 className="text-xl font-semibold text-gray-800 mb-2">Specific Heat Capacity</h3>
+              <p className="text-gray-600">Convert between J/(kg·K), cal/(g·°C), BTU/(lb·°F), and more</p>
+            </Link>
+          </div>
+
+          <div className="bg-white rounded-xl shadow-lg p-8 text-center hover:shadow-xl transition-shadow">
+            <Link href="/heat-density">
+              <Flame className="h-12 w-12 text-orange-600 mx-auto mb-4" />
+              <h3 className="text-xl font-semibold text-gray-800 mb-2">Heat Density</h3>
+              <p className="text-gray-600">Convert heat density between J/m³, MJ/m³, cal/cm³, and BTU/ft³</p>
+            </Link>
+          </div>
+
+          <div className="bg-white rounded-xl shadow-lg p-8 text-center hover:shadow-xl transition-shadow">
+            <Link href="/heat-flux-density">
+              <Sun className="h-12 w-12 text-yellow-600 mx-auto mb-4" />
+              <h3 className="text-xl font-semibold text-gray-800 mb-2">Heat Flux Density</h3>
+              <p className="text-gray-600">Convert heat flux density between W/m², kW/m², cal/(s·cm²), and more</p>
+            </Link>
+          </div>
+
+          <div className="bg-white rounded-xl shadow-lg p-8 text-center hover:shadow-xl transition-shadow">
+            <Link href="/heat-transfer-coefficient">
+              <Flame className="h-12 w-12 text-red-600 mx-auto mb-4" />
+              <h3 className="text-xl font-semibold text-gray-800 mb-2">Heat Transfer Coefficient</h3>
+              <p className="text-gray-600">Convert between W/(m²·K), W/(cm²·°C), kcal/(h·m²·°C), and more</p>
             </Link>
           </div>
           </div>

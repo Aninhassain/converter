@@ -385,6 +385,23 @@ const Sidebar = () => {
           ]}
         </SidebarDropdownItem>
 
+        {/* Thermal Properties Converters */}
+        <SidebarDropdownItem
+          icon={FaThermometerHalf}
+          text="Thermal Properties"
+          href="/thermal"
+        >
+          {[
+            { text: "Thermal Expansion", href: "/thermal-expansion" },
+            { text: "Thermal Resistance", href: "/thermal-resistance" },
+            { text: "Thermal Conductivity", href: "/thermal-conductivity" },
+            { text: "Specific Heat Capacity", href: "/specific-heat-capacity" },
+            { text: "Heat Density", href: "/heat-density" },
+            { text: "Heat Flux Density", href: "/heat-flux-density" },
+            { text: "Heat Transfer Coefficient", href: "/heat-transfer-coefficient" },
+          ]}
+        </SidebarDropdownItem>
+
         {/* Electrical Converters */}
         <SidebarDropdownItem
           icon={FaBatteryQuarter}
