@@ -430,6 +430,22 @@ const Sidebar = () => {
             { text: "Magnetic Flux Density", href: "/magnetic-flux-density" }
           ]}
         </SidebarDropdownItem>
+
+        {/* Flow & Concentration Converters */}
+        <SidebarDropdownItem
+          icon={FaWater}
+          text="Flow & Concentration"
+          href="/flow"
+        >
+          {[
+            { text: "Flow", href: "/flow" },
+            { text: "Flow (Mass)", href: "/flow-mass" },
+            { text: "Flow (Molar)", href: "/flow-molar" },
+            { text: "Mass Flux Density", href: "/mass-flux-density" },
+            { text: "Concentration (Molar)", href: "/concentration-molar" },
+            { text: "Concentration (Solution)", href: "/concentration-solution" }
+          ]}
+        </SidebarDropdownItem>
       </nav>
     </aside>
   );

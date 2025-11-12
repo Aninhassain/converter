@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { Calculator, Ruler, Thermometer, Scale, Box, Gauge, Fuel, Wrench, RotateCcw, RotateCw, Hash, HardDrive, Zap, Type, Clock, Droplets, Waves, Filter, Sun, Flashlight, Lightbulb, Image, Radio, AlertTriangle, Activity, ShieldAlert, Volume2, Flame } from "lucide-react";
+import { Calculator, Ruler, Thermometer, Scale, Box, Gauge, Fuel, Wrench, RotateCcw, RotateCw, Hash, HardDrive, Zap, Type, Clock, Droplets, Waves, Filter, Sun, Flashlight, Lightbulb, Image, Radio, AlertTriangle, Activity, ShieldAlert, Volume2, Flame, Beaker } from "lucide-react";
 
 export default function Home() {
   return (
@@ -570,6 +570,55 @@ export default function Home() {
               <Flame className="h-12 w-12 text-red-600 mx-auto mb-4" />
               <h3 className="text-xl font-semibold text-gray-800 mb-2">Heat Transfer Coefficient</h3>
               <p className="text-gray-600">Convert between W/(m²·K), W/(cm²·°C), kcal/(h·m²·°C), and more</p>
+            </Link>
+          </div>
+
+          {/* Flow & Concentration Section */}
+          <div className="bg-white rounded-xl shadow-lg p-8 text-center hover:shadow-xl transition-shadow">
+            <Link href="/flow">
+              <Waves className="h-12 w-12 text-blue-600 mx-auto mb-4" />
+              <h3 className="text-xl font-semibold text-gray-800 mb-2">Flow Converter</h3>
+              <p className="text-gray-600">Convert volumetric flow rates between m³/s, L/s, L/min, ft³/s, gal/min, and more</p>
+            </Link>
+          </div>
+
+          <div className="bg-white rounded-xl shadow-lg p-8 text-center hover:shadow-xl transition-shadow">
+            <Link href="/flow-mass">
+              <Scale className="h-12 w-12 text-green-600 mx-auto mb-4" />
+              <h3 className="text-xl font-semibold text-gray-800 mb-2">Flow (Mass) Converter</h3>
+              <p className="text-gray-600">Convert mass flow rates between kg/s, kg/h, kg/min, g/s, lb/s, lb/h, and more</p>
+            </Link>
+          </div>
+
+          <div className="bg-white rounded-xl shadow-lg p-8 text-center hover:shadow-xl transition-shadow">
+            <Link href="/flow-molar">
+              <Zap className="h-12 w-12 text-purple-600 mx-auto mb-4" />
+              <h3 className="text-xl font-semibold text-gray-800 mb-2">Flow (Molar) Converter</h3>
+              <p className="text-gray-600">Convert molar flow rates between mol/s, mol/min, mol/h, kmol/s, and kmol/h</p>
+            </Link>
+          </div>
+
+          <div className="bg-white rounded-xl shadow-lg p-8 text-center hover:shadow-xl transition-shadow">
+            <Link href="/mass-flux-density">
+              <Droplets className="h-12 w-12 text-teal-600 mx-auto mb-4" />
+              <h3 className="text-xl font-semibold text-gray-800 mb-2">Mass Flux Density</h3>
+              <p className="text-gray-600">Convert mass flux density between kg/(m²·s), g/(cm²·s), lb/(ft²·s), and more</p>
+            </Link>
+          </div>
+
+          <div className="bg-white rounded-xl shadow-lg p-8 text-center hover:shadow-xl transition-shadow">
+            <Link href="/concentration-molar">
+              <Zap className="h-12 w-12 text-orange-600 mx-auto mb-4" />
+              <h3 className="text-xl font-semibold text-gray-800 mb-2">Concentration (Molar)</h3>
+              <p className="text-gray-600">Convert molar concentration between mol/m³, mol/L, mmol/L, kmol/m³, and more</p>
+            </Link>
+          </div>
+
+          <div className="bg-white rounded-xl shadow-lg p-8 text-center hover:shadow-xl transition-shadow">
+            <Link href="/concentration-solution">
+              <Beaker className="h-12 w-12 text-pink-600 mx-auto mb-4" />
+              <h3 className="text-xl font-semibold text-gray-800 mb-2">Concentration (Solution)</h3>
+              <p className="text-gray-600">Convert solution concentration between g/L, mg/L, %w/w, %v/v, ppm, and more</p>
             </Link>
           </div>
           </div>
