@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { Calculator, Ruler, Thermometer, Scale, Box, Gauge, Fuel, Wrench, RotateCcw, Hash, HardDrive, Zap, Type, Clock, Droplets, Waves, Filter, Sun, Flashlight, Lightbulb, Image, Radio, AlertTriangle, Activity, ShieldAlert, Volume2 } from "lucide-react";
+import { Calculator, Ruler, Thermometer, Scale, Box, Gauge, Fuel, Wrench, RotateCcw, RotateCw, Hash, HardDrive, Zap, Type, Clock, Droplets, Waves, Filter, Sun, Flashlight, Lightbulb, Image, Radio, AlertTriangle, Activity, ShieldAlert, Volume2 } from "lucide-react";
 
 export default function Home() {
   return (
@@ -408,6 +408,111 @@ export default function Home() {
               <Box className="h-12 w-12 text-green-500 mx-auto mb-4" />
               <h3 className="text-xl font-semibold text-gray-800 mb-2">Lumber Volume</h3>
               <p className="text-gray-600">Convert board foot, cubic inch, cubic foot and cubic meter.</p>
+            </Link>
+          </div>
+
+          {/* Physics & Mechanics Section */}
+          <div className="bg-white rounded-xl shadow-lg p-8 text-center hover:shadow-xl transition-shadow">
+            <Link href="/energy">
+              <Zap className="h-12 w-12 text-orange-600 mx-auto mb-4" />
+              <h3 className="text-xl font-semibold text-gray-800 mb-2">Energy Converter</h3>
+              <p className="text-gray-600">Convert between joule, kilocalorie, watt-hour, erg, and more</p>
+            </Link>
+          </div>
+
+          <div className="bg-white rounded-xl shadow-lg p-8 text-center hover:shadow-xl transition-shadow">
+            <Link href="/power">
+              <Zap className="h-12 w-12 text-amber-600 mx-auto mb-4" />
+              <h3 className="text-xl font-semibold text-gray-800 mb-2">Power Converter</h3>
+              <p className="text-gray-600">Convert between watt, kilowatt, megawatt, horsepower, and more</p>
+            </Link>
+          </div>
+
+          <div className="bg-white rounded-xl shadow-lg p-8 text-center hover:shadow-xl transition-shadow">
+            <Link href="/speed">
+              <Gauge className="h-12 w-12 text-cyan-600 mx-auto mb-4" />
+              <h3 className="text-xl font-semibold text-gray-800 mb-2">Speed Converter</h3>
+              <p className="text-gray-600">Convert between m/s, km/h, mph, knots, and ft/s</p>
+            </Link>
+          </div>
+
+          <div className="bg-white rounded-xl shadow-lg p-8 text-center hover:shadow-xl transition-shadow">
+            <Link href="/velocity-angular">
+              <RotateCcw className="h-12 w-12 text-purple-600 mx-auto mb-4" />
+              <h3 className="text-xl font-semibold text-gray-800 mb-2">Angular Velocity</h3>
+              <p className="text-gray-600">Convert between rad/s, deg/s, rpm, and rps</p>
+            </Link>
+          </div>
+
+          <div className="bg-white rounded-xl shadow-lg p-8 text-center hover:shadow-xl transition-shadow">
+            <Link href="/acceleration">
+              <Zap className="h-12 w-12 text-red-600 mx-auto mb-4" />
+              <h3 className="text-xl font-semibold text-gray-800 mb-2">Acceleration</h3>
+              <p className="text-gray-600">Convert between m/s², g-force, ft/s², and more</p>
+            </Link>
+          </div>
+
+          <div className="bg-white rounded-xl shadow-lg p-8 text-center hover:shadow-xl transition-shadow">
+            <Link href="/acceleration-angular">
+              <RotateCcw className="h-12 w-12 text-violet-600 mx-auto mb-4" />
+              <h3 className="text-xl font-semibold text-gray-800 mb-2">Angular Acceleration</h3>
+              <p className="text-gray-600">Convert between rad/s², deg/s², rpm², and more</p>
+            </Link>
+          </div>
+
+          <div className="bg-white rounded-xl shadow-lg p-8 text-center hover:shadow-xl transition-shadow">
+            <Link href="/density">
+              <Scale className="h-12 w-12 text-green-600 mx-auto mb-4" />
+              <h3 className="text-xl font-semibold text-gray-800 mb-2">Density Converter</h3>
+              <p className="text-gray-600">Convert between kg/m³, g/cm³, lb/ft³, and more</p>
+            </Link>
+          </div>
+
+          <div className="bg-white rounded-xl shadow-lg p-8 text-center hover:shadow-xl transition-shadow">
+            <Link href="/specific-volume">
+              <Box className="h-12 w-12 text-teal-600 mx-auto mb-4" />
+              <h3 className="text-xl font-semibold text-gray-800 mb-2">Specific Volume</h3>
+              <p className="text-gray-600">Convert between m³/kg, cm³/g, and ft³/lb</p>
+            </Link>
+          </div>
+
+          <div className="bg-white rounded-xl shadow-lg p-8 text-center hover:shadow-xl transition-shadow">
+            <Link href="/moment-of-force">
+              <RotateCw className="h-12 w-12 text-blue-600 mx-auto mb-4" />
+              <h3 className="text-xl font-semibold text-gray-800 mb-2">Moment of Force (Torque)</h3>
+              <p className="text-gray-600">Convert between N⋅m, kN⋅m, lb⋅ft, and more</p>
+            </Link>
+          </div>
+
+          <div className="bg-white rounded-xl shadow-lg p-8 text-center hover:shadow-xl transition-shadow">
+            <Link href="/fuel-efficiency-mass">
+              <Fuel className="h-12 w-12 text-orange-600 mx-auto mb-4" />
+              <h3 className="text-xl font-semibold text-gray-800 mb-2">Fuel Efficiency (Mass)</h3>
+              <p className="text-gray-600">Convert between km/kg, mi/lb, and more</p>
+            </Link>
+          </div>
+
+          <div className="bg-white rounded-xl shadow-lg p-8 text-center hover:shadow-xl transition-shadow">
+            <Link href="/fuel-efficiency-volume">
+              <Fuel className="h-12 w-12 text-amber-600 mx-auto mb-4" />
+              <h3 className="text-xl font-semibold text-gray-800 mb-2">Fuel Efficiency (Volume)</h3>
+              <p className="text-gray-600">Convert between km/L, L/100km, mi/gal, and more</p>
+            </Link>
+          </div>
+
+          <div className="bg-white rounded-xl shadow-lg p-8 text-center hover:shadow-xl transition-shadow">
+            <Link href="/temperature-interval">
+              <Thermometer className="h-12 w-12 text-red-600 mx-auto mb-4" />
+              <h3 className="text-xl font-semibold text-gray-800 mb-2">Temperature Interval</h3>
+              <p className="text-gray-600">Convert temperature intervals between K, °C, °F, and °R</p>
+            </Link>
+          </div>
+
+          <div className="bg-white rounded-xl shadow-lg p-8 text-center hover:shadow-xl transition-shadow">
+            <Link href="/volume-dry">
+              <Box className="h-12 w-12 text-yellow-600 mx-auto mb-4" />
+              <h3 className="text-xl font-semibold text-gray-800 mb-2">Volume (Dry)</h3>
+              <p className="text-gray-600">Convert between liters, bushels, pecks, and dry gallons</p>
             </Link>
           </div>
           </div>

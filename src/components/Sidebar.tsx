@@ -362,6 +362,29 @@ const Sidebar = () => {
           ]}
         </SidebarDropdownItem>
 
+        {/* Physics & Mechanics Converters */}
+        <SidebarDropdownItem
+          icon={FaBolt}
+          text="Physics & Mechanics"
+          href="/physics"
+        >
+          {[
+            { text: "Energy", href: "/energy" },
+            { text: "Power", href: "/power" },
+            { text: "Speed", href: "/speed" },
+            { text: "Angular Velocity", href: "/velocity-angular" },
+            { text: "Acceleration", href: "/acceleration" },
+            { text: "Angular Acceleration", href: "/acceleration-angular" },
+            { text: "Density", href: "/density" },
+            { text: "Specific Volume", href: "/specific-volume" },
+            { text: "Moment of Force", href: "/moment-of-force" },
+            { text: "Fuel Efficiency (Mass)", href: "/fuel-efficiency-mass" },
+            { text: "Fuel Efficiency (Volume)", href: "/fuel-efficiency-volume" },
+            { text: "Temperature Interval", href: "/temperature-interval" },
+            { text: "Volume (Dry)", href: "/volume-dry" },
+          ]}
+        </SidebarDropdownItem>
+
         {/* Electrical Converters */}
         <SidebarDropdownItem
           icon={FaBatteryQuarter}
