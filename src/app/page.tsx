@@ -181,7 +181,7 @@ export default function Home() {
 
           <div className="bg-white rounded-xl shadow-lg p-8 text-center hover:shadow-xl transition-shadow">
             <Link href="/image-resolution">
-              <Image className="h-12 w-12 text-blue-500 mx-auto mb-4" />
+              <Image aria-hidden="true" className="h-12 w-12 text-blue-500 mx-auto mb-4" />
               <h3 className="text-xl font-semibold text-gray-800 mb-2">Image Resolution</h3>
               <p className="text-gray-600">Convert between megapixels, 4K, Full HD, and more</p>
             </Link>

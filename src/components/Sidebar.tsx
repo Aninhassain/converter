@@ -178,9 +178,7 @@ import {
   FaBalanceScale,
   FaBolt,
   FaKeyboard,
-  FaVial,
   FaClock,
-  FaTint,
   FaWater,
   FaBatteryQuarter
 } from "react-icons/fa";

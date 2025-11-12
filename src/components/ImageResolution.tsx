@@ -84,7 +84,7 @@ const ImageResolution = () => {
           {/* Header */}
           <div className="text-center mb-8">
             <div className="flex items-center justify-center gap-3 mb-4">
-              <Image className="h-8 w-8 text-blue-600" />
+              <Image aria-hidden="true" className="h-8 w-8 text-blue-600" />
               <h1 className="text-4xl font-bold text-gray-900">Digital Image Resolution Converter</h1>
             </div>
             <p className="text-lg text-gray-600">
