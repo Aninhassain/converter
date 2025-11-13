@@ -149,27 +149,27 @@ const colorClasses: { [key: string]: string } = {
 export default function Home() {
   return (
     <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100">
-      <div className="container mx-auto px-4 py-12">
+      <div className="container mx-auto px-2 md:px-4 py-6 md:py-12">
         <div className="max-w-7xl mx-auto">
           {/* Hero Section */}
-          <div className="text-center mb-16">
-            <h1 className="text-5xl font-bold text-gray-900 mb-6">
+          <div className="text-center mb-8 md:mb-16">
+            <h1 className="text-3xl md:text-5xl font-bold text-gray-900 mb-4 md:mb-6 px-4">
               Welcome to <span className="text-blue-600">AAA Converter</span>
             </h1>
-            <p className="text-xl text-gray-600 mb-8 max-w-2xl mx-auto">
+            <p className="text-base md:text-xl text-gray-600 mb-6 md:mb-8 max-w-2xl mx-auto px-4">
               Your comprehensive platform for all types of unit conversions.
               From length and weight to temperature and currency conversions.
             </p>
           </div>
 
           {/* Categories Grid */}
-          <div className="space-y-12">
+          <div className="space-y-6 md:space-y-12 px-2 md:px-0">
             {calculatorCategories.map((category, categoryIndex) => (
-              <div key={categoryIndex} className="bg-white rounded-xl shadow-lg p-8">
-                <h2 className="text-2xl font-bold text-gray-900 mb-6 pb-3 border-b-2 border-blue-200">
+              <div key={categoryIndex} className="bg-white rounded-xl shadow-lg p-4 md:p-8">
+                <h2 className="text-xl md:text-2xl font-bold text-gray-900 mb-4 md:mb-6 pb-2 md:pb-3 border-b-2 border-blue-200">
                   {category.title}
                 </h2>
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+                <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 md:gap-6">
                   {category.calculators.map((calculator, index) => {
                     const IconComponent = calculator.icon;
                     const iconColorClass = colorClasses[calculator.color] || "text-blue-600";
@@ -177,11 +177,11 @@ export default function Home() {
                       <Link
                         key={index}
                         href={calculator.path}
-                        className="bg-gradient-to-br from-white to-gray-50 rounded-lg p-6 shadow-md hover:shadow-xl transition-all duration-300 hover:-translate-y-1 border border-gray-200 hover:border-blue-300"
+                        className="bg-gradient-to-br from-white to-gray-50 rounded-lg p-4 md:p-6 shadow-md hover:shadow-xl transition-all duration-300 hover:-translate-y-1 border border-gray-200 hover:border-blue-300"
                       >
                         <div className="flex flex-col items-center text-center">
-                          <IconComponent className={`h-10 w-10 ${iconColorClass} mb-3`} />
-                          <h3 className="text-base font-semibold text-gray-800 mb-2 leading-tight">
+                          <IconComponent className={`h-8 w-8 md:h-10 md:w-10 ${iconColorClass} mb-2 md:mb-3`} />
+                          <h3 className="text-sm md:text-base font-semibold text-gray-800 mb-1 md:mb-2 leading-tight">
                             {calculator.name}
                           </h3>
                         </div>

@@ -117,19 +117,19 @@ const Case = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100 py-8">
+    <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100 py-4 md:py-8">
       <div className="container mx-auto px-4">
         <div className="max-w-4xl mx-auto">
-          <div className="text-center mb-8">
-            <div className="flex items-center justify-center gap-3 mb-4">
-              <Zap className="h-8 w-8 text-orange-600" />
-              <h1 className="text-4xl font-bold text-gray-900">Case Converter</h1>
+          <div className="text-center mb-6 md:mb-8">
+            <div className="flex items-center justify-center gap-2 md:gap-3 mb-3 md:mb-4">
+              <Zap className="h-6 w-6 md:h-8 md:w-8 text-orange-600" />
+              <h1 className="text-2xl md:text-4xl font-bold text-gray-900">Case Converter</h1>
             </div>
-            <p className="text-lg text-gray-600">Convert text between different casing styles.</p>
+            <p className="text-base md:text-lg text-gray-600 px-4">Convert text between different casing styles.</p>
           </div>
 
-          <div className="bg-white rounded-xl shadow-lg p-8">
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+          <div className="bg-white rounded-xl shadow-lg p-4 md:p-8">
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 md:gap-8">
               <div>
                 <label className="block text-sm font-semibold text-gray-700 mb-2">Input</label>
                 <textarea
@@ -137,14 +137,14 @@ const Case = () => {
                   onChange={(e) => handleInput(e.target.value)}
                   placeholder="Type or paste text here"
                   rows={8}
-                  className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-transparent text-lg"
+                  className="w-full px-3 md:px-4 py-2 md:py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-transparent text-base md:text-lg"
                 />
 
                 <div className="mt-4 grid grid-cols-2 gap-3">
                   <select
                     value={mode}
                     onChange={(e) => handleMode(e.target.value)}
-                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-transparent text-lg bg-white"
+                    className="w-full px-3 md:px-4 py-2 md:py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-transparent text-base md:text-lg bg-white"
                   >
                     <option value="uppercase">UPPERCASE</option>
                     <option value="lowercase">lowercase</option>
@@ -174,7 +174,7 @@ const Case = () => {
                   readOnly
                   placeholder="Converted text will appear here"
                   rows={8}
-                  className="w-full px-4 py-3 border border-gray-300 rounded-lg bg-gray-50 text-lg text-gray-700"
+                  className="w-full px-3 md:px-4 py-2 md:py-3 border border-gray-300 rounded-lg bg-gray-50 text-base md:text-lg text-gray-700"
                 />
 
                 {input && (

@@ -52,7 +52,7 @@ const SidebarDropdownItem = ({
       {/* Dropdown Toggle */}
       <button
         onClick={() => setIsOpen(!isOpen)}
-        className={`flex items-center justify-between w-full p-3 my-1.5 rounded-lg shadow-sm transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-blue-300 ${
+        className={`flex items-center justify-between w-full p-2 sm:p-3 my-1 sm:my-1.5 rounded-lg shadow-sm transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-blue-300 ${
           isActive
             ? "bg-blue-700 text-white"
             : "bg-white text-gray-800 hover:bg-gray-100"
@@ -63,9 +63,10 @@ const SidebarDropdownItem = ({
             className={`${
               isActive ? "text-white" : "text-blue-600"
             } transition-colors`}
-            size={18}
+            size={16}
+            style={{ minWidth: '16px' }}
           />
-          <span className="ml-4 text-sm font-medium">{text}</span>
+          <span className="ml-2 sm:ml-4 text-xs sm:text-sm font-medium">{text}</span>
         </div>
         <FaChevronDown
           className={`text-gray-500 transition-transform duration-200 ${
@@ -77,12 +78,12 @@ const SidebarDropdownItem = ({
 
       {/* Dropdown Content */}
       {isOpen && (
-        <div className="pl-10 pt-1 pb-2 space-y-1">
+        <div className="pl-6 sm:pl-10 pt-1 pb-2 space-y-1">
           {children.map((child, index) => (
             <Link
               key={index}
               href={child.href}
-              className={`block py-1 text-sm transition-colors ${
+              className={`block py-1 text-xs sm:text-sm transition-colors ${
                 pathname === child.href
                   ? "text-blue-400 font-semibold"
                   : "text-gray-300 hover:text-blue-200"
@@ -104,7 +105,7 @@ const SidebarItem = ({ icon: Icon, text, href }: SidebarItemProps) => {
   return (
     <Link
       href={href}
-      className={`flex items-center w-full p-3 my-1.5 rounded-lg shadow-sm transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-blue-300 ${
+      className={`flex items-center w-full p-2 sm:p-3 my-1 sm:my-1.5 rounded-lg shadow-sm transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-blue-300 ${
         isActive
           ? "bg-blue-700 text-white"
           : "bg-white text-gray-800 hover:bg-gray-100"
@@ -112,20 +113,21 @@ const SidebarItem = ({ icon: Icon, text, href }: SidebarItemProps) => {
     >
       <Icon
         className={`${isActive ? "text-white" : "text-blue-600"}`}
-        size={18}
+        size={16}
+        style={{ minWidth: '16px' }}
       />
-      <span className="ml-4 text-sm font-medium">{text}</span>
+      <span className="ml-2 sm:ml-4 text-xs sm:text-sm font-medium">{text}</span>
     </Link>
   );
 };
 
 const Sidebar = () => {
   return (
-    <aside className="w-64 h-screen bg-gradient-to-b from-blue-800 to-blue-900 text-white p-5 flex flex-col">
+    <aside className="w-64 h-screen bg-gradient-to-b from-blue-800 to-blue-900 text-white p-4 md:p-5 flex flex-col overflow-y-auto">
       {/* Logo Section */}
-      <div className="flex flex-col items-center pt-2 pb-8">
-        <FaCalculator size={28} className="mb-2.5" />
-        <h1 className="text-sm font-semibold tracking-widest uppercase">
+      <div className="flex flex-col items-center pt-2 pb-4 sm:pb-8">
+        <FaCalculator size={24} className="sm:size-[28px] mb-2 sm:mb-2.5" />
+        <h1 className="text-xs sm:text-sm font-semibold tracking-widest uppercase">
           AAA Converter
         </h1>
       </div>

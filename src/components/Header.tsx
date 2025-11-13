@@ -120,29 +120,30 @@ const Header = () => {
 
   return (
     <header className="bg-blue-600 text-white shadow-lg">
-      <div className="container mx-auto px-4 py-6">
-        <div className="flex items-center justify-between gap-4">
-          <Link href="/" className="flex items-center gap-3 hover:opacity-90 transition-opacity">
-            <Calculator className="h-8 w-8" />
-            <h1 className="text-3xl font-bold">
+      <div className="container mx-auto px-4 py-3 md:py-6">
+        <div className="flex flex-col md:flex-row items-center justify-between gap-3 md:gap-4">
+          <Link href="/" className="flex items-center gap-2 md:gap-3 hover:opacity-90 transition-opacity">
+            <Calculator className="h-6 w-6 md:h-8 md:w-8" />
+            <h1 className="text-xl md:text-3xl font-bold">
               <span className="font-bold">AAA </span>
-              <span className="font-normal"> CONVERTER</span>
+              <span className="font-normal hidden sm:inline"> CONVERTER</span>
             </h1>
           </Link>
-          <nav className="flex items-center gap-4 flex-1 justify-end">
+          <nav className="flex items-center gap-2 md:gap-4 w-full md:w-auto md:flex-1 md:justify-end">
             <Link 
               href="/converters" 
-              className="px-4 py-2 rounded-lg hover:bg-white/10 transition-colors font-medium"
+              className="px-3 py-1.5 md:px-4 md:py-2 rounded-lg hover:bg-white/10 transition-colors font-medium text-sm md:text-base whitespace-nowrap"
             >
-              Unit Converters
+              <span className="hidden sm:inline">Unit Converters</span>
+              <span className="sm:hidden">Converters</span>
             </Link>
             {/* Search bar at extreme right */}
-            <div className="relative ml-4 w-64">
+            <div className="relative ml-auto md:ml-4 w-full md:w-64">
               <input
                 ref={inputRef}
                 type="text"
-                className="w-full px-4 py-2 rounded-lg bg-white text-gray-900 focus:outline-none focus:ring-2 focus:ring-blue-300"
-                placeholder="Search calculators..."
+                className="w-full px-3 py-1.5 md:px-4 md:py-2 rounded-lg bg-white text-gray-900 focus:outline-none focus:ring-2 focus:ring-blue-300 text-sm md:text-base"
+                placeholder="Search..."
                 value={search}
                 onChange={e => { setSearch(e.target.value); setShowSuggestions(true); }}
                 onFocus={() => setShowSuggestions(true)}
@@ -155,7 +156,7 @@ const Header = () => {
                   {suggestions.map((s) => (
                     <li
                       key={s.path}
-                      className="px-4 py-2 cursor-pointer hover:bg-blue-100"
+                      className="px-3 md:px-4 py-2 cursor-pointer hover:bg-blue-100 text-sm md:text-base"
                       onMouseDown={() => handleSelect(s.path)}
                     >
                       {s.name}

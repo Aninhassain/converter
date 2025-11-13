@@ -78,23 +78,23 @@ const ImageResolution = () => {
   }, [toUnit, fromUnit, toValue]);
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100 py-8">
+    <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100 py-4 md:py-8">
       <div className="container mx-auto px-4">
         <div className="max-w-4xl mx-auto">
           {/* Header */}
-          <div className="text-center mb-8">
-            <div className="flex items-center justify-center gap-3 mb-4">
-              <ImageIcon aria-label="Image Resolution Icon" className="h-8 w-8 text-blue-600" />
-              <h1 className="text-4xl font-bold text-gray-900">Digital Image Resolution Converter</h1>
+          <div className="text-center mb-6 md:mb-8">
+            <div className="flex items-center justify-center gap-2 md:gap-3 mb-3 md:mb-4">
+              <ImageIcon className="h-6 w-6 md:h-8 md:w-8 text-blue-600" aria-label="Image Resolution Icon" />
+              <h1 className="text-xl md:text-4xl font-bold text-gray-900">Digital Image Resolution Converter</h1>
             </div>
-            <p className="text-lg text-gray-600">
+            <p className="text-base md:text-lg text-gray-600 px-4">
               Convert between different digital image resolution units
             </p>
           </div>
 
           {/* Converter Card */}
-          <div className="bg-white rounded-xl shadow-lg p-8">
-            <div className="grid grid-cols-1 lg:grid-cols-[2fr_auto_2fr] items-center gap-4 lg:gap-8">
+          <div className="bg-white rounded-xl shadow-lg p-4 md:p-8">
+            <div className="grid grid-cols-1 lg:grid-cols-[2fr_auto_2fr] items-center gap-4 md:gap-8">
               {/* From Section */}
               <div className="space-y-4">
                 <label className="block text-sm font-semibold text-gray-700 mb-2">
@@ -106,12 +106,12 @@ const ImageResolution = () => {
                     value={fromValue}
                     onChange={(e) => handleFromValueChange(e.target.value)}
                     placeholder="Enter value"
-                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent text-lg"
+                    className="w-full px-3 md:px-4 py-2 md:py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent text-base md:text-lg"
                   />
                   <select
                     value={fromUnit}
                     onChange={(e) => handleFromUnitChange(e.target.value)}
-                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent text-lg bg-white"
+                    className="w-full px-3 md:px-4 py-2 md:py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent text-base md:text-lg bg-white"
                   >
                     {sortedResolutionUnits.map((unit) => (
                       <option key={unit.name} value={unit.name}>
@@ -146,12 +146,12 @@ const ImageResolution = () => {
                     value={toValue}
                     readOnly
                     placeholder="Result will appear here"
-                    className="w-full px-4 py-3 border border-gray-300 rounded-lg bg-gray-50 text-lg text-gray-700"
+                    className="w-full px-3 md:px-4 py-2 md:py-3 border border-gray-300 rounded-lg bg-gray-50 text-base md:text-lg text-gray-700"
                   />
                   <select
                     value={toUnit}
                     onChange={(e) => handleToUnitChange(e.target.value)}
-                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent text-lg bg-white"
+                    className="w-full px-3 md:px-4 py-2 md:py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent text-base md:text-lg bg-white"
                   >
                     {sortedResolutionUnits.map((unit) => (
                       <option key={unit.name} value={unit.name}>
