@@ -64,7 +64,6 @@ const SidebarDropdownItem = ({
               isActive ? "text-white" : "text-blue-600"
             } transition-colors`}
             size={16}
-            style={{ minWidth: '16px' }}
           />
           <span className="ml-2 sm:ml-4 text-xs sm:text-sm font-medium">{text}</span>
         </div>
@@ -114,7 +113,6 @@ const SidebarItem = ({ icon: Icon, text, href }: SidebarItemProps) => {
       <Icon
         className={`${isActive ? "text-white" : "text-blue-600"}`}
         size={16}
-        style={{ minWidth: '16px' }}
       />
       <span className="ml-2 sm:ml-4 text-xs sm:text-sm font-medium">{text}</span>
     </Link>
