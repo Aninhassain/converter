@@ -1,163 +1,3 @@
-// "use client"; // This is necessary for Next.js App Router to use state
-
-// import { useState } from 'react';
-// import Link from 'next/link';
-// import { usePathname } from 'next/navigation';
-// import {
-//   FaCalculator,
-//   FaHome,
-//   FaThermometerHalf,
-//   FaRulerCombined,
-//   FaWeightHanging,
-//   FaRulerHorizontal,
-//   FaChevronDown,
-//   FaSquare,
-//   FaCube,
-//   FaDollarSign,
-//   FaTachometerAlt,
-//   FaBalanceScale
-// } from 'react-icons/fa';
-
-// // Type definitions
-// interface ChildItem {
-//   text: string;
-//   href: string;
-// }
-
-// interface SidebarDropdownItemProps {
-//   icon: React.ComponentType<{ className?: string; size?: number }>;
-//   text: string;
-//   href: string;
-//   children?: ChildItem[];
-// }
-
-// interface SidebarItemProps {
-//   icon: React.ComponentType<{ className?: string; size?: number }>;
-//   text: string;
-//   href: string;
-// }
-
-// // This is a sub-component to keep our code clean (DRY)
-// // It manages its own open/closed state
-// const SidebarDropdownItem = ({ icon: Icon, text, href, children }: SidebarDropdownItemProps & { children?: ChildItem[] }) => {
-//   const [isOpen, setIsOpen] = useState(false);
-//   const pathname = usePathname();
-//   const isActive = pathname === href || (children && children.some((child: ChildItem) => pathname === child.href));
-
-//   return (
-//     <div className="w-full">
-//       {/* The main button to toggle the dropdown */}
-//       <button
-//         onClick={() => setIsOpen(!isOpen)}
-//         className={`flex items-center justify-between w-full p-3 my-1.5 rounded-lg shadow-sm transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-blue-300 ${
-//           isActive 
-//             ? 'bg-blue-700 text-white' 
-//             : 'bg-white text-gray-800 hover:bg-gray-100'
-//         }`}
-//       >
-//         <div className="flex items-center">
-//           <Icon className={isActive ? 'text-white' : 'text-blue-600'} size={18} />
-//           <span className="ml-4 text-sm font-medium">{text}</span>
-//         </div>
-//         <FaChevronDown
-//           className={`text-gray-500 transition-transform duration-200 ${
-//             isOpen ? 'rotate-180' : ''
-//           }`}
-//           size={14}
-//         />
-//       </button>
-
-//       {/* The collapsible sub-section */}
-//       {isOpen && children && (
-//         <div className="pl-10 pt-1 pb-2 space-y-1">
-//           {children.map((child: ChildItem, index: number) => (
-//             <Link
-//               key={index}
-//               href={child.href}
-//               className={`block py-1 text-sm transition-colors ${
-//                 pathname === child.href 
-//                   ? 'text-white font-medium' 
-//                   : 'text-gray-300 hover:text-white'
-//               }`}
-//             >
-//               {child.text}
-//             </Link>
-//           ))}
-//         </div>
-//       )}
-//     </div>
-//   );
-// };
-
-// // Simple navigation item without dropdown
-// const SidebarItem = ({ icon: Icon, text, href }: SidebarItemProps) => {
-//   const pathname = usePathname();
-//   const isActive = pathname === href;
-
-//   return (
-//     <Link
-//       href={href}
-//       className={`flex items-center w-full p-3 my-1.5 rounded-lg shadow-sm transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-blue-300 ${
-//         isActive 
-//           ? 'bg-blue-700 text-white' 
-//           : 'bg-white text-gray-800 hover:bg-gray-100'
-//       }`}
-//     >
-//       <Icon className={isActive ? 'text-white' : 'text-blue-600'} size={18} />
-//       <span className="ml-4 text-sm font-medium">{text}</span>
-//     </Link>
-//   );
-// };
-
-// // The main Sidebar component
-// const Sidebar = () => {
-//   return (
-//     <aside className="w-64 h-screen bg-gradient-to-b from-blue-800 to-blue-900 text-white p-5 flex flex-col">
-      
-//       {/* 1. Header/Logo */}
-//       <div className="flex flex-col items-center pt-2 pb-8">
-//         <FaCalculator size={28} className="mb-2.5" />
-//         <h1 className="text-sm font-semibold tracking-widest uppercase">
-//           AAA Converter
-//         </h1>
-//       </div>
-
-//       {/* 2. Navigation Menu */}
-//       <nav className="flex-grow">
-//         <SidebarItem icon={FaHome} text="Home" href="/" />
-        
-//         <SidebarDropdownItem 
-//           icon={FaRulerCombined} 
-//           text="Unit Converters" 
-//           href="/converters"
-//         >
-//           {[
-//             { text: "Length", href: "/length" },
-//             { text: "Weight & Mass", href: "/weight" },
-//             { text: "Temperature", href: "/temperature" },
-//             { text: "Area", href: "/area" },
-//             { text: "Volume", href: "/volume" },
-//             { text: "Pressure", href: "/pressure" },
-//             { text: "Currency", href: "/currency" },
-//             { text: "Moment of Inertia", href: "/moment-of-inertia" }
-//           ]}
-//         </SidebarDropdownItem>
-        
-//         <SidebarItem icon={FaThermometerHalf} text="Temperature" href="/temperature" />
-//         <SidebarItem icon={FaRulerHorizontal} text="Length" href="/length" />
-//         <SidebarItem icon={FaWeightHanging} text="Weight & Mass" href="/weight" />
-//         <SidebarItem icon={FaSquare} text="Area" href="/area" />
-//         <SidebarItem icon={FaCube} text="Volume" href="/volume" />
-//         <SidebarItem icon={FaTachometerAlt} text="Pressure" href="/pressure" />
-//         <SidebarItem icon={FaDollarSign} text="Currency" href="/currency" />
-//         <SidebarItem icon={FaBalanceScale} text="Moment of Inertia" href="/moment-of-inertia" />
-//       </nav>
-
-//     </aside>
-//   );
-// };
-
-// export default Sidebar;
 "use client";
 
 import { useState } from "react";
@@ -166,21 +6,14 @@ import { usePathname } from "next/navigation";
 import {
   FaCalculator,
   FaHome,
-  FaThermometerHalf,
   FaRulerCombined,
-  FaWeightHanging,
-  FaRulerHorizontal,
   FaChevronDown,
-  FaSquare,
-  FaCube,
-  FaDollarSign,
-  FaTachometerAlt,
-  FaBalanceScale,
-  FaBolt,
-  FaKeyboard,
-  FaClock,
+  FaThermometerHalf,
   FaWater,
-  FaBatteryQuarter
+  FaEye,
+  FaBolt,
+  FaRadiation,
+  FaCog,
 } from "react-icons/fa";
 
 interface ChildItem {
@@ -301,147 +134,162 @@ const Sidebar = () => {
       <nav className="flex-grow overflow-y-auto">
         <SidebarItem icon={FaHome} text="Home" href="/" />
 
+        {/* Basic & Common */}
         <SidebarDropdownItem
           icon={FaRulerCombined}
-          text="Unit Converters"
-          href="/converters"
+          text="Basic & Common"
+          href="/basic"
         >
           {[
-            { text: "Length", href: "/length" },
-            { text: "Weight & Mass", href: "/weight" },
-            { text: "Temperature", href: "/temperature" },
-            { text: "Area", href: "/area" },
-            { text: "Volume", href: "/volume" },
-            { text: "Pressure", href: "/pressure" },
-            { text: "Force", href: "/force" },
-            { text: "Time", href: "/time" },
-            { text: "Currency", href: "/currency" },
-            { text: "Moment of Inertia", href: "/moment-of-inertia" },
+            { text: "Length Converter", href: "/length" },
+            { text: "Weight and Mass Converter", href: "/weight" },
+            { text: "Volume Converter", href: "/volume" },
+            { text: "Temperature Converter", href: "/temperature" },
+            { text: "Area Converter", href: "/area" },
+            { text: "Pressure Converter", href: "/pressure" },
+            { text: "Energy Converter", href: "/energy" },
+            { text: "Volume (Dry) Converter", href: "/volume-dry" },
+            { text: "Currency Converter", href: "/currency" },
+            { text: "Case Converter", href: "/case" },
+            { text: "Power Converter", href: "/power" },
+            { text: "Force Converter", href: "/force" },
+            { text: "Time Converter", href: "/time" },
+            { text: "Speed Converter", href: "/speed" },
+            { text: "Angle Converter", href: "/angle" },
+            { text: "Fuel Consumption Converter", href: "/fuel-consumption" },
+            { text: "Numbers Converter", href: "/number-converter" },
+            { text: "Data Storage Converter", href: "/data-storage" },
+            { text: "Velocity Angular Converter", href: "/velocity-angular" },
+            { text: "Acceleration Converter", href: "/acceleration" },
+            { text: "Acceleration Angular Converter", href: "/acceleration-angular" },
+            { text: "Density Converter", href: "/density" },
+            { text: "Specific Volume Converter", href: "/specific-volume" },
+            { text: "Moment of Inertia Converter", href: "/moment-of-inertia" },
+            { text: "Moment of Force Converter", href: "/moment-of-force" },
+            { text: "Torque Converter", href: "/torque" },
+            { text: "Fuel Efficiency (Mass) Converter", href: "/fuel-efficiency-mass" },
+            { text: "Fuel Efficiency (Volume) Converter", href: "/fuel-efficiency-volume" },
+            { text: "Temperature Interval Converter", href: "/temperature-interval" },
           ]}
         </SidebarDropdownItem>
 
-        {/* Misc / Developer shortcuts */}
-        <SidebarDropdownItem
-          icon={FaKeyboard}
-          text="Miscellaneous"
-          href="/misc"
-        >
-          {[
-            { text: "Prefixes", href: "/prefixes" },
-            { text: "Data Transfer", href: "/data-transfer" },
-            { text: "Typography", href: "/typography" },
-            { text: "Lumber Volume", href: "/volume-lumber" }
-          ]}
-        </SidebarDropdownItem>
-
-        {/* Basic Unit Converters */}
-        <SidebarItem icon={FaThermometerHalf} text="Temperature" href="/temperature" />
-        <SidebarItem icon={FaRulerHorizontal} text="Length" href="/length" />
-        <SidebarItem icon={FaWeightHanging} text="Weight & Mass" href="/weight" />
-        <SidebarItem icon={FaSquare} text="Area" href="/area" />
-        <SidebarItem icon={FaCube} text="Volume" href="/volume" />
-        <SidebarItem icon={FaTachometerAlt} text="Pressure" href="/pressure" />
-        <SidebarItem icon={FaBolt} text="Force" href="/force" />
-        <SidebarItem icon={FaDollarSign} text="Currency" href="/currency" />
-        <SidebarItem icon={FaBalanceScale} text="Moment of Inertia" href="/moment-of-inertia" />
-        <SidebarItem icon={FaClock} text="Time" href="/time" />
-
-        {/* Fluid Related Converters */}
-        <SidebarDropdownItem
-          icon={FaWater}
-          text="Viscosity & Surface"
-          href="/viscosity"
-        >
-          {[
-            { text: "Dynamic Viscosity", href: "/viscosity-dynamic" },
-            { text: "Kinematic Viscosity", href: "/viscosity-kinematic" },
-            { text: "Surface Tension", href: "/surface-tension" },
-            { text: "Permeability", href: "/permeability" },
-          ]}
-        </SidebarDropdownItem>
-
-        {/* Physics & Mechanics Converters */}
-        <SidebarDropdownItem
-          icon={FaBolt}
-          text="Physics & Mechanics"
-          href="/physics"
-        >
-          {[
-            { text: "Energy", href: "/energy" },
-            { text: "Power", href: "/power" },
-            { text: "Speed", href: "/speed" },
-            { text: "Angular Velocity", href: "/velocity-angular" },
-            { text: "Acceleration", href: "/acceleration" },
-            { text: "Angular Acceleration", href: "/acceleration-angular" },
-            { text: "Density", href: "/density" },
-            { text: "Specific Volume", href: "/specific-volume" },
-            { text: "Moment of Force", href: "/moment-of-force" },
-            { text: "Fuel Efficiency (Mass)", href: "/fuel-efficiency-mass" },
-            { text: "Fuel Efficiency (Volume)", href: "/fuel-efficiency-volume" },
-            { text: "Temperature Interval", href: "/temperature-interval" },
-            { text: "Volume (Dry)", href: "/volume-dry" },
-          ]}
-        </SidebarDropdownItem>
-
-        {/* Thermal Properties Converters */}
+        {/* Thermal & Heat */}
         <SidebarDropdownItem
           icon={FaThermometerHalf}
-          text="Thermal Properties"
+          text="Thermal & Heat"
           href="/thermal"
         >
           {[
-            { text: "Thermal Expansion", href: "/thermal-expansion" },
-            { text: "Thermal Resistance", href: "/thermal-resistance" },
-            { text: "Thermal Conductivity", href: "/thermal-conductivity" },
-            { text: "Specific Heat Capacity", href: "/specific-heat-capacity" },
-            { text: "Heat Density", href: "/heat-density" },
-            { text: "Heat Flux Density", href: "/heat-flux-density" },
-            { text: "Heat Transfer Coefficient", href: "/heat-transfer-coefficient" },
+            { text: "Thermal Expansion Converter", href: "/thermal-expansion" },
+            { text: "Thermal Resistance Converter", href: "/thermal-resistance" },
+            { text: "Thermal Conductivity Converter", href: "/thermal-conductivity" },
+            { text: "Specific Heat Capacity Converter", href: "/specific-heat-capacity" },
+            { text: "Heat Density Converter", href: "/heat-density" },
+            { text: "Heat Flux Density Converter", href: "/heat-flux-density" },
+            { text: "Heat Transfer Coefficient Converter", href: "/heat-transfer-coefficient" },
           ]}
         </SidebarDropdownItem>
 
-        {/* Electrical Converters */}
-        <SidebarDropdownItem
-          icon={FaBatteryQuarter}
-          text="Electrical & Magnetic"
-          href="/electrical"
-        >
-          {[
-            { text: "Electric Charge", href: "/electric-charge" },
-            { text: "Linear Charge Density", href: "/linear-charge-density" },
-            { text: "Surface Charge Density", href: "/surface-charge-density" },
-            { text: "Volume Charge Density", href: "/volume-charge-density" },
-            { text: "Electric Current", href: "/electric-current" },
-            { text: "Linear Current Density", href: "/linear-current-density" },
-            { text: "Surface Current Density", href: "/surface-current-density" },
-            { text: "Electric Field Strength", href: "/electric-field-strength" },
-            { text: "Electric Potential", href: "/electric-potential" },
-            { text: "Electric Resistance", href: "/electric-resistance" },
-            { text: "Electric Resistivity", href: "/electric-resistivity" },
-            { text: "Electric Conductance", href: "/electric-conductance" },
-            { text: "Electric Conductivity", href: "/electric-conductivity" },
-            { text: "Electrostatic Capacitance", href: "/electrostatic-capacitance" },
-            { text: "Inductance", href: "/inductance" },
-            { text: "Magnetomotive Force", href: "/magnetomotive-force" },
-            { text: "Magnetic Field Strength", href: "/magnetic-field-strength" },
-            { text: "Magnetic Flux", href: "/magnetic-flux" },
-            { text: "Magnetic Flux Density", href: "/magnetic-flux-density" }
-          ]}
-        </SidebarDropdownItem>
-
-        {/* Flow & Concentration Converters */}
+        {/* Flow & Concentration */}
         <SidebarDropdownItem
           icon={FaWater}
           text="Flow & Concentration"
           href="/flow"
         >
           {[
-            { text: "Flow", href: "/flow" },
-            { text: "Flow (Mass)", href: "/flow-mass" },
-            { text: "Flow (Molar)", href: "/flow-molar" },
-            { text: "Mass Flux Density", href: "/mass-flux-density" },
-            { text: "Concentration (Molar)", href: "/concentration-molar" },
-            { text: "Concentration (Solution)", href: "/concentration-solution" }
+            { text: "Flow Converter", href: "/flow" },
+            { text: "Flow (Mass) Converter", href: "/flow-mass" },
+            { text: "Flow (Molar) Converter", href: "/flow-molar" },
+            { text: "Mass Flux Density Converter", href: "/mass-flux-density" },
+            { text: "Concentration (Molar) Converter", href: "/concentration-molar" },
+            { text: "Concentration (Solution) Converter", href: "/concentration-solution" },
+          ]}
+        </SidebarDropdownItem>
+
+        {/* Viscosity & Surface */}
+        <SidebarDropdownItem
+          icon={FaWater}
+          text="Viscosity & Surface"
+          href="/viscosity"
+        >
+          {[
+            { text: "Viscosity (Dynamic) Converter", href: "/viscosity-dynamic" },
+            { text: "Viscosity (Kinematic) Converter", href: "/viscosity-kinematic" },
+            { text: "Surface Tension Converter", href: "/surface-tension" },
+            { text: "Permeability Converter", href: "/permeability" },
+          ]}
+        </SidebarDropdownItem>
+
+        {/* Light & Optics */}
+        <SidebarDropdownItem
+          icon={FaEye}
+          text="Light & Optics"
+          href="/light"
+        >
+          {[
+            { text: "Luminance Converter", href: "/luminance" },
+            { text: "Luminous Intensity Converter", href: "/luminous-intensity" },
+            { text: "Illumination Converter", href: "/illumination" },
+            { text: "Digital Image Resolution Converter", href: "/image-resolution" },
+            { text: "Frequency Wavelength Converter", href: "/frequency-wavelength" },
+          ]}
+        </SidebarDropdownItem>
+
+        {/* Electrical & Magnetic */}
+        <SidebarDropdownItem
+          icon={FaBolt}
+          text="Electrical & Magnetic"
+          href="/electrical"
+        >
+          {[
+            { text: "Electric Charge Converter", href: "/electric-charge" },
+            { text: "Linear Charge Density Converter", href: "/linear-charge-density" },
+            { text: "Surface Charge Density Converter", href: "/surface-charge-density" },
+            { text: "Volume Charge Density Converter", href: "/volume-charge-density" },
+            { text: "Electric Current Converter", href: "/electric-current" },
+            { text: "Linear Current Density Converter", href: "/linear-current-density" },
+            { text: "Surface Current Density Converter", href: "/surface-current-density" },
+            { text: "Electric Field Strength Converter", href: "/electric-field-strength" },
+            { text: "Electric Potential Converter", href: "/electric-potential" },
+            { text: "Electric Resistance Converter", href: "/electric-resistance" },
+            { text: "Electric Resistivity Converter", href: "/electric-resistivity" },
+            { text: "Electric Conductance Converter", href: "/electric-conductance" },
+            { text: "Electric Conductivity Converter", href: "/electric-conductivity" },
+            { text: "Electrostatic Capacitance Converter", href: "/electrostatic-capacitance" },
+            { text: "Inductance Converter", href: "/inductance" },
+            { text: "Magnetomotive Force Converter", href: "/magnetomotive-force" },
+            { text: "Magnetic Field Strength Converter", href: "/magnetic-field-strength" },
+            { text: "Magnetic Flux Converter", href: "/magnetic-flux" },
+            { text: "Magnetic Flux Density Converter", href: "/magnetic-flux-density" },
+          ]}
+        </SidebarDropdownItem>
+
+        {/* Radiation & Sound */}
+        <SidebarDropdownItem
+          icon={FaRadiation}
+          text="Radiation & Sound"
+          href="/radiation"
+        >
+          {[
+            { text: "Radiation Converter", href: "/radiation" },
+            { text: "Radiation Activity Converter", href: "/radiation-activity" },
+            { text: "Radiation Exposure Converter", href: "/radiation-exposure" },
+            { text: "Radiation Absorbed Dose Converter", href: "/radiation-absorbed-dose" },
+            { text: "Sound Converter", href: "/sound" },
+          ]}
+        </SidebarDropdownItem>
+
+        {/* Miscellaneous */}
+        <SidebarDropdownItem
+          icon={FaCog}
+          text="Miscellaneous"
+          href="/misc"
+        >
+          {[
+            { text: "Prefixes Converter", href: "/prefixes" },
+            { text: "Data Transfer Converter", href: "/data-transfer" },
+            { text: "Typography Converter", href: "/typography" },
+            { text: "Volume Lumber Converter", href: "/volume-lumber" },
           ]}
         </SidebarDropdownItem>
       </nav>
@@ -450,4 +298,3 @@ const Sidebar = () => {
 };
 
 export default Sidebar;
-
