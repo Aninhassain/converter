@@ -152,7 +152,7 @@ const Header = () => {
               />
               {showSuggestions && suggestions.length > 0 && (
                 <ul className="absolute z-10 left-0 right-0 bg-white text-gray-900 rounded-lg shadow-lg mt-1 max-h-60 overflow-y-auto border border-blue-200">
-                  {suggestions.map((s, idx) => (
+                  {suggestions.map((s) => (
                     <li
                       key={s.path}
                       className="px-4 py-2 cursor-pointer hover:bg-blue-100"
