@@ -148,49 +148,68 @@ const colorClasses: { [key: string]: string } = {
 
 export default function Home() {
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100">
-      <div className="container mx-auto px-2 md:px-4 py-6 md:py-12">
-        <div className="max-w-7xl mx-auto">
-          {/* Hero Section */}
-          <div className="text-center mb-8 md:mb-16">
-            <h1 className="text-3xl md:text-5xl font-bold text-gray-900 mb-4 md:mb-6 px-4">
-              Welcome to <span className="text-blue-600">AAA Converter</span>
-            </h1>
-            <p className="text-base md:text-xl text-gray-600 mb-6 md:mb-8 max-w-2xl mx-auto px-4">
-              Your comprehensive platform for all types of unit conversions.
-              From length and weight to temperature and currency conversions.
-            </p>
-          </div>
+    <div className="relative min-h-screen overflow-hidden text-white">
+      {/* Background layers inspired by provided artwork */}
+      <div aria-hidden="true" className="absolute inset-0 starry-base" />
+      <div aria-hidden="true" className="absolute inset-0 star-field star-field-primary" />
+      <div aria-hidden="true" className="absolute inset-0 star-field star-field-secondary" />
+      <div aria-hidden="true" className="absolute inset-x-0 bottom-0 horizon-glow" />
+      <div aria-hidden="true" className="absolute inset-x-0 bottom-0 city-grid" />
+      <div aria-hidden="true" className="absolute inset-x-0 bottom-0 swirl-layer swirl-layer-left" />
+      <div aria-hidden="true" className="absolute inset-x-0 bottom-0 swirl-layer swirl-layer-right" />
 
-          {/* Categories Grid */}
-          <div className="space-y-6 md:space-y-12 px-2 md:px-0">
-            {calculatorCategories.map((category, categoryIndex) => (
-              <div key={categoryIndex} className="bg-white rounded-xl shadow-lg p-4 md:p-8">
-                <h2 className="text-xl md:text-2xl font-bold text-gray-900 mb-4 md:mb-6 pb-2 md:pb-3 border-b-2 border-blue-200">
-                  {category.title}
-                </h2>
-                <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 md:gap-6">
-                  {category.calculators.map((calculator, index) => {
-                    const IconComponent = calculator.icon;
-                    const iconColorClass = colorClasses[calculator.color] || "text-blue-600";
-                    return (
-                      <Link
-                        key={index}
-                        href={calculator.path}
-                        className="bg-gradient-to-br from-white to-gray-50 rounded-lg p-4 md:p-6 shadow-md hover:shadow-xl transition-all duration-300 hover:-translate-y-1 border border-gray-200 hover:border-blue-300"
-                      >
-                        <div className="flex flex-col items-center text-center">
-                          <IconComponent className={`h-8 w-8 md:h-10 md:w-10 ${iconColorClass} mb-2 md:mb-3`} />
-                          <h3 className="text-sm md:text-base font-semibold text-gray-800 mb-1 md:mb-2 leading-tight">
-                            {calculator.name}
-                          </h3>
-                        </div>
-                      </Link>
-                    );
-                  })}
+      <div className="relative z-10">
+        <div className="container mx-auto px-2 md:px-4 py-8 md:py-14">
+          <div className="max-w-7xl mx-auto">
+            {/* Hero Section */}
+            <div className="text-center mb-10 md:mb-16 space-y-5">
+              <h1 className="text-3xl md:text-5xl font-extrabold tracking-tight px-4 text-white drop-shadow-glow">
+                Welcome to{" "}
+                <span className="text-transparent bg-gradient-to-r from-cyan-200 via-white to-blue-200 bg-clip-text animate-pan">
+                  AAA Converter
+                </span>
+              </h1>
+              <p className="text-base md:text-xl text-blue-100/90 max-w-2xl mx-auto px-4">
+                Your comprehensive platform for all types of unit conversions. From length and weight to temperature
+                and currency conversions.
+              </p>
+            </div>
+
+            {/* Categories Grid */}
+            <div className="space-y-6 md:space-y-12 px-2 md:px-0">
+              {calculatorCategories.map((category, categoryIndex) => (
+                <div
+                  key={categoryIndex}
+                  className="rounded-2xl bg-white/90 backdrop-blur-md shadow-2xl shadow-blue-900/30 p-4 md:p-8 border border-white/40 animate-rise"
+                  style={{ animationDelay: `${categoryIndex * 120}ms` }}
+                >
+                  <h2 className="text-xl md:text-2xl font-bold text-gray-900 mb-4 md:mb-6 pb-2 md:pb-3 border-b border-blue-200/60">
+                    {category.title}
+                  </h2>
+                  <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 md:gap-6">
+                    {category.calculators.map((calculator, index) => {
+                      const IconComponent = calculator.icon;
+                      const iconColorClass = colorClasses[calculator.color] || "text-blue-600";
+                      return (
+                        <Link
+                          key={index}
+                          href={calculator.path}
+                          className="relative overflow-hidden rounded-xl bg-gradient-to-br from-white to-gray-50 p-4 md:p-6 shadow-md transition-all duration-500 hover:-translate-y-1 hover:shadow-2xl hover:shadow-blue-200/60 border border-gray-200/70"
+                        >
+                          <div className="absolute inset-0 opacity-0 transition-opacity duration-500 bg-gradient-to-br from-blue-50/80 via-transparent to-purple-50/60 hover:opacity-100" />
+                          <div className="relative flex flex-col items-center text-center">
+                            <IconComponent className={`h-8 w-8 md:h-10 md:w-10 ${iconColorClass} mb-2 md:mb-3`} />
+                            <h3 className="text-sm md:text-base font-semibold text-gray-800 mb-1 md:mb-2 leading-tight">
+                              {calculator.name}
+                            </h3>
+                          </div>
+                        </Link>
+                      );
+                    })}
+                  </div>
                 </div>
-              </div>
-            ))}
+              ))}
+            </div>
           </div>
         </div>
       </div>

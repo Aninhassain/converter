@@ -25,3 +25,123 @@ body {
   color: var(--foreground);
   font-family: 'Montserrat', sans-serif;
 }
+
+/* Cosmic background inspired styles */
+.starry-base {
+  background: radial-gradient(circle at 20% 20%, rgba(255, 255, 255, 0.15), transparent 50%),
+    radial-gradient(circle at 80% 10%, rgba(255, 255, 255, 0.1), transparent 40%),
+    linear-gradient(180deg, #01092b 0%, #032a6a 40%, #0b4fb8 75%, #0f6ed6 100%);
+}
+
+.star-field {
+  background-image: radial-gradient(rgba(255, 255, 255, 0.9) 1px, transparent 1px),
+    radial-gradient(rgba(255, 255, 255, 0.6) 1px, transparent 1px);
+  background-size: 180px 180px, 120px 120px;
+  animation: starDrift 120s linear infinite;
+  opacity: 0.6;
+}
+
+.star-field-primary {
+  animation-duration: 140s;
+}
+
+.star-field-secondary {
+  background-size: 240px 240px, 160px 160px;
+  animation-direction: reverse;
+  animation-duration: 100s;
+  opacity: 0.35;
+}
+
+.horizon-glow {
+  height: 45%;
+  background: radial-gradient(ellipse at center bottom, rgba(255, 255, 255, 0.95), rgba(3, 46, 115, 0) 65%);
+  filter: blur(6px);
+}
+
+.city-grid {
+  height: 28%;
+  background-image: linear-gradient(rgba(255, 255, 255, 0.15) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.18) 1px, transparent 1px);
+  background-size: 30px 30px;
+  background-position: bottom;
+  opacity: 0.4;
+  mix-blend-mode: screen;
+}
+
+.swirl-layer {
+  height: 32%;
+  opacity: 0.25;
+  background-repeat: no-repeat;
+  background-size: cover;
+  filter: blur(1px);
+  animation: swirlMotion 18s ease-in-out infinite;
+}
+
+.swirl-layer-left {
+  background-image: radial-gradient(circle at 20% 60%, rgba(255, 255, 255, 0.8), transparent 45%),
+    radial-gradient(circle at 40% 80%, rgba(59, 130, 246, 0.5), transparent 35%);
+}
+
+.swirl-layer-right {
+  background-image: radial-gradient(circle at 80% 60%, rgba(255, 255, 255, 0.7), transparent 45%),
+    radial-gradient(circle at 60% 80%, rgba(37, 99, 235, 0.4), transparent 35%);
+  animation-delay: 4s;
+}
+
+.drop-shadow-glow {
+  text-shadow: 0 8px 35px rgba(22, 78, 170, 0.7);
+}
+
+.animate-pan {
+  background-size: 200% 200%;
+  animation: gradientPan 10s ease-in-out infinite;
+}
+
+.animate-rise {
+  opacity: 0;
+  animation: riseUp 0.8s ease forwards;
+}
+
+@keyframes starDrift {
+  from {
+    transform: translate3d(0, 0, 0);
+  }
+  to {
+    transform: translate3d(-120px, -80px, 0);
+  }
+}
+
+@keyframes swirlMotion {
+  0% {
+    transform: translateY(0) scale(1);
+  }
+  50% {
+    transform: translateY(-20px) scale(1.02);
+  }
+  100% {
+    transform: translateY(0) scale(1);
+  }
+}
+
+@keyframes gradientPan {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+@keyframes riseUp {
+  0% {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
