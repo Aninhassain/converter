@@ -1,9 +1,12 @@
+"use client";
+
+import { useState } from "react";
 import Link from "next/link";
 import { 
   Ruler, Thermometer, Scale, Box, Gauge, Fuel, Wrench, RotateCcw, 
   Hash, HardDrive, Zap, Type, Clock, Droplets, Waves, Filter, 
   Sun, Flashlight, Lightbulb, Image, Radio, AlertTriangle, Activity, 
-  ShieldAlert, Volume2, Flame, Beaker, Calculator
+  ShieldAlert, Volume2, Flame, Beaker, Calculator, ChevronDown
 } from "lucide-react";
 
 // Calculator data organized by category
@@ -147,6 +150,12 @@ const colorClasses: { [key: string]: string } = {
 };
 
 export default function Home() {
+  const [openCategoryIndex, setOpenCategoryIndex] = useState<number | null>(0);
+
+  const toggleCategory = (index: number) => {
+    setOpenCategoryIndex((prev) => (prev === index ? null : index));
+  };
+
   return (
     <div className="relative min-h-screen overflow-hidden text-white">
       {/* Background layers inspired by provided artwork */}
@@ -183,10 +192,30 @@ export default function Home() {
                   className="rounded-2xl bg-white/90 backdrop-blur-md shadow-2xl shadow-blue-900/30 p-4 md:p-8 border border-white/40 animate-rise"
                   style={{ animationDelay: `${categoryIndex * 120}ms` }}
                 >
-                  <h2 className="text-xl md:text-2xl font-bold text-gray-900 mb-4 md:mb-6 pb-2 md:pb-3 border-b border-blue-200/60">
-                    {category.title}
-                  </h2>
-                  <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 md:gap-6">
+                  <div className="flex items-center justify-between gap-4 mb-3 md:mb-4 pb-2 border-b border-blue-200/60">
+                    <h2 className="text-xl md:text-2xl font-bold text-gray-900">
+                      {category.title}
+                    </h2>
+                    <button
+                      type="button"
+                      aria-label={`Toggle ${category.title}`}
+                      onClick={() => toggleCategory(categoryIndex)}
+                      className="rounded-full border border-blue-200 bg-white/60 p-2 text-blue-600 transition-transform duration-300 hover:bg-blue-50"
+                    >
+                      <ChevronDown
+                        className={`h-5 w-5 transition-transform duration-300 ${
+                          openCategoryIndex === categoryIndex ? "rotate-180" : ""
+                        }`}
+                      />
+                    </button>
+                  </div>
+                  <div
+                    className={`grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 md:gap-6 transition-all duration-500 ${
+                      openCategoryIndex === categoryIndex
+                        ? "max-h-[2000px] opacity-100"
+                        : "pointer-events-none max-h-0 opacity-0"
+                    }`}
+                  >
                     {category.calculators.map((calculator, index) => {
                       const IconComponent = calculator.icon;
                       const iconColorClass = colorClasses[calculator.color] || "text-blue-600";
