@@ -290,12 +290,16 @@ const Header = () => {
           </div>
 
           {/* Category buttons with dropdowns */}
-          <div className="flex flex-wrap items-center justify-center gap-2 md:gap-3">
+          {/* <div className="flex flex-wrap items-center justify-center gap-2 md:gap-3"> */}
+          {/* <div className="flex flex-nowrap items-center justify-center gap-1.5 md:gap-3 overflow-x-auto"> */}
+          <div className="flex flex-wrap md:flex-nowrap items-center justify-center gap-2 md:gap-3">
+
+
             {converterCategories.map((category, index) => (
               <div key={index} className="relative">
                 <button
                   onClick={() => setOpenDropdown(openDropdown === index ? null : index)}
-                  className="flex items-center gap-1 px-3 py-1.5 md:px-4 md:py-2 rounded-lg bg-white/20 hover:bg-white/30 transition-colors text-white text-sm md:text-base font-medium whitespace-nowrap"
+                  className="flex items-center gap-1 px-1.5 py-1.5 md:px-4 md:py-2 rounded-lg bg-white/20 hover:bg-white/30 transition-colors text-white text-sm md:text-base font-medium whitespace-nowrap"
                 >
                   {category.title}
                   <ChevronDown
