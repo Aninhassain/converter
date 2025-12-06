@@ -2,7 +2,7 @@
 "use client";
 import { useState, useMemo, useRef } from "react";
 import { useRouter } from "next/navigation";
-import { Calculator } from "lucide-react";
+import { Calculator, ChevronDown } from "lucide-react";
 import Link from "next/link";
 
 
@@ -90,9 +90,133 @@ const calculators = [
   { name: "Concentration (Solution)", path: "/concentration-solution" },
 ];
 
+// Converter categories
+const converterCategories = [
+  {
+    title: "Basic & Common",
+    items: [
+      { name: "Length Converter", path: "/length" },
+      { name: "Weight and Mass Converter", path: "/weight" },
+      { name: "Volume Converter", path: "/volume" },
+      { name: "Temperature Converter", path: "/temperature" },
+      { name: "Area Converter", path: "/area" },
+      { name: "Pressure Converter", path: "/pressure" },
+      { name: "Energy Converter", path: "/energy" },
+      { name: "Volume (Dry) Converter", path: "/volume-dry" },
+      { name: "Currency Converter", path: "/currency" },
+      { name: "Case Converter", path: "/case" },
+      { name: "Power Converter", path: "/power" },
+      { name: "Force Converter", path: "/force" },
+      { name: "Time Converter", path: "/time" },
+      { name: "Speed Converter", path: "/speed" },
+      { name: "Angle Converter", path: "/angle" },
+      { name: "Fuel Consumption Converter", path: "/fuel-consumption" },
+      { name: "Numbers Converter", path: "/number-converter" },
+      { name: "Data Storage Converter", path: "/data-storage" },
+      { name: "Velocity Angular Converter", path: "/velocity-angular" },
+      { name: "Acceleration Converter", path: "/acceleration" },
+      { name: "Acceleration Angular Converter", path: "/acceleration-angular" },
+      { name: "Density Converter", path: "/density" },
+      { name: "Specific Volume Converter", path: "/specific-volume" },
+      { name: "Moment of Inertia Converter", path: "/moment-of-inertia" },
+      { name: "Moment of Force Converter", path: "/moment-of-force" },
+      { name: "Torque Converter", path: "/torque" },
+      { name: "Fuel Efficiency (Mass) Converter", path: "/fuel-efficiency-mass" },
+      { name: "Fuel Efficiency (Volume) Converter", path: "/fuel-efficiency-volume" },
+      { name: "Temperature Interval Converter", path: "/temperature-interval" },
+    ]
+  },
+  {
+    title: "Thermal & Heat",
+    items: [
+      { name: "Thermal Expansion Converter", path: "/thermal-expansion" },
+      { name: "Thermal Resistance Converter", path: "/thermal-resistance" },
+      { name: "Thermal Conductivity Converter", path: "/thermal-conductivity" },
+      { name: "Specific Heat Capacity Converter", path: "/specific-heat-capacity" },
+      { name: "Heat Density Converter", path: "/heat-density" },
+      { name: "Heat Flux Density Converter", path: "/heat-flux-density" },
+      { name: "Heat Transfer Coefficient Converter", path: "/heat-transfer-coefficient" },
+    ]
+  },
+  {
+    title: "Flow & Concentration",
+    items: [
+      { name: "Flow Converter", path: "/flow" },
+      { name: "Flow (Mass) Converter", path: "/flow-mass" },
+      { name: "Flow (Molar) Converter", path: "/flow-molar" },
+      { name: "Mass Flux Density Converter", path: "/mass-flux-density" },
+      { name: "Concentration (Molar) Converter", path: "/concentration-molar" },
+      { name: "Concentration (Solution) Converter", path: "/concentration-solution" },
+    ]
+  },
+  {
+    title: "Viscosity & Surface",
+    items: [
+      { name: "Viscosity (Dynamic) Converter", path: "/viscosity-dynamic" },
+      { name: "Viscosity (Kinematic) Converter", path: "/viscosity-kinematic" },
+      { name: "Surface Tension Converter", path: "/surface-tension" },
+      { name: "Permeability Converter", path: "/permeability" },
+    ]
+  },
+  {
+    title: "Light & Optics",
+    items: [
+      { name: "Luminance Converter", path: "/luminance" },
+      { name: "Luminous Intensity Converter", path: "/luminous-intensity" },
+      { name: "Illumination Converter", path: "/illumination" },
+      { name: "Digital Image Resolution Converter", path: "/image-resolution" },
+      { name: "Frequency Wavelength Converter", path: "/frequency-wavelength" },
+    ]
+  },
+  {
+    title: "Electrical & Magnetic",
+    items: [
+      { name: "Electric Charge Converter", path: "/electric-charge" },
+      { name: "Linear Charge Density Converter", path: "/linear-charge-density" },
+      { name: "Surface Charge Density Converter", path: "/surface-charge-density" },
+      { name: "Volume Charge Density Converter", path: "/volume-charge-density" },
+      { name: "Electric Current Converter", path: "/electric-current" },
+      { name: "Linear Current Density Converter", path: "/linear-current-density" },
+      { name: "Surface Current Density Converter", path: "/surface-current-density" },
+      { name: "Electric Field Strength Converter", path: "/electric-field-strength" },
+      { name: "Electric Potential Converter", path: "/electric-potential" },
+      { name: "Electric Resistance Converter", path: "/electric-resistance" },
+      { name: "Electric Resistivity Converter", path: "/electric-resistivity" },
+      { name: "Electric Conductance Converter", path: "/electric-conductance" },
+      { name: "Electric Conductivity Converter", path: "/electric-conductivity" },
+      { name: "Electrostatic Capacitance Converter", path: "/electrostatic-capacitance" },
+      { name: "Inductance Converter", path: "/inductance" },
+      { name: "Magnetomotive Force Converter", path: "/magnetomotive-force" },
+      { name: "Magnetic Field Strength Converter", path: "/magnetic-field-strength" },
+      { name: "Magnetic Flux Converter", path: "/magnetic-flux" },
+      { name: "Magnetic Flux Density Converter", path: "/magnetic-flux-density" },
+    ]
+  },
+  {
+    title: "Radiation & Sound",
+    items: [
+      { name: "Radiation Converter", path: "/radiation" },
+      { name: "Radiation Activity Converter", path: "/radiation-activity" },
+      { name: "Radiation Exposure Converter", path: "/radiation-exposure" },
+      { name: "Radiation Absorbed Dose Converter", path: "/radiation-absorbed-dose" },
+      { name: "Sound Converter", path: "/sound" },
+    ]
+  },
+  {
+    title: "Miscellaneous",
+    items: [
+      { name: "Prefixes Converter", path: "/prefixes" },
+      { name: "Data Transfer Converter", path: "/data-transfer" },
+      { name: "Typography Converter", path: "/typography" },
+      { name: "Volume Lumber Converter", path: "/volume-lumber" },
+    ]
+  },
+];
+
 const Header = () => {
   const [search, setSearch] = useState("");
   const [showSuggestions, setShowSuggestions] = useState(false);
+  const [openDropdown, setOpenDropdown] = useState<number | null>(null);
   const router = useRouter();
   const inputRef = useRef(null);
 
@@ -121,7 +245,8 @@ const Header = () => {
   return (
     <header className="bg-blue-600 text-white shadow-lg">
       <div className="container mx-auto px-4 py-3 md:py-6">
-        <div className="flex flex-col md:flex-row items-center justify-between gap-3 md:gap-4">
+        {/* Top row: Logo */}
+        <div className="flex items-center justify-center gap-3 md:gap-4 mb-4">
           <Link href="/" className="flex items-center gap-2 md:gap-3 hover:opacity-90 transition-opacity">
             <Calculator className="h-6 w-6 md:h-8 md:w-8" />
             <h1 className="text-xl md:text-3xl font-bold">
@@ -129,16 +254,13 @@ const Header = () => {
               <span className="font-normal hidden sm:inline"> CONVERTER</span>
             </h1>
           </Link>
-          <nav className="flex items-center gap-2 md:gap-4 w-full md:w-auto md:flex-1 md:justify-end">
-            <Link 
-              href="/converters" 
-              className="px-3 py-1.5 md:px-4 md:py-2 rounded-lg hover:bg-white/10 transition-colors font-medium text-sm md:text-base whitespace-nowrap"
-            >
-              <span className="hidden sm:inline">Unit Converters</span>
-              <span className="sm:hidden">Converters</span>
-            </Link>
-            {/* Search bar at extreme right */}
-            <div className="relative ml-auto md:ml-4 w-full md:w-64">
+        </div>
+
+        {/* Search bar and categories section */}
+        <div className="space-y-4">
+          {/* Search bar - centered */}
+          <div className="flex justify-center">
+            <div className="relative w-full md:w-96">
               <input
                 ref={inputRef}
                 type="text"
@@ -165,7 +287,42 @@ const Header = () => {
                 </ul>
               )}
             </div>
-          </nav>
+          </div>
+
+          {/* Category buttons with dropdowns */}
+          <div className="flex flex-wrap items-center justify-center gap-2 md:gap-3">
+            {converterCategories.map((category, index) => (
+              <div key={index} className="relative">
+                <button
+                  onClick={() => setOpenDropdown(openDropdown === index ? null : index)}
+                  className="flex items-center gap-1 px-3 py-1.5 md:px-4 md:py-2 rounded-lg bg-white/20 hover:bg-white/30 transition-colors text-white text-sm md:text-base font-medium whitespace-nowrap"
+                >
+                  {category.title}
+                  <ChevronDown
+                    className={`h-4 w-4 transition-transform duration-300 ${
+                      openDropdown === index ? "rotate-180" : ""
+                    }`}
+                  />
+                </button>
+
+                {/* Dropdown menu */}
+                {openDropdown === index && (
+                  <div className="absolute top-full left-0 mt-2 bg-white text-gray-900 rounded-lg shadow-lg z-50 min-w-max border border-blue-200">
+                    {category.items.map((item, itemIndex) => (
+                      <Link
+                        key={itemIndex}
+                        href={item.path}
+                        className="block px-4 py-2 hover:bg-blue-50 text-sm md:text-base first:rounded-t-lg last:rounded-b-lg transition-colors"
+                        onClick={() => setOpenDropdown(null)}
+                      >
+                        {item.name}
+                      </Link>
+                    ))}
+                  </div>
+                )}
+              </div>
+            ))}
+          </div>
         </div>
       </div>
     </header>
