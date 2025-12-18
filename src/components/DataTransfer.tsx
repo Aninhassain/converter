@@ -1,13 +1,18 @@
 'use client';
 
 import { useState } from 'react';
-import { HardDrive } from 'lucide-react';
+import { HardDrive, RotateCcw } from 'lucide-react';
 
 const DataTransfer = () => {
-  const [fromValue, setFromValue] = useState<string>('1');
-  const [toValue, setToValue] = useState<string>('');
-  const [fromUnit, setFromUnit] = useState<string>('byte');
-  const [toUnit, setToUnit] = useState<string>('kilobyte');
+  const defaultFromValue = '1';
+  const defaultToValue = '';
+  const defaultFromUnit = 'byte';
+  const defaultToUnit = 'kilobyte';
+
+  const [fromValue, setFromValue] = useState<string>(defaultFromValue);
+  const [toValue, setToValue] = useState<string>(defaultToValue);
+  const [fromUnit, setFromUnit] = useState<string>(defaultFromUnit);
+  const [toUnit, setToUnit] = useState<string>(defaultToUnit);
 
   const units = [
     { value: 'bit', label: 'Bit', factor: 1 },
@@ -34,34 +39,27 @@ const DataTransfer = () => {
     return bits / factorMap[to];
   };
 
-  const handleChange = (val: string) => {
+  const handleChange = (val: string, from = fromUnit, to = toUnit) => {
     setFromValue(val);
-    if (val === '') { setToValue(''); return; }
+    if (val === '') {
+      setToValue('');
+      return;
+    }
     const num = parseFloat(val);
     if (!isNaN(num)) {
-      const out = convert(num, fromUnit, toUnit);
+      const out = convert(num, from, to);
       setToValue(Math.abs(out) < 1e-6 || Math.abs(out) > 1e6 ? out.toExponential(6) : out.toString());
     }
   };
 
   const handleFromUnit = (u: string) => {
     setFromUnit(u);
-    if (fromValue === '') return;
-    const num = parseFloat(fromValue);
-    if (!isNaN(num)) {
-      const out = convert(num, u, toUnit);
-      setToValue(Math.abs(out) < 1e-6 || Math.abs(out) > 1e6 ? out.toExponential(6) : out.toString());
-    }
+    handleChange(fromValue, u, toUnit);
   };
 
   const handleToUnit = (u: string) => {
     setToUnit(u);
-    if (fromValue === '') return;
-    const num = parseFloat(fromValue);
-    if (!isNaN(num)) {
-      const out = convert(num, fromUnit, u);
-      setToValue(Math.abs(out) < 1e-6 || Math.abs(out) > 1e6 ? out.toExponential(6) : out.toString());
-    }
+    handleChange(fromValue, fromUnit, u);
   };
 
   const swap = () => {
@@ -71,6 +69,13 @@ const DataTransfer = () => {
     setFromUnit(toUnit);
     setToValue(tv);
     setToUnit(fu);
+  };
+
+  const handleReset = () => {
+    setFromValue(defaultFromValue);
+    setFromUnit(defaultFromUnit);
+    setToUnit(defaultToUnit);
+    handleChange(defaultFromValue, defaultFromUnit, defaultToUnit);
   };
 
   return (
@@ -104,6 +109,10 @@ const DataTransfer = () => {
 
             <div className="mt-4 text-center">
               <button onClick={swap} className="px-4 py-2 bg-sky-600 text-white rounded">Swap</button>
+              <button onClick={handleReset} className="ml-4 px-4 py-2 bg-gray-300 text-gray-800 rounded inline-flex items-center">
+                <RotateCcw className="mr-2 h-4 w-4" />
+                Reset
+              </button>
             </div>
           </div>
         </div>

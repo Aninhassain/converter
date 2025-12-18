@@ -1,13 +1,18 @@
 'use client';
 
 import { useState } from 'react';
-import { HardDrive } from 'lucide-react';
+import { HardDrive, RotateCcw } from 'lucide-react';
 
 const DataStorage = () => {
-  const [fromValue, setFromValue] = useState<string>('');
-  const [toValue, setToValue] = useState<string>('');
-  const [fromUnit, setFromUnit] = useState<string>('bit');
-  const [toUnit, setToUnit] = useState<string>('nibble');
+  const defaultFromValue = '';
+  const defaultToValue = '';
+  const defaultFromUnit = 'bit';
+  const defaultToUnit = 'nibble';
+
+  const [fromValue, setFromValue] = useState<string>(defaultFromValue);
+  const [toValue, setToValue] = useState<string>(defaultToValue);
+  const [fromUnit, setFromUnit] = useState<string>(defaultFromUnit);
+  const [toUnit, setToUnit] = useState<string>(defaultToUnit);
 
   const dataStorageUnits = [
     // Basic units
@@ -199,6 +204,13 @@ const DataStorage = () => {
     setToValue(tempValue);
   };
 
+  const handleReset = () => {
+    setFromValue(defaultFromValue);
+    setToValue(defaultToValue);
+    setFromUnit(defaultFromUnit);
+    setToUnit(defaultToUnit);
+  };
+
   return (
     <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100 py-8">
       <div className="container mx-auto px-4">
@@ -283,6 +295,13 @@ const DataStorage = () => {
                   </select>
                 </div>
               </div>
+            </div>
+
+            <div className="text-center mt-6">
+                <button onClick={handleReset} className="bg-indigo-500 hover:bg-indigo-600 text-white font-bold py-2 px-4 rounded-full inline-flex items-center transition-colors">
+                    <RotateCcw className="mr-2 h-4 w-4" />
+                    Reset
+                </button>
             </div>
 
             {/* Conversion Info */}

@@ -1,13 +1,18 @@
 'use client';
 
 import { useState } from 'react';
-import { Droplets } from 'lucide-react';
+import { Droplets, RotateCcw } from 'lucide-react';
 
 const Density = () => {
-  const [fromValue, setFromValue] = useState<string>('');
-  const [toValue, setToValue] = useState<string>('');
-  const [fromUnit, setFromUnit] = useState<string>('g_cm3');
-  const [toUnit, setToUnit] = useState<string>('kg_m3');
+  const defaultFromValue = '';
+  const defaultToValue = '';
+  const defaultFromUnit = 'g_cm3';
+  const defaultToUnit = 'kg_m3';
+
+  const [fromValue, setFromValue] = useState<string>(defaultFromValue);
+  const [toValue, setToValue] = useState<string>(defaultToValue);
+  const [fromUnit, setFromUnit] = useState<string>(defaultFromUnit);
+  const [toUnit, setToUnit] = useState<string>(defaultToUnit);
 
   const densityUnits = [
     { value: 'g_cm3', label: 'Grams per cubic centimeter', symbol: 'g/cm³' },
@@ -79,6 +84,13 @@ const Density = () => {
     setToUnit(tempUnit);
     setFromValue(toValue);
     setToValue(tempValue);
+  };
+
+  const handleReset = () => {
+    setFromValue(defaultFromValue);
+    setToValue(defaultToValue);
+    setFromUnit(defaultFromUnit);
+    setToUnit(defaultToUnit);
   };
 
   return (
@@ -165,6 +177,13 @@ const Density = () => {
                   </select>
                 </div>
               </div>
+            </div>
+
+            <div className="text-center mt-6">
+                <button onClick={handleReset} className="bg-purple-500 hover:bg-purple-600 text-white font-bold py-2 px-4 rounded-full inline-flex items-center transition-colors">
+                    <RotateCcw className="mr-2 h-4 w-4" />
+                    Reset
+                </button>
             </div>
 
             {/* Conversion Info */}

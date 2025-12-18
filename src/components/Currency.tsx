@@ -1,13 +1,18 @@
 'use client';
 
 import { useState, useEffect } from 'react';
-import { Landmark } from 'lucide-react';
+import { Landmark, RotateCcw } from 'lucide-react';
 
 const Currency = () => {
-  const [fromValue, setFromValue] = useState<string>('1');
-  const [toValue, setToValue] = useState<string>('');
-  const [fromCurrency, setFromCurrency] = useState<string>('USD');
-  const [toCurrency, setToCurrency] = useState<string>('INR');
+  const defaultFromValue = '1';
+  const defaultToValue = '';
+  const defaultFromCurrency = 'USD';
+  const defaultToCurrency = 'INR';
+
+  const [fromValue, setFromValue] = useState<string>(defaultFromValue);
+  const [toValue, setToValue] = useState<string>(defaultToValue);
+  const [fromCurrency, setFromCurrency] = useState<string>(defaultFromCurrency);
+  const [toCurrency, setToCurrency] = useState<string>(defaultToCurrency);
   const [rates, setRates] = useState<{ [key: string]: number }>({});
   const [loading, setLoading] = useState<boolean>(true);
   const [lastUpdate, setLastUpdate] = useState<string>('');
@@ -253,6 +258,13 @@ const Currency = () => {
     setToCurrency(fromCurrency);
   };
 
+  const handleReset = () => {
+    setFromValue(defaultFromValue);
+    setToValue(defaultToValue);
+    setFromCurrency(defaultFromCurrency);
+    setToCurrency(defaultToCurrency);
+  };
+
   const getCurrencyName = (code: string) => {
     return currencyList.find(c => c.code === code)?.name || code;
   };
@@ -341,6 +353,13 @@ const Currency = () => {
                   </select>
                 </div>
               </div>
+            </div>
+
+            <div className="text-center mt-6">
+              <button onClick={handleReset} className="bg-purple-500 hover:bg-purple-600 text-white font-bold py-2 px-4 rounded-full inline-flex items-center transition-colors">
+                <RotateCcw className="mr-2 h-4 w-4" />
+                Reset
+              </button>
             </div>
 
             {/* Conversion Info */}

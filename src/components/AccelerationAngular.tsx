@@ -4,10 +4,15 @@ import { useState } from 'react';
 import { RotateCcw } from 'lucide-react';
 
 const AccelerationAngular = () => {
-  const [fromValue, setFromValue] = useState<string>('1');
-  const [toValue, setToValue] = useState<string>('');
-  const [fromUnit, setFromUnit] = useState<string>('radian-per-second-squared');
-  const [toUnit, setToUnit] = useState<string>('degree-per-second-squared');
+  const defaultFromValue = '1';
+  const defaultToValue = '';
+  const defaultFromUnit = 'radian-per-second-squared';
+  const defaultToUnit = 'degree-per-second-squared';
+
+  const [fromValue, setFromValue] = useState<string>(defaultFromValue);
+  const [toValue, setToValue] = useState<string>(defaultToValue);
+  const [fromUnit, setFromUnit] = useState<string>(defaultFromUnit);
+  const [toUnit, setToUnit] = useState<string>(defaultToUnit);
 
   const units = [
     { value: 'radian-per-second-squared', label: 'Radian/second² [rad/s²]', factor: 1 },
@@ -22,14 +27,34 @@ const AccelerationAngular = () => {
     return base / factorMap[to];
   };
 
-  const update = (val: string) => {
+  const update = (val: string, from = fromUnit, to = toUnit) => {
     setFromValue(val);
-    if (val === '') { setToValue(''); return; }
+    if (val === '') {
+      setToValue('');
+      return;
+    }
     const n = parseFloat(val);
     if (!isNaN(n)) {
-      const out = convert(n, fromUnit, toUnit);
+      const out = convert(n, from, to);
       setToValue(Math.abs(out) < 1e-6 || Math.abs(out) > 1e6 ? out.toExponential(6) : String(out));
     }
+  };
+
+  const handleFromUnitChange = (newFromUnit: string) => {
+    setFromUnit(newFromUnit);
+    update(fromValue, newFromUnit, toUnit);
+  };
+
+  const handleToUnitChange = (newToUnit: string) => {
+    setToUnit(newToUnit);
+    update(fromValue, fromUnit, newToUnit);
+  };
+
+  const handleReset = () => {
+    setFromValue(defaultFromValue);
+    setFromUnit(defaultFromUnit);
+    setToUnit(defaultToUnit);
+    update(defaultFromValue, defaultFromUnit, defaultToUnit);
   };
 
   return (
@@ -48,16 +73,22 @@ const AccelerationAngular = () => {
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               <div>
                 <input type="number" value={fromValue} onChange={(e) => update(e.target.value)} className="w-full p-3 border rounded" placeholder="Enter value" />
-                <select value={fromUnit} onChange={(e) => { setFromUnit(e.target.value); update(fromValue); }} className="w-full p-3 border rounded mt-2">
+                <select value={fromUnit} onChange={(e) => handleFromUnitChange(e.target.value)} className="w-full p-3 border rounded mt-2">
                   {units.map(u => <option key={u.value} value={u.value}>{u.label}</option>)}
                 </select>
               </div>
               <div>
                 <input type="text" value={toValue} readOnly className="w-full p-3 border rounded bg-gray-50" placeholder="Result" />
-                <select value={toUnit} onChange={(e) => { setToUnit(e.target.value); update(fromValue); }} className="w-full p-3 border rounded mt-2">
+                <select value={toUnit} onChange={(e) => handleToUnitChange(e.target.value)} className="w-full p-3 border rounded mt-2">
                   {units.map(u => <option key={u.value} value={u.value}>{u.label}</option>)}
                 </select>
               </div>
+            </div>
+            <div className="text-center mt-4">
+              <button onClick={handleReset} className="bg-violet-500 hover:bg-violet-600 text-white font-bold py-2 px-4 rounded-full inline-flex items-center transition-colors">
+                <RotateCcw className="mr-2 h-4 w-4" />
+                Reset
+              </button>
             </div>
           </div>
         </div>

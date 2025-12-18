@@ -1,13 +1,18 @@
 'use client';
 
 import { useState } from 'react';
-import { Square } from 'lucide-react';
+import { Square, RotateCcw } from 'lucide-react';
 
 const Area = () => {
-  const [fromValue, setFromValue] = useState<string>('');
-  const [toValue, setToValue] = useState<string>('');
-  const [fromUnit, setFromUnit] = useState<string>('square_meter');
-  const [toUnit, setToUnit] = useState<string>('square_kilometer');
+  const defaultFromValue = '';
+  const defaultToValue = '';
+  const defaultFromUnit = 'square_meter';
+  const defaultToUnit = 'square_kilometer';
+
+  const [fromValue, setFromValue] = useState<string>(defaultFromValue);
+  const [toValue, setToValue] = useState<string>(defaultToValue);
+  const [fromUnit, setFromUnit] = useState<string>(defaultFromUnit);
+  const [toUnit, setToUnit] = useState<string>(defaultToUnit);
 
   const areaUnits = [
     { value: 'square_meter', label: 'Square Meter', symbol: 'm²' },
@@ -91,6 +96,13 @@ const Area = () => {
     setToUnit(tempUnit);
     setFromValue(toValue);
     setToValue(tempValue);
+  };
+
+  const handleReset = () => {
+    setFromValue(defaultFromValue);
+    setToValue(defaultToValue);
+    setFromUnit(defaultFromUnit);
+    setToUnit(defaultToUnit);
   };
 
   return (
@@ -177,6 +189,13 @@ const Area = () => {
                   </select>
                 </div>
               </div>
+            </div>
+
+            <div className="text-center mt-6">
+                <button onClick={handleReset} className="bg-purple-500 hover:bg-purple-600 text-white font-bold py-2 px-4 rounded-full inline-flex items-center transition-colors">
+                    <RotateCcw className="mr-2 h-4 w-4" />
+                    Reset
+                </button>
             </div>
 
             {/* Conversion Info */}
