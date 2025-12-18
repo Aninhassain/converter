@@ -1,13 +1,18 @@
 "use client";
 
 import { useState, useEffect, useMemo, useCallback } from 'react';
-import { Sun } from 'lucide-react';
+import { Sun, RotateCcw } from 'lucide-react';
 
 const Luminance = () => {
-  const [fromValue, setFromValue] = useState<string>('1');
-  const [toValue, setToValue] = useState<string>('');
-  const [fromUnit, setFromUnit] = useState<string>('candela/square-meter');
-  const [toUnit, setToUnit] = useState<string>('nit');
+  const defaultFromValue = '1';
+  const defaultToValue = '';
+  const defaultFromUnit = 'candela/square-meter';
+  const defaultToUnit = 'nit';
+
+  const [fromValue, setFromValue] = useState<string>(defaultFromValue);
+  const [toValue, setToValue] = useState<string>(defaultToValue);
+  const [fromUnit, setFromUnit] = useState<string>(defaultFromUnit);
+  const [toUnit, setToUnit] = useState<string>(defaultToUnit);
 
   // Luminance units with conversion factors (relative to cd/m²)
   const luminanceUnits = useMemo(() => [
@@ -76,6 +81,13 @@ const Luminance = () => {
     setToUnit(fromUnit);
     setFromValue(toValue);
   }, [toUnit, fromUnit, toValue]);
+
+  const handleReset = () => {
+    setFromValue(defaultFromValue);
+    setToValue(defaultToValue);
+    setFromUnit(defaultFromUnit);
+    setToUnit(defaultToUnit);
+  };
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100 py-8">
@@ -161,6 +173,13 @@ const Luminance = () => {
                   </select>
                 </div>
               </div>
+            </div>
+
+            <div className="text-center mt-6">
+                <button onClick={handleReset} className="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded-full inline-flex items-center transition-colors">
+                    <RotateCcw className="mr-2 h-4 w-4" />
+                    Reset
+                </button>
             </div>
 
             {/* Conversion Info */}

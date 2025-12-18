@@ -1,13 +1,18 @@
 'use client';
 
 import { useState } from 'react';
-import { Ruler } from 'lucide-react';
+import { Ruler, RotateCcw } from 'lucide-react';
 
 const Length = () => {
-  const [fromValue, setFromValue] = useState<string>('');
-  const [toValue, setToValue] = useState<string>('');
-  const [fromUnit, setFromUnit] = useState<string>('meter');
-  const [toUnit, setToUnit] = useState<string>('kilometer');
+  const defaultFromValue = '';
+  const defaultToValue = '';
+  const defaultFromUnit = 'meter';
+  const defaultToUnit = 'kilometer';
+
+  const [fromValue, setFromValue] = useState<string>(defaultFromValue);
+  const [toValue, setToValue] = useState<string>(defaultToValue);
+  const [fromUnit, setFromUnit] = useState<string>(defaultFromUnit);
+  const [toUnit, setToUnit] = useState<string>(defaultToUnit);
 
   const lengthUnits = [
     { value: 'meter', label: 'Meter', symbol: 'm' },
@@ -91,6 +96,13 @@ const Length = () => {
     setToUnit(tempUnit);
     setFromValue(toValue);
     setToValue(tempValue);
+  };
+
+  const handleReset = () => {
+    setFromValue(defaultFromValue);
+    setToValue(defaultToValue);
+    setFromUnit(defaultFromUnit);
+    setToUnit(defaultToUnit);
   };
 
   return (
@@ -177,6 +189,13 @@ const Length = () => {
                   </select>
                 </div>
               </div>
+            </div>
+
+            <div className="text-center mt-6">
+                <button onClick={handleReset} className="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded-full inline-flex items-center transition-colors">
+                    <RotateCcw className="mr-2 h-4 w-4" />
+                    Reset
+                </button>
             </div>
 
             {/* Conversion Info */}

@@ -1,13 +1,18 @@
 "use client";
 
 import { useState, useEffect, useMemo, useCallback } from 'react';
-import { Lamp } from 'lucide-react';
+import { Lamp, RotateCcw } from 'lucide-react';
 
 const Illumination = () => {
-  const [fromValue, setFromValue] = useState<string>('1');
-  const [toValue, setToValue] = useState<string>('');
-  const [fromUnit, setFromUnit] = useState<string>('lux');
-  const [toUnit, setToUnit] = useState<string>('foot-candle');
+  const defaultFromValue = '1';
+  const defaultToValue = '';
+  const defaultFromUnit = 'lux';
+  const defaultToUnit = 'foot-candle';
+
+  const [fromValue, setFromValue] = useState<string>(defaultFromValue);
+  const [toValue, setToValue] = useState<string>(defaultToValue);
+  const [fromUnit, setFromUnit] = useState<string>(defaultFromUnit);
+  const [toUnit, setToUnit] = useState<string>(defaultToUnit);
 
   // Illumination units with conversion factors (relative to lux)
   const illuminationUnits = useMemo(() => [
@@ -79,6 +84,13 @@ const Illumination = () => {
     setFromValue(toValue);
   }, [toUnit, fromUnit, toValue]);
 
+  const handleReset = () => {
+    setFromValue(defaultFromValue);
+    setToValue(defaultToValue);
+    setFromUnit(defaultFromUnit);
+    setToUnit(defaultToUnit);
+  };
+
   return (
     <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100 py-8">
       <div className="container mx-auto px-4">
@@ -96,7 +108,7 @@ const Illumination = () => {
 
           {/* Converter Card */}
           <div className="bg-white rounded-xl shadow-lg p-8">
-            <div className="grid grid-cols-1 lg:grid-cols-[2fr_auto_2fr] items-center gap-4 lg:gap-8">
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
               {/* From Section */}
               <div className="space-y-4">
                 <label className="block text-sm font-semibold text-gray-700 mb-2">
@@ -125,7 +137,7 @@ const Illumination = () => {
               </div>
 
               {/* Swap Button */}
-              <div className="flex items-center justify-center">
+              <div className="flex items-center justify-center lg:order-3">
                 <button
                   onClick={swapUnits}
                   className="p-3 bg-blue-600 text-white rounded-full hover:bg-blue-700 transition-colors"
@@ -163,6 +175,13 @@ const Illumination = () => {
                   </select>
                 </div>
               </div>
+            </div>
+
+            <div className="text-center mt-6">
+                <button onClick={handleReset} className="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded-full inline-flex items-center transition-colors">
+                    <RotateCcw className="mr-2 h-4 w-4" />
+                    Reset
+                </button>
             </div>
 
             {/* Conversion Info */}
