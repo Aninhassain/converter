@@ -168,7 +168,7 @@ export default function Home() {
       <div aria-hidden="true" className="absolute inset-x-0 bottom-0 swirl-layer swirl-layer-right" />
 
       <div className="relative z-10">
-        <div className="container mx-auto px-2 md:px-4 py-8 md:py-14">
+        <div className="w-full px-2 md:px-4 py-8 md:py-14 mx-auto">
           <div className="max-w-7xl mx-auto">
             {/* Hero Section */}
             <div className="text-center mb-10 md:mb-16 space-y-5">

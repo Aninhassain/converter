@@ -244,7 +244,7 @@ const Header = () => {
 
   return (
     <header className="bg-blue-600 text-white shadow-lg">
-      <div className="container mx-auto px-4 py-3 md:py-6">
+      <div className="w-full px-4 py-3 md:py-6 mx-auto">
         {/* Top row: Logo */}
         <div className="flex items-center justify-center gap-3 md:gap-4 mb-4">
           <Link href="/" className="flex items-center gap-2 md:gap-3 hover:opacity-90 transition-opacity">
