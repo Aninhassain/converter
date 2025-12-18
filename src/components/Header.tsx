@@ -290,9 +290,7 @@ const Header = () => {
           </div>
 
           {/* Category buttons with dropdowns */}
-          {/* <div className="flex flex-wrap items-center justify-center gap-2 md:gap-3"> */}
-          {/* <div className="flex flex-nowrap items-center justify-center gap-1.5 md:gap-3 overflow-x-auto"> */}
-          <div className="flex flex-wrap md:flex-nowrap items-center justify-center gap-2 md:gap-3">
+          <div className="flex flex-wrap items-center justify-center gap-2 md:gap-3">
 
 
             {converterCategories.map((category, index) => (
