@@ -1,13 +1,18 @@
 'use client';
 
 import { useState } from 'react';
-import { Zap } from 'lucide-react';
+import { Zap, RotateCcw } from 'lucide-react';
 
 const Force = () => {
-  const [fromValue, setFromValue] = useState<string>('');
-  const [toValue, setToValue] = useState<string>('');
-  const [fromUnit, setFromUnit] = useState<string>('newton');
-  const [toUnit, setToUnit] = useState<string>('kilonewton');
+  const defaultFromValue = '';
+  const defaultToValue = '';
+  const defaultFromUnit = 'newton';
+  const defaultToUnit = 'kilonewton';
+
+  const [fromValue, setFromValue] = useState<string>(defaultFromValue);
+  const [toValue, setToValue] = useState<string>(defaultToValue);
+  const [fromUnit, setFromUnit] = useState<string>(defaultFromUnit);
+  const [toUnit, setToUnit] = useState<string>(defaultToUnit);
 
   const forceUnits = [
     { value: 'newton', label: 'newton [N]', symbol: 'N' },
@@ -153,6 +158,13 @@ const Force = () => {
     setToValue(tempValue);
   };
 
+  const handleReset = () => {
+    setFromValue(defaultFromValue);
+    setToValue(defaultToValue);
+    setFromUnit(defaultFromUnit);
+    setToUnit(defaultToUnit);
+  };
+
   return (
     <div className="min-h-screen bg-gradient-to-br from-orange-50 to-red-100 py-8">
       <div className="container mx-auto px-4">
@@ -237,6 +249,13 @@ const Force = () => {
                   </select>
                 </div>
               </div>
+            </div>
+
+            <div className="text-center mt-6">
+                <button onClick={handleReset} className="bg-orange-500 hover:bg-orange-600 text-white font-bold py-2 px-4 rounded-full inline-flex items-center transition-colors">
+                    <RotateCcw className="mr-2 h-4 w-4" />
+                    Reset
+                </button>
             </div>
 
             {/* Conversion Info */}

@@ -1,13 +1,18 @@
 'use client';
 
 import { useState } from 'react';
-import { Fuel } from 'lucide-react';
+import { Fuel, RotateCcw } from 'lucide-react';
 
 const FuelConsumption = () => {
-  const [fromValue, setFromValue] = useState<string>('');
-  const [toValue, setToValue] = useState<string>('');
-  const [fromUnit, setFromUnit] = useState<string>('liter_per_100km');
-  const [toUnit, setToUnit] = useState<string>('mile_per_gallon_us');
+  const defaultFromValue = '';
+  const defaultToValue = '';
+  const defaultFromUnit = 'liter_per_100km';
+  const defaultToUnit = 'mile_per_gallon_us';
+
+  const [fromValue, setFromValue] = useState<string>(defaultFromValue);
+  const [toValue, setToValue] = useState<string>(defaultToValue);
+  const [fromUnit, setFromUnit] = useState<string>(defaultFromUnit);
+  const [toUnit, setToUnit] = useState<string>(defaultToUnit);
 
   const fuelConsumptionUnits = [
     // Metric units (distance per volume)
@@ -166,6 +171,13 @@ const FuelConsumption = () => {
     setToValue(tempValue);
   };
 
+  const handleReset = () => {
+    setFromValue(defaultFromValue);
+    setToValue(defaultToValue);
+    setFromUnit(defaultFromUnit);
+    setToUnit(defaultToUnit);
+  };
+
   return (
     <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100 py-8">
       <div className="container mx-auto px-4">
@@ -250,6 +262,13 @@ const FuelConsumption = () => {
                   </select>
                 </div>
               </div>
+            </div>
+
+            <div className="text-center mt-6">
+                <button onClick={handleReset} className="bg-green-500 hover:bg-green-600 text-white font-bold py-2 px-4 rounded-full inline-flex items-center transition-colors">
+                    <RotateCcw className="mr-2 h-4 w-4" />
+                    Reset
+                </button>
             </div>
 
             {/* Conversion Info */}
