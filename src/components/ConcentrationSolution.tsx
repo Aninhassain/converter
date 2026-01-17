@@ -1,103 +1,55 @@
-'use client';
+"use client";
 
-import { useState } from 'react';
-import { Beaker, RotateCcw } from 'lucide-react';
+import { useState } from "react";
+import { Beaker } from "lucide-react";
+import ConverterPageLayout from "@/components/ConverterPageLayout";
+import GenericConverterCard, { type ConversionHistory, type UnitDefinition } from "@/components/GenericConverterCard";
 
 const ConcentrationSolution = () => {
-  const defaultFromValue = '1';
-  const defaultToValue = '';
-  const defaultFromUnit = 'gram-per-liter';
-  const defaultToUnit = 'percentage-by-weight';
+  const [history, setHistory] = useState<ConversionHistory[]>([]);
 
-  const [fromValue, setFromValue] = useState<string>(defaultFromValue);
-  const [toValue, setToValue] = useState<string>(defaultToValue);
-  const [fromUnit, setFromUnit] = useState<string>(defaultFromUnit);
-  const [toUnit, setToUnit] = useState<string>(defaultToUnit);
+  const handleConvert = (conversion: ConversionHistory) => {
+    setHistory((prev) => [...prev.slice(-9), conversion]);
+  };
 
-  const units = [
-    { value: 'gram-per-liter', label: 'Gram/liter [g/L]', factor: 1 },
-    { value: 'kilogram-per-cubic-meter', label: 'Kilogram/m³ [kg/m³]', factor: 1 },
-    { value: 'milligram-per-liter', label: 'Milligram/liter [mg/L]', factor: 0.001 },
-    { value: 'microgram-per-liter', label: 'Microgram/liter [µg/L]', factor: 0.000001 },
-    { value: 'percentage-by-weight', label: 'Percentage by weight [%w/w]', factor: 10 },
-    { value: 'percentage-by-volume', label: 'Percentage by volume [%v/v]', factor: 0.1 },
-    { value: 'parts-per-million', label: 'Parts per million [ppm]', factor: 0.001 }
+  const units: UnitDefinition[] = [
+    { name: "Gram/liter", symbol: "g/L", factor: 1 },
+    { name: "Kilogram/cubic meter", symbol: "kg/m³", factor: 1 },
+    { name: "Milligram/liter", symbol: "mg/L", factor: 0.001 },
+    { name: "Microgram/liter", symbol: "µg/L", factor: 0.000001 },
+    { name: "Percentage by weight", symbol: "%w/w", factor: 10 },
+    { name: "Percentage by volume", symbol: "%v/v", factor: 0.1 },
+    { name: "Parts per million", symbol: "ppm", factor: 0.001 },
   ];
 
-  const factorMap = units.reduce((acc, u) => { acc[u.value] = u.factor; return acc; }, {} as Record<string, number>);
-
-  const convert = (value: number, from: string, to: string) => {
-    const base = value * factorMap[from];
-    return base / factorMap[to];
-  };
-
-  const update = (val: string, from = fromUnit, to = toUnit) => {
-    setFromValue(val);
-    if (val === '') {
-      setToValue('');
-      return;
-    }
-    const n = parseFloat(val);
-    if (!isNaN(n)) {
-      const out = convert(n, from, to);
-      setToValue(Math.abs(out) < 1e-6 || Math.abs(out) > 1e6 ? out.toExponential(6) : String(out));
-    }
-  };
-
-  const handleFromUnitChange = (newFromUnit: string) => {
-    setFromUnit(newFromUnit);
-    update(fromValue, newFromUnit, toUnit);
-  };
-
-  const handleToUnitChange = (newToUnit: string) => {
-    setToUnit(newToUnit);
-    update(fromValue, fromUnit, newToUnit);
-  };
-
-  const handleReset = () => {
-    setFromValue(defaultFromValue);
-    setFromUnit(defaultFromUnit);
-    setToUnit(defaultToUnit);
-    update(defaultFromValue, defaultFromUnit, defaultToUnit);
-  };
+  const quickConversions = [
+    { from: "g/L", to: "mg/L", conversion: "1 g/L = 1000 mg/L" },
+    { from: "%w/w", to: "g/L", conversion: "1 %w/w = 10 g/L" },
+    { from: "ppm", to: "mg/L", conversion: "1 ppm = 1 mg/L" },
+    { from: "g/L", to: "kg/m³", conversion: "1 g/L = 1 kg/m³" },
+    { from: "mg/L", to: "µg/L", conversion: "1 mg/L = 1000 µg/L" },
+    { from: "%v/v", to: "g/L", conversion: "1 %v/v = 0.1 g/L" },
+  ];
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-pink-50 to-rose-100 py-8">
-      <div className="container mx-auto px-4">
-        <div className="max-w-3xl mx-auto">
-          <div className="text-center mb-6">
-            <div className="flex items-center justify-center gap-3 mb-4">
-              <Beaker className="h-8 w-8 text-pink-600" />
-              <h1 className="text-3xl font-bold text-gray-900">Concentration (Solution) Converter</h1>
-            </div>
-            <p className="text-gray-600">Convert solution concentration between g/L, mg/L, %w/w, %v/v, ppm, and more.</p>
-          </div>
-
-          <div className="bg-white rounded-xl shadow p-6">
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-              <div>
-                <input type="number" value={fromValue} onChange={(e) => update(e.target.value)} className="w-full p-3 border rounded" placeholder="Enter value" />
-                <select value={fromUnit} onChange={(e) => handleFromUnitChange(e.target.value)} className="w-full p-3 border rounded mt-2">
-                  {units.map(u => <option key={u.value} value={u.value}>{u.label}</option>)}
-                </select>
-              </div>
-              <div>
-                <input type="text" value={toValue} readOnly className="w-full p-3 border rounded bg-gray-50" placeholder="Result" />
-                <select value={toUnit} onChange={(e) => handleToUnitChange(e.target.value)} className="w-full p-3 border rounded mt-2">
-                  {units.map(u => <option key={u.value} value={u.value}>{u.label}</option>)}
-                </select>
-              </div>
-            </div>
-            <div className="text-center mt-4">
-              <button onClick={handleReset} className="bg-pink-500 hover:bg-pink-600 text-white font-bold py-2 px-4 rounded-full inline-flex items-center transition-colors">
-                <RotateCcw className="mr-2 h-4 w-4" />
-                Reset
-              </button>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
+    <ConverterPageLayout
+      title="Concentration (Solution)"
+      subtitle="Unit Converter"
+      description="Convert solution concentration between g/L, mg/L, %w/w, %v/v, ppm, and more with precision."
+      quickConversions={quickConversions}
+      footerText="Built with precision • All concentration solution units supported"
+    >
+      <GenericConverterCard
+        title="Concentration Converter"
+        description="Convert between different units of solution concentration measurement."
+        icon={Beaker}
+        units={units}
+        defaultFromUnit="Gram/liter"
+        defaultToUnit="Percentage by weight"
+        commonUnits={["Gram/liter", "Milligram/liter", "Parts per million", "Percentage by weight"]}
+        onConvert={handleConvert}
+      />
+    </ConverterPageLayout>
   );
 };
 

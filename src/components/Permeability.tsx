@@ -1,200 +1,58 @@
 "use client";
 
-import { useState, useEffect, useMemo, useCallback } from 'react';
-import { Filter } from 'lucide-react';
+import { useState } from "react";
+import { Filter } from "lucide-react";
+import ConverterPageLayout from "@/components/ConverterPageLayout";
+import GenericConverterCard, { type ConversionHistory, type UnitDefinition } from "@/components/GenericConverterCard";
 
 const Permeability = () => {
-  const [fromValue, setFromValue] = useState<string>('1');
-  const [toValue, setToValue] = useState<string>('');
-  const [fromUnit, setFromUnit] = useState<string>('darcy');
-  const [toUnit, setToUnit] = useState<string>('square-meter');
+  const [history, setHistory] = useState<ConversionHistory[]>([]);
 
-  // Permeability units with conversion factors (relative to square meter)
-  const permeabilityUnits = useMemo(() => [
-    { name: 'square-meter', symbol: 'm²', factor: 1 },
-    { name: 'darcy', symbol: 'D', factor: 9.869233e-13 },
-    { name: 'millidarcy', symbol: 'mD', factor: 9.869233e-16 },
-    { name: 'microdarcy', symbol: 'μD', factor: 9.869233e-19 },
-    { name: 'nanodarcy', symbol: 'nD', factor: 9.869233e-22 },
-    { name: 'square-centimeter', symbol: 'cm²', factor: 1e-4 },
-    { name: 'square-millimeter', symbol: 'mm²', factor: 1e-6 },
-    { name: 'square-micrometer', symbol: 'μm²', factor: 1e-12 },
-    { name: 'square-foot', symbol: 'ft²', factor: 0.092903 },
-    { name: 'square-inch', symbol: 'in²', factor: 0.00064516 },
-  ], []);
+  const handleConvert = (conversion: ConversionHistory) => {
+    setHistory((prev) => [...prev.slice(-9), conversion]);
+  };
 
-  // Sort units by common usage, then alphabetically
-  const sortedPermeabilityUnits = useMemo(() => {
-    const commonUnits = ['darcy', 'millidarcy', 'square-meter'];
-    const units = [...permeabilityUnits];
-    units.sort((a, b) => {
-      const aCommonIndex = commonUnits.indexOf(a.name);
-      const bCommonIndex = commonUnits.indexOf(b.name);
-      if (aCommonIndex !== -1 && bCommonIndex !== -1) return aCommonIndex - bCommonIndex;
-      if (aCommonIndex !== -1) return -1;
-      if (bCommonIndex !== -1) return 1;
-      return a.name.localeCompare(b.name);
-    });
-    return units;
-  }, [permeabilityUnits]);
+  const units: UnitDefinition[] = [
+    { name: "Square Meter", symbol: "m²", factor: 1 },
+    { name: "Darcy", symbol: "D", factor: 9.869233e-13 },
+    { name: "Millidarcy", symbol: "mD", factor: 9.869233e-16 },
+    { name: "Microdarcy", symbol: "μD", factor: 9.869233e-19 },
+    { name: "Nanodarcy", symbol: "nD", factor: 9.869233e-22 },
+    { name: "Square Centimeter", symbol: "cm²", factor: 1e-4 },
+    { name: "Square Millimeter", symbol: "mm²", factor: 1e-6 },
+    { name: "Square Micrometer", symbol: "μm²", factor: 1e-12 },
+    { name: "Square Foot", symbol: "ft²", factor: 0.092903 },
+    { name: "Square Inch", symbol: "in²", factor: 0.00064516 },
+  ];
 
-  useEffect(() => {
-    const numValue = parseFloat(fromValue);
-    if (!isNaN(numValue)) {
-      const fromUnitData = permeabilityUnits.find(unit => unit.name === fromUnit);
-      const toUnitData = permeabilityUnits.find(unit => unit.name === toUnit);
-      
-      if (fromUnitData && toUnitData) {
-        const baseValue = numValue * fromUnitData.factor;
-        const convertedValue = baseValue / toUnitData.factor;
-        
-        if (Math.abs(convertedValue) < 0.000001 || Math.abs(convertedValue) > 999999999) {
-          setToValue(convertedValue.toExponential(6));
-        } else {
-          setToValue(convertedValue.toPrecision(7));
-        }
-      }
-    } else {
-      setToValue('');
-    }
-  }, [fromValue, fromUnit, toUnit, permeabilityUnits]);
-
-  const handleFromValueChange = useCallback((value: string) => {
-    setFromValue(value);
-  }, []);
-
-  const handleFromUnitChange = useCallback((unit: string) => {
-    setFromUnit(unit);
-  }, []);
-
-  const handleToUnitChange = useCallback((unit: string) => {
-    setToUnit(unit);
-  }, []);
-
-  const swapUnits = useCallback(() => {
-    setFromUnit(toUnit);
-    setToUnit(fromUnit);
-    setFromValue(toValue);
-  }, [toUnit, fromUnit, toValue]);
+  const quickConversions = [
+    { from: "D", to: "mD", conversion: "1 D = 1000 mD" },
+    { from: "mD", to: "μD", conversion: "1 mD = 1000 μD" },
+    { from: "μD", to: "nD", conversion: "1 μD = 1000 nD" },
+    { from: "m²", to: "D", conversion: "1 m² = 1.01e12 D" },
+    { from: "m²", to: "cm²", conversion: "1 m² = 10,000 cm²" },
+    { from: "ft²", to: "in²", conversion: "1 ft² = 144 in²" },
+  ];
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100 py-8">
-      <div className="container mx-auto px-4">
-        <div className="max-w-4xl mx-auto">
-          {/* Header */}
-          <div className="text-center mb-8">
-            <div className="flex items-center justify-center gap-3 mb-4">
-              <Filter className="h-8 w-8 text-blue-600" />
-              <h1 className="text-4xl font-bold text-gray-900">Permeability Converter</h1>
-            </div>
-            <p className="text-lg text-gray-600">
-              Convert between different permeability units
-            </p>
-          </div>
-
-          {/* Converter Card */}
-          <div className="bg-white rounded-xl shadow-lg p-8">
-            <div className="grid grid-cols-1 lg:grid-cols-[2fr_auto_2fr] items-center gap-4 lg:gap-8">
-              {/* From Section */}
-              <div className="space-y-4">
-                <label className="block text-sm font-semibold text-gray-700 mb-2">
-                  From:
-                </label>
-                <div className="space-y-3">
-                  <input
-                    type="number"
-                    value={fromValue}
-                    onChange={(e) => handleFromValueChange(e.target.value)}
-                    placeholder="Enter value"
-                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent text-lg"
-                  />
-                  <select
-                    value={fromUnit}
-                    onChange={(e) => handleFromUnitChange(e.target.value)}
-                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent text-lg bg-white"
-                  >
-                    {sortedPermeabilityUnits.map((unit) => (
-                      <option key={unit.name} value={unit.name}>
-                        {unit.name} [{unit.symbol}]
-                      </option>
-                    ))}
-                  </select>
-                </div>
-              </div>
-
-              {/* Swap Button */}
-              <div className="flex items-center justify-center">
-                <button
-                  onClick={swapUnits}
-                  className="p-3 bg-blue-600 text-white rounded-full hover:bg-blue-700 transition-colors"
-                  title="Swap units"
-                >
-                  <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 7h12m0 0l-4-4m4 4l-4 4m0 6H4m0 0l4 4m-4-4l4-4" />
-                  </svg>
-                </button>
-              </div>
-
-              {/* To Section */}
-              <div className="space-y-4">
-                <label className="block text-sm font-semibold text-gray-700 mb-2">
-                  To:
-                </label>
-                <div className="space-y-3">
-                  <input
-                    type="text"
-                    value={toValue}
-                    readOnly
-                    placeholder="Result will appear here"
-                    className="w-full px-4 py-3 border border-gray-300 rounded-lg bg-gray-50 text-lg text-gray-700"
-                  />
-                  <select
-                    value={toUnit}
-                    onChange={(e) => handleToUnitChange(e.target.value)}
-                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent text-lg bg-white"
-                  >
-                    {sortedPermeabilityUnits.map((unit) => (
-                      <option key={unit.name} value={unit.name}>
-                        {unit.name} [{unit.symbol}]
-                      </option>
-                    ))}
-                  </select>
-                </div>
-              </div>
-            </div>
-
-            {/* Conversion Info */}
-            {fromValue && toValue && (
-              <div className="mt-8 p-4 bg-blue-50 rounded-lg">
-                <p className="text-center text-gray-700">
-                  <span className="font-semibold">{fromValue}</span> {fromUnit} = 
-                  <span className="font-semibold text-blue-600"> {toValue}</span> {toUnit}
-                </p>
-              </div>
-            )}
-          </div>
-
-          {/* Common Conversions */}
-          <div className="mt-8">
-            <h3 className="text-xl font-semibold text-gray-800 mb-4 text-center">Common Permeability Conversions</h3>
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-              <div className="bg-white rounded-lg p-4 shadow-sm">
-                <h4 className="font-medium text-gray-700 mb-2">Darcy to Millidarcy</h4>
-                <p className="text-sm text-gray-600">1 D = 1000 mD</p>
-              </div>
-              <div className="bg-white rounded-lg p-4 shadow-sm">
-                <h4 className="font-medium text-gray-700 mb-2">Square Meter to Darcy</h4>
-                <p className="text-sm text-gray-600">1 m² ≈ 1.013249965828144e12 D</p>
-              </div>
-              <div className="bg-white rounded-lg p-4 shadow-sm">
-                <h4 className="font-medium text-gray-700 mb-2">Millidarcy to Microdarcy</h4>
-                <p className="text-sm text-gray-600">1 mD = 1000 μD</p>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
+    <ConverterPageLayout
+      title="Permeability"
+      subtitle="Unit Converter"
+      description="Convert between different units of permeability measurement with precision."
+      quickConversions={quickConversions}
+      footerText="Built with precision • All permeability units supported"
+    >
+      <GenericConverterCard
+        title="Permeability Converter"
+        description="Convert between different units of permeability measurement."
+        icon={Filter}
+        units={units}
+        defaultFromUnit="D"
+        defaultToUnit="m²"
+        commonUnits={["D", "mD", "m²"]}
+        onConvert={handleConvert}
+      />
+    </ConverterPageLayout>
   );
 };
 

@@ -1,102 +1,54 @@
-'use client';
+"use client";
 
-import { useState } from 'react';
-import { ShieldAlert, RotateCcw } from 'lucide-react';
+import { useState } from "react";
+import { CircuitBoard } from "lucide-react";
+import ConverterPageLayout from "@/components/ConverterPageLayout";
+import GenericConverterCard, { type ConversionHistory, type UnitDefinition } from "@/components/GenericConverterCard";
 
 const ElectrostaticCapacitance = () => {
-  const defaultFromValue = '1';
-  const defaultToValue = '';
-  const defaultFromUnit = 'farad';
-  const defaultToUnit = 'microfarad';
+  const [history, setHistory] = useState<ConversionHistory[]>([]);
 
-  const [fromValue, setFromValue] = useState<string>(defaultFromValue);
-  const [toValue, setToValue] = useState<string>(defaultToValue);
-  const [fromUnit, setFromUnit] = useState<string>(defaultFromUnit);
-  const [toUnit, setToUnit] = useState<string>(defaultToUnit);
+  const handleConvert = (conversion: ConversionHistory) => {
+    setHistory((prev) => [...prev.slice(-9), conversion]);
+  };
 
-  const units = [
-    { value: 'farad', label: 'Farad [F]', factor: 1 },
-    { value: 'kilofarad', label: 'Kilofarad [kF]', factor: 1e3 },
-    { value: 'millifarad', label: 'Millifarad [mF]', factor: 1e-3 },
-    { value: 'microfarad', label: 'Microfarad [µF]', factor: 1e-6 },
-    { value: 'nanofarad', label: 'Nanofarad [nF]', factor: 1e-9 },
-    { value: 'picofarad', label: 'Picofarad [pF]', factor: 1e-12 }
+  const units: UnitDefinition[] = [
+    { name: "Farad", symbol: "F", factor: 1 },
+    { name: "Kilofarad", symbol: "kF", factor: 1e3 },
+    { name: "Millifarad", symbol: "mF", factor: 1e-3 },
+    { name: "Microfarad", symbol: "µF", factor: 1e-6 },
+    { name: "Nanofarad", symbol: "nF", factor: 1e-9 },
+    { name: "Picofarad", symbol: "pF", factor: 1e-12 },
   ];
 
-  const factorMap = units.reduce((acc, u) => { acc[u.value] = u.factor; return acc; }, {} as Record<string, number>);
-
-  const convert = (value: number, from: string, to: string) => {
-    const base = value * factorMap[from];
-    return base / factorMap[to];
-  };
-
-  const update = (val: string, from = fromUnit, to = toUnit) => {
-    setFromValue(val);
-    if (val === '') {
-      setToValue('');
-      return;
-    }
-    const n = parseFloat(val);
-    if (!isNaN(n)) {
-      const out = convert(n, from, to);
-      setToValue(Math.abs(out) < 1e-6 || Math.abs(out) > 1e6 ? out.toExponential(6) : String(out));
-    }
-  };
-
-  const handleFromUnitChange = (newFromUnit: string) => {
-    setFromUnit(newFromUnit);
-    update(fromValue, newFromUnit, toUnit);
-  };
-
-  const handleToUnitChange = (newToUnit: string) => {
-    setToUnit(newToUnit);
-    update(fromValue, fromUnit, newToUnit);
-  };
-
-  const handleReset = () => {
-    setFromValue(defaultFromValue);
-    setFromUnit(defaultFromUnit);
-    setToUnit(defaultToUnit);
-    update(defaultFromValue, defaultFromUnit, defaultToUnit);
-  };
+  const quickConversions = [
+    { from: "F", to: "µF", conversion: "1 F = 1,000,000 µF" },
+    { from: "µF", to: "nF", conversion: "1 µF = 1,000 nF" },
+    { from: "nF", to: "pF", conversion: "1 nF = 1,000 pF" },
+    { from: "mF", to: "µF", conversion: "1 mF = 1,000 µF" },
+    { from: "µF", to: "pF", conversion: "1 µF = 1,000,000 pF" },
+    { from: "kF", to: "F", conversion: "1 kF = 1,000 F" },
+  ];
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-violet-50 to-purple-100 py-8">
-      <div className="container mx-auto px-4">
-        <div className="max-w-3xl mx-auto">
-          <div className="text-center mb-6">
-            <div className="flex items-center justify-center gap-3 mb-4">
-              <ShieldAlert className="h-8 w-8 text-violet-600" />
-              <h1 className="text-3xl font-bold text-gray-900">Electrostatic Capacitance Converter</h1>
-            </div>
-            <p className="text-gray-600">Convert between farad, microfarad, nanofarad, picofarad and more.</p>
-          </div>
-
-          <div className="bg-white rounded-xl shadow p-6">
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-              <div>
-                <input type="number" value={fromValue} onChange={(e) => update(e.target.value)} className="w-full p-3 border rounded" />
-                <select value={fromUnit} onChange={(e) => handleFromUnitChange(e.target.value)} className="w-full p-3 border rounded mt-2">
-                  {units.map(u => <option key={u.value} value={u.value}>{u.label}</option>)}
-                </select>
-              </div>
-              <div>
-                <input type="text" value={toValue} readOnly className="w-full p-3 border rounded bg-gray-50" />
-                <select value={toUnit} onChange={(e) => handleToUnitChange(e.target.value)} className="w-full p-3 border rounded mt-2">
-                  {units.map(u => <option key={u.value} value={u.value}>{u.label}</option>)}
-                </select>
-              </div>
-            </div>
-            <div className="text-center mt-4">
-              <button onClick={handleReset} className="bg-violet-500 hover:bg-violet-600 text-white font-bold py-2 px-4 rounded-full inline-flex items-center transition-colors">
-                <RotateCcw className="mr-2 h-4 w-4" />
-                Reset
-              </button>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
+    <ConverterPageLayout
+      title="Electrostatic Capacitance"
+      subtitle="Unit Converter"
+      description="Convert between farad, microfarad, nanofarad, picofarad, and more with precision."
+      quickConversions={quickConversions}
+      footerText="Built with precision • All capacitance units supported"
+    >
+      <GenericConverterCard
+        title="Capacitance Converter"
+        description="Convert between different units of electrostatic capacitance measurement."
+        icon={CircuitBoard}
+        units={units}
+        defaultFromUnit="Farad"
+        defaultToUnit="Microfarad"
+        commonUnits={["Farad", "Microfarad", "Nanofarad", "Picofarad"]}
+        onConvert={handleConvert}
+      />
+    </ConverterPageLayout>
   );
 };
 

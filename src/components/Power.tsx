@@ -1,72 +1,56 @@
-'use client';
+"use client";
 
-import { useState } from 'react';
-import { Zap } from 'lucide-react';
+import { useState } from "react";
+import { Zap } from "lucide-react";
+import ConverterPageLayout from "@/components/ConverterPageLayout";
+import GenericConverterCard, { type ConversionHistory, type UnitDefinition } from "@/components/GenericConverterCard";
 
 const Power = () => {
-  const [fromValue, setFromValue] = useState<string>('1');
-  const [toValue, setToValue] = useState<string>('');
-  const [fromUnit, setFromUnit] = useState<string>('watt');
-  const [toUnit, setToUnit] = useState<string>('kilowatt');
+  const [history, setHistory] = useState<ConversionHistory[]>([]);
 
-  const units = [
-    { value: 'watt', label: 'Watt [W]', factor: 1 },
-    { value: 'kilowatt', label: 'Kilowatt [kW]', factor: 1e3 },
-    { value: 'megawatt', label: 'Megawatt [MW]', factor: 1e6 },
-    { value: 'milliwatt', label: 'Milliwatt [mW]', factor: 1e-3 },
-    { value: 'horsepower', label: 'Horsepower [hp]', factor: 745.7 },
-    { value: 'joule-per-second', label: 'Joule/second [J/s]', factor: 1 },
-    { value: 'calorie-per-second', label: 'Calorie/second [cal/s]', factor: 4.184 }
+  const handleConvert = (conversion: ConversionHistory) => {
+    setHistory((prev) => [...prev.slice(-9), conversion]);
+  };
+
+  const powerUnits: UnitDefinition[] = [
+    { name: "watt", symbol: "W", factor: 1 },
+    { name: "kilowatt", symbol: "kW", factor: 1e3 },
+    { name: "megawatt", symbol: "MW", factor: 1e6 },
+    { name: "gigawatt", symbol: "GW", factor: 1e9 },
+    { name: "milliwatt", symbol: "mW", factor: 1e-3 },
+    { name: "horsepower", symbol: "hp", factor: 745.7 },
+    { name: "BTU per hour", symbol: "BTU/h", factor: 0.293071 },
+    { name: "calorie per second", symbol: "cal/s", factor: 4.184 },
   ];
 
-  const factorMap = units.reduce((acc, u) => { acc[u.value] = u.factor; return acc; }, {} as Record<string, number>);
-
-  const convert = (value: number, from: string, to: string) => {
-    const base = value * factorMap[from];
-    return base / factorMap[to];
-  };
-
-  const update = (val: string) => {
-    setFromValue(val);
-    if (val === '') { setToValue(''); return; }
-    const n = parseFloat(val);
-    if (!isNaN(n)) {
-      const out = convert(n, fromUnit, toUnit);
-      setToValue(Math.abs(out) < 1e-6 || Math.abs(out) > 1e6 ? out.toExponential(6) : String(out));
-    }
-  };
+  const quickConversions = [
+    { from: "kW", to: "hp", conversion: "1 kW = 1.341 hp" },
+    { from: "hp", to: "W", conversion: "1 hp = 745.7 W" },
+    { from: "MW", to: "kW", conversion: "1 MW = 1000 kW" },
+    { from: "W", to: "BTU/h", conversion: "1 W = 3.412 BTU/h" },
+    { from: "kW", to: "W", conversion: "1 kW = 1000 W" },
+    { from: "GW", to: "MW", conversion: "1 GW = 1000 MW" },
+  ];
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-amber-50 to-orange-100 py-8">
-      <div className="container mx-auto px-4">
-        <div className="max-w-3xl mx-auto">
-          <div className="text-center mb-6">
-            <div className="flex items-center justify-center gap-3 mb-4">
-              <Zap className="h-8 w-8 text-amber-600" />
-              <h1 className="text-3xl font-bold text-gray-900">Power Converter</h1>
-            </div>
-            <p className="text-gray-600">Convert between watt, kilowatt, megawatt, horsepower, and more.</p>
-          </div>
-
-          <div className="bg-white rounded-xl shadow p-6">
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-              <div>
-                <input type="number" value={fromValue} onChange={(e) => update(e.target.value)} className="w-full p-3 border rounded" placeholder="Enter value" />
-                <select value={fromUnit} onChange={(e) => { setFromUnit(e.target.value); update(fromValue); }} className="w-full p-3 border rounded mt-2">
-                  {units.map(u => <option key={u.value} value={u.value}>{u.label}</option>)}
-                </select>
-              </div>
-              <div>
-                <input type="text" value={toValue} readOnly className="w-full p-3 border rounded bg-gray-50" placeholder="Result" />
-                <select value={toUnit} onChange={(e) => { setToUnit(e.target.value); update(fromValue); }} className="w-full p-3 border rounded mt-2">
-                  {units.map(u => <option key={u.value} value={u.value}>{u.label}</option>)}
-                </select>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
+    <ConverterPageLayout
+      title="Power"
+      subtitle="Unit Converter"
+      description="Precision conversion between all standard power units including watts and horsepower"
+      quickConversions={quickConversions}
+      footerText="Built with precision • All power units supported"
+    >
+      <GenericConverterCard
+        title="Power Converter"
+        description="Convert between different units of power measurement."
+        icon={Zap}
+        units={powerUnits}
+        defaultFromUnit="watt"
+        defaultToUnit="kilowatt"
+        commonUnits={["watt", "kilowatt", "megawatt", "horsepower"]}
+        onConvert={handleConvert}
+      />
+    </ConverterPageLayout>
   );
 };
 

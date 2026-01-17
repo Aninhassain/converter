@@ -1,268 +1,62 @@
-'use client';
+"use client";
 
-import { useState } from 'react';
-import { Zap, RotateCcw } from 'lucide-react';
+import { useState } from "react";
+import { Zap } from "lucide-react";
+import ConverterPageLayout from "@/components/ConverterPageLayout";
+import GenericConverterCard, { type ConversionHistory, type UnitDefinition } from "@/components/GenericConverterCard";
 
 const ElectricCharge = () => {
-  const defaultFromValue = '';
-  const defaultToValue = '';
-  const defaultFromUnit = 'coulomb';
-  const defaultToUnit = 'millicoulomb';
+  const [history, setHistory] = useState<ConversionHistory[]>([]);
 
-  const [fromValue, setFromValue] = useState<string>(defaultFromValue);
-  const [toValue, setToValue] = useState<string>(defaultToValue);
-  const [fromUnit, setFromUnit] = useState<string>(defaultFromUnit);
-  const [toUnit, setToUnit] = useState<string>(defaultToUnit);
+  const handleConvert = (conversion: ConversionHistory) => {
+    setHistory((prev) => [...prev.slice(-9), conversion]);
+  };
 
-  const chargeUnits = [
-    { value: 'coulomb', label: 'Coulomb [C]', symbol: 'C' },
-    { value: 'megacoulomb', label: 'Megacoulomb [MC]', symbol: 'MC' },
-    { value: 'kilocoulomb', label: 'Kilocoulomb [kC]', symbol: 'kC' },
-    { value: 'millicoulomb', label: 'Millicoulomb [mC]', symbol: 'mC' },
-    { value: 'microcoulomb', label: 'Microcoulomb [µC]', symbol: 'µC' },
-    { value: 'nanocoulomb', label: 'Nanocoulomb [nC]', symbol: 'nC' },
-    { value: 'picocoulomb', label: 'Picocoulomb [pC]', symbol: 'pC' },
-    { value: 'ampere-hour', label: 'Ampere-hour [Ah]', symbol: 'Ah' },
-    { value: 'ampere-minute', label: 'Ampere-minute [A·min]', symbol: 'A·min' },
-    { value: 'ampere-second', label: 'Ampere-second [A·s]', symbol: 'A·s' },
-    { value: 'faraday', label: 'Faraday [F]', symbol: 'F' },
-    { value: 'elementary-charge', label: 'Elementary Charge [e]', symbol: 'e' },
-    { value: 'statcoulomb', label: 'Statcoulomb [statC]', symbol: 'statC' },
-    { value: 'franklin', label: 'Franklin [Fr]', symbol: 'Fr' }
+  const units: UnitDefinition[] = [
+    { name: "Coulomb", symbol: "C", factor: 1 },
+    { name: "Megacoulomb", symbol: "MC", factor: 1e6 },
+    { name: "Kilocoulomb", symbol: "kC", factor: 1e3 },
+    { name: "Millicoulomb", symbol: "mC", factor: 1e-3 },
+    { name: "Microcoulomb", symbol: "uC", factor: 1e-6 },
+    { name: "Nanocoulomb", symbol: "nC", factor: 1e-9 },
+    { name: "Picocoulomb", symbol: "pC", factor: 1e-12 },
+    { name: "Ampere-hour", symbol: "Ah", factor: 3600 },
+    { name: "Ampere-minute", symbol: "A-min", factor: 60 },
+    { name: "Ampere-second", symbol: "A-s", factor: 1 },
+    { name: "Faraday", symbol: "F", factor: 96485.3321233100184 },
+    { name: "Elementary Charge", symbol: "e", factor: 1.602176634e-19 },
+    { name: "Statcoulomb", symbol: "statC", factor: 3.335641e-10 },
+    { name: "Franklin", symbol: "Fr", factor: 3.335641e-10 },
   ];
 
-  // Conversion factors to Coulomb (C)
-  const conversionFactors: { [key: string]: number } = {
-    'coulomb': 1,
-    'megacoulomb': 1e6,
-    'kilocoulomb': 1e3,
-    'millicoulomb': 1e-3,
-    'microcoulomb': 1e-6,
-    'nanocoulomb': 1e-9,
-    'picocoulomb': 1e-12,
-    'ampere-hour': 3600,
-    'ampere-minute': 60,
-    'ampere-second': 1,
-    'faraday': 96485.3321233100184,
-    'elementary-charge': 1.602176634e-19,
-    'statcoulomb': 3.335641e-10,
-    'franklin': 3.335641e-10
-  };
-
-  const convertCharge = (value: number, from: string, to: string): number => {
-    if (from === to) return value;
-    
-    // Convert to coulomb first
-    const coulombs = value * conversionFactors[from];
-    // Convert from coulomb to target unit
-    return coulombs / conversionFactors[to];
-  };
-
-  const handleFromValueChange = (value: string) => {
-    setFromValue(value);
-    if (value === '') {
-      setToValue('');
-      return;
-    }
-    
-    const numValue = parseFloat(value);
-    if (!isNaN(numValue)) {
-      const converted = convertCharge(numValue, fromUnit, toUnit);
-      const absConverted = Math.abs(converted);
-      if (absConverted < 0.000001 || absConverted > 1000000) {
-        setToValue(converted.toExponential(6));
-      } else {
-        setToValue(converted.toFixed(6));
-      }
-    }
-  };
-
-  const handleFromUnitChange = (unit: string) => {
-    setFromUnit(unit);
-    if (fromValue === '') return;
-    
-    const numValue = parseFloat(fromValue);
-    if (!isNaN(numValue)) {
-      const converted = convertCharge(numValue, unit, toUnit);
-      const absConverted = Math.abs(converted);
-      if (absConverted < 0.000001 || absConverted > 1000000) {
-        setToValue(converted.toExponential(6));
-      } else {
-        setToValue(converted.toFixed(6));
-      }
-    }
-  };
-
-  const handleToUnitChange = (unit: string) => {
-    setToUnit(unit);
-    if (fromValue === '') return;
-    
-    const numValue = parseFloat(fromValue);
-    if (!isNaN(numValue)) {
-      const converted = convertCharge(numValue, fromUnit, unit);
-      const absConverted = Math.abs(converted);
-      if (absConverted < 0.000001 || absConverted > 1000000) {
-        setToValue(converted.toExponential(6));
-      } else {
-        setToValue(converted.toFixed(6));
-      }
-    }
-  };
-
-  const swapUnits = () => {
-    const tempUnit = fromUnit;
-    const tempValue = fromValue;
-    
-    setFromUnit(toUnit);
-    setToUnit(tempUnit);
-    setFromValue(toValue);
-    setToValue(tempValue);
-  };
-
-  const handleReset = () => {
-    setFromValue(defaultFromValue);
-    setToValue(defaultToValue);
-    setFromUnit(defaultFromUnit);
-    setToUnit(defaultToUnit);
-  };
+  const quickConversions = [
+    { from: "C", to: "mC", conversion: "1 C = 1000 mC" },
+    { from: "Ah", to: "C", conversion: "1 Ah = 3600 C" },
+    { from: "C", to: "A-s", conversion: "1 C = 1 A-s" },
+    { from: "Faraday", to: "C", conversion: "1 F = 96,485 C" },
+    { from: "e", to: "C", conversion: "1 e = 1.602e-19 C" },
+    { from: "statC", to: "C", conversion: "1 statC = 3.336e-10 C" },
+  ];
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100 py-8">
-      <div className="container mx-auto px-4">
-        <div className="max-w-4xl mx-auto">
-          {/* Header */}
-          <div className="text-center mb-8">
-            <div className="flex items-center justify-center gap-3 mb-4">
-              <Zap className="h-8 w-8 text-blue-600" />
-              <h1 className="text-4xl font-bold text-gray-900">Electric Charge Converter</h1>
-            </div>
-            <p className="text-lg text-gray-600">
-              Convert between different units of electric charge measurement
-            </p>
-          </div>
-
-          {/* Converter Card */}
-          <div className="bg-white rounded-xl shadow-lg p-8">
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
-              {/* From Section */}
-              <div className="space-y-4">
-                <label className="block text-sm font-semibold text-gray-700 mb-2">
-                  From:
-                </label>
-                <div className="space-y-3">
-                  <input
-                    type="number"
-                    value={fromValue}
-                    onChange={(e) => handleFromValueChange(e.target.value)}
-                    placeholder="Enter value"
-                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent text-lg"
-                  />
-                  <select
-                    value={fromUnit}
-                    onChange={(e) => handleFromUnitChange(e.target.value)}
-                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent text-lg bg-white"
-                  >
-                    {chargeUnits.map((unit) => (
-                      <option key={unit.value} value={unit.value}>
-                        {unit.label}
-                      </option>
-                    ))}
-                  </select>
-                </div>
-              </div>
-
-              {/* Swap Button */}
-              <div className="flex items-center justify-center lg:order-3">
-                <button
-                  onClick={swapUnits}
-                  className="p-3 bg-blue-600 text-white rounded-full hover:bg-blue-700 transition-colors"
-                  title="Swap units"
-                >
-                  <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 7h12m0 0l-4-4m4 4l-4 4m0 6H4m0 0l4 4m-4-4l4-4" />
-                  </svg>
-                </button>
-              </div>
-
-              {/* To Section */}
-              <div className="space-y-4">
-                <label className="block text-sm font-semibold text-gray-700 mb-2">
-                  To:
-                </label>
-                <div className="space-y-3">
-                  <input
-                    type="text"
-                    value={toValue}
-                    readOnly
-                    placeholder="Result will appear here"
-                    className="w-full px-4 py-3 border border-gray-300 rounded-lg bg-gray-50 text-lg text-gray-700"
-                  />
-                  <select
-                    value={toUnit}
-                    onChange={(e) => handleToUnitChange(e.target.value)}
-                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent text-lg bg-white"
-                  >
-                    {chargeUnits.map((unit) => (
-                      <option key={unit.value} value={unit.value}>
-                        {unit.label}
-                      </option>
-                    ))}
-                  </select>
-                </div>
-              </div>
-            </div>
-
-            <div className="text-center mt-6">
-                <button onClick={handleReset} className="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded-full inline-flex items-center transition-colors">
-                    <RotateCcw className="mr-2 h-4 w-4" />
-                    Reset
-                </button>
-            </div>
-
-            {/* Conversion Info */}
-            {fromValue && toValue && (
-              <div className="mt-8 p-4 bg-blue-50 rounded-lg">
-                <p className="text-center text-gray-700">
-                  <span className="font-semibold">{fromValue}</span> {chargeUnits.find(u => u.value === fromUnit)?.label} = 
-                  <span className="font-semibold text-blue-600"> {toValue}</span> {chargeUnits.find(u => u.value === toUnit)?.label}
-                </p>
-              </div>
-            )}
-          </div>
-
-          {/* Popular Conversions */}
-          <div className="mt-8">
-            <h3 className="text-xl font-semibold text-gray-800 mb-4">Popular Electric Charge Conversions</h3>
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-              <div className="bg-white rounded-lg p-4 shadow-md">
-                <h4 className="font-semibold text-gray-700 mb-2">SI Units</h4>
-                <ul className="text-sm text-gray-600 space-y-1">
-                  <li>1 C = 1 A·s</li>
-                  <li>1 kC = 1,000 C</li>
-                  <li>1 mC = 0.001 C</li>
-                </ul>
-              </div>
-              <div className="bg-white rounded-lg p-4 shadow-md">
-                <h4 className="font-semibold text-gray-700 mb-2">Time-based Units</h4>
-                <ul className="text-sm text-gray-600 space-y-1">
-                  <li>1 Ah = 3,600 C</li>
-                  <li>1 A·min = 60 C</li>
-                  <li>1 A·s = 1 C</li>
-                </ul>
-              </div>
-              <div className="bg-white rounded-lg p-4 shadow-md">
-                <h4 className="font-semibold text-gray-700 mb-2">Other Units</h4>
-                <ul className="text-sm text-gray-600 space-y-1">
-                  <li>1 Faraday ≈ 96,485.3321 C</li>
-                  <li>1 statC = 3.336×10⁻¹⁰ C</li>
-                  <li>1 e ≈ 1.602×10⁻¹⁹ C</li>
-                </ul>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
+    <ConverterPageLayout
+      title="Electric Charge"
+      subtitle="Unit Converter"
+      description="Convert between different electric charge units including coulombs, ampere-hours, and faradays."
+      quickConversions={quickConversions}
+      footerText="Built with precision - All electric charge units supported"
+    >
+      <GenericConverterCard
+        title="Electric Charge Converter"
+        description="Convert between different units of electric charge measurement."
+        icon={Zap}
+        units={units}
+        defaultFromUnit="Coulomb"
+        defaultToUnit="Millicoulomb"
+        commonUnits={["Coulomb", "Millicoulomb", "Ampere-hour"]}
+        onConvert={handleConvert}
+      />
+    </ConverterPageLayout>
   );
 };
 

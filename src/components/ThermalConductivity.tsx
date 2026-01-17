@@ -1,69 +1,54 @@
-'use client';
+"use client";
 
-import { useState } from 'react';
-import { Thermometer } from 'lucide-react';
+import { useState } from "react";
+import { Thermometer } from "lucide-react";
+import ConverterPageLayout from "@/components/ConverterPageLayout";
+import GenericConverterCard, { type ConversionHistory, type UnitDefinition } from "@/components/GenericConverterCard";
 
 const ThermalConductivity = () => {
-  const [fromValue, setFromValue] = useState<string>('1');
-  const [toValue, setToValue] = useState<string>('');
-  const [fromUnit, setFromUnit] = useState<string>('watt-per-meter-kelvin');
-  const [toUnit, setToUnit] = useState<string>('btu-per-hour-foot-fahrenheit');
+  const [history, setHistory] = useState<ConversionHistory[]>([]);
 
-  const units = [
-    { value: 'watt-per-meter-kelvin', label: 'Watt/meter·Kelvin [W/(m·K)]', factor: 1 },
-    { value: 'watt-per-centimeter-celsius', label: 'Watt/cm·°C [W/(cm·°C)]', factor: 100 },
-    { value: 'calorie-per-second-centimeter-celsius', label: 'Cal/s·cm·°C', factor: 418.4 },
-    { value: 'btu-per-hour-foot-fahrenheit', label: 'BTU/h·ft·°F', factor: 1.73073 }
+  const handleConvert = (conversion: ConversionHistory) => {
+    setHistory((prev) => [...prev.slice(-9), conversion]);
+  };
+
+  const units: UnitDefinition[] = [
+    { name: "Watt per Meter Kelvin", symbol: "W/(m·K)", factor: 1 },
+    { name: "Watt per Centimeter Celsius", symbol: "W/(cm·°C)", factor: 100 },
+    { name: "Calorie per Second Centimeter Celsius", symbol: "cal/(s·cm·°C)", factor: 418.4 },
+    { name: "BTU per Hour Foot Fahrenheit", symbol: "BTU/(h·ft·°F)", factor: 1.73073 },
+    { name: "BTU Inch per Hour Square Foot Fahrenheit", symbol: "BTU·in/(h·ft²·°F)", factor: 0.144228 },
+    { name: "Kilowatt per Meter Kelvin", symbol: "kW/(m·K)", factor: 1000 },
   ];
 
-  const factorMap = units.reduce((acc, u) => { acc[u.value] = u.factor; return acc; }, {} as Record<string, number>);
-
-  const convert = (value: number, from: string, to: string) => {
-    const base = value * factorMap[from];
-    return base / factorMap[to];
-  };
-
-  const update = (val: string) => {
-    setFromValue(val);
-    if (val === '') { setToValue(''); return; }
-    const n = parseFloat(val);
-    if (!isNaN(n)) {
-      const out = convert(n, fromUnit, toUnit);
-      setToValue(Math.abs(out) < 1e-6 || Math.abs(out) > 1e6 ? out.toExponential(6) : String(out));
-    }
-  };
+  const quickConversions = [
+    { from: "W/(m·K)", to: "W/(cm·°C)", conversion: "1 W/(m·K) = 0.01 W/(cm·°C)" },
+    { from: "W/(m·K)", to: "BTU/(h·ft·°F)", conversion: "1 W/(m·K) = 0.578 BTU/(h·ft·°F)" },
+    { from: "W/(m·K)", to: "cal/(s·cm·°C)", conversion: "1 W/(m·K) = 0.00239 cal/(s·cm·°C)" },
+    { from: "kW/(m·K)", to: "W/(m·K)", conversion: "1 kW/(m·K) = 1000 W/(m·K)" },
+    { from: "BTU/(h·ft·°F)", to: "W/(m·K)", conversion: "1 BTU/(h·ft·°F) = 1.731 W/(m·K)" },
+    { from: "W/(cm·°C)", to: "W/(m·K)", conversion: "1 W/(cm·°C) = 100 W/(m·K)" },
+  ];
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-red-50 to-orange-100 py-8">
-      <div className="container mx-auto px-4">
-        <div className="max-w-3xl mx-auto">
-          <div className="text-center mb-6">
-            <div className="flex items-center justify-center gap-3 mb-4">
-              <Thermometer className="h-8 w-8 text-red-600" />
-              <h1 className="text-3xl font-bold text-gray-900">Thermal Conductivity Converter</h1>
-            </div>
-            <p className="text-gray-600">Convert thermal conductivity between W/(m·K), W/(cm·°C), cal/(s·cm·°C), and more.</p>
-          </div>
-
-          <div className="bg-white rounded-xl shadow p-6">
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-              <div>
-                <input type="number" value={fromValue} onChange={(e) => update(e.target.value)} className="w-full p-3 border rounded" placeholder="Enter value" />
-                <select value={fromUnit} onChange={(e) => { setFromUnit(e.target.value); update(fromValue); }} className="w-full p-3 border rounded mt-2">
-                  {units.map(u => <option key={u.value} value={u.value}>{u.label}</option>)}
-                </select>
-              </div>
-              <div>
-                <input type="text" value={toValue} readOnly className="w-full p-3 border rounded bg-gray-50" placeholder="Result" />
-                <select value={toUnit} onChange={(e) => { setToUnit(e.target.value); update(fromValue); }} className="w-full p-3 border rounded mt-2">
-                  {units.map(u => <option key={u.value} value={u.value}>{u.label}</option>)}
-                </select>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
+    <ConverterPageLayout
+      title="Thermal Conductivity"
+      subtitle="Unit Converter"
+      description="Convert between different units of thermal conductivity measurement with precision."
+      quickConversions={quickConversions}
+      footerText="Built with precision • All thermal conductivity units supported"
+    >
+      <GenericConverterCard
+        title="Thermal Conductivity Converter"
+        description="Convert between different units of thermal conductivity measurement."
+        icon={Thermometer}
+        units={units}
+        defaultFromUnit="W/(m·K)"
+        defaultToUnit="BTU/(h·ft·°F)"
+        commonUnits={["W/(m·K)", "BTU/(h·ft·°F)", "W/(cm·°C)"]}
+        onConvert={handleConvert}
+      />
+    </ConverterPageLayout>
   );
 };
 

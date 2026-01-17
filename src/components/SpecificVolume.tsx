@@ -1,68 +1,53 @@
-'use client';
+"use client";
 
-import { useState } from 'react';
-import { Box } from 'lucide-react';
+import { useState } from "react";
+import { Box } from "lucide-react";
+import ConverterPageLayout from "@/components/ConverterPageLayout";
+import GenericConverterCard, { type ConversionHistory, type UnitDefinition } from "@/components/GenericConverterCard";
 
 const SpecificVolume = () => {
-  const [fromValue, setFromValue] = useState<string>('1');
-  const [toValue, setToValue] = useState<string>('');
-  const [fromUnit, setFromUnit] = useState<string>('cubic-meter-per-kilogram');
-  const [toUnit, setToUnit] = useState<string>('cubic-centimeter-per-gram');
+  const [history, setHistory] = useState<ConversionHistory[]>([]);
 
-  const units = [
-    { value: 'cubic-meter-per-kilogram', label: 'Cubic meter/kg [m³/kg]', factor: 1 },
-    { value: 'cubic-centimeter-per-gram', label: 'Cubic cm/g [cm³/g]', factor: 0.001 },
-    { value: 'cubic-foot-per-pound', label: 'Cubic ft/lb [ft³/lb]', factor: 0.0624279 }
+  const handleConvert = (conversion: ConversionHistory) => {
+    setHistory((prev) => [...prev.slice(-9), conversion]);
+  };
+
+  const units: UnitDefinition[] = [
+    { name: "Cubic Meter per Kilogram", symbol: "m³/kg", factor: 1 },
+    { name: "Cubic Centimeter per Gram", symbol: "cm³/g", factor: 0.001 },
+    { name: "Cubic Foot per Pound", symbol: "ft³/lb", factor: 0.0624279 },
+    { name: "Liter per Kilogram", symbol: "L/kg", factor: 0.001 },
+    { name: "Gallon per Pound", symbol: "gal/lb", factor: 0.008345 },
   ];
 
-  const factorMap = units.reduce((acc, u) => { acc[u.value] = u.factor; return acc; }, {} as Record<string, number>);
-
-  const convert = (value: number, from: string, to: string) => {
-    const base = value * factorMap[from];
-    return base / factorMap[to];
-  };
-
-  const update = (val: string) => {
-    setFromValue(val);
-    if (val === '') { setToValue(''); return; }
-    const n = parseFloat(val);
-    if (!isNaN(n)) {
-      const out = convert(n, fromUnit, toUnit);
-      setToValue(Math.abs(out) < 1e-6 || Math.abs(out) > 1e6 ? out.toExponential(6) : String(out));
-    }
-  };
+  const quickConversions = [
+    { from: "m³/kg", to: "cm³/g", conversion: "1 m³/kg = 1000 cm³/g" },
+    { from: "m³/kg", to: "L/kg", conversion: "1 m³/kg = 1000 L/kg" },
+    { from: "m³/kg", to: "ft³/lb", conversion: "1 m³/kg = 16.02 ft³/lb" },
+    { from: "cm³/g", to: "L/kg", conversion: "1 cm³/g = 1 L/kg" },
+    { from: "ft³/lb", to: "gal/lb", conversion: "1 ft³/lb = 7.48 gal/lb" },
+    { from: "L/kg", to: "gal/lb", conversion: "1 L/kg = 0.12 gal/lb" },
+  ];
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-teal-50 to-cyan-100 py-8">
-      <div className="container mx-auto px-4">
-        <div className="max-w-3xl mx-auto">
-          <div className="text-center mb-6">
-            <div className="flex items-center justify-center gap-3 mb-4">
-              <Box className="h-8 w-8 text-teal-600" />
-              <h1 className="text-3xl font-bold text-gray-900">Specific Volume Converter</h1>
-            </div>
-            <p className="text-gray-600">Convert between m³/kg, cm³/g, and ft³/lb.</p>
-          </div>
-
-          <div className="bg-white rounded-xl shadow p-6">
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-              <div>
-                <input type="number" value={fromValue} onChange={(e) => update(e.target.value)} className="w-full p-3 border rounded" placeholder="Enter value" />
-                <select value={fromUnit} onChange={(e) => { setFromUnit(e.target.value); update(fromValue); }} className="w-full p-3 border rounded mt-2">
-                  {units.map(u => <option key={u.value} value={u.value}>{u.label}</option>)}
-                </select>
-              </div>
-              <div>
-                <input type="text" value={toValue} readOnly className="w-full p-3 border rounded bg-gray-50" placeholder="Result" />
-                <select value={toUnit} onChange={(e) => { setToUnit(e.target.value); update(fromValue); }} className="w-full p-3 border rounded mt-2">
-                  {units.map(u => <option key={u.value} value={u.value}>{u.label}</option>)}
-                </select>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
+    <ConverterPageLayout
+      title="Specific Volume"
+      subtitle="Unit Converter"
+      description="Convert between different units of specific volume measurement with precision."
+      quickConversions={quickConversions}
+      footerText="Built with precision • All specific volume units supported"
+    >
+      <GenericConverterCard
+        title="Specific Volume Converter"
+        description="Convert between different units of specific volume measurement."
+        icon={Box}
+        units={units}
+        defaultFromUnit="m³/kg"
+        defaultToUnit="cm³/g"
+        commonUnits={["m³/kg", "cm³/g", "ft³/lb"]}
+        onConvert={handleConvert}
+      />
+    </ConverterPageLayout>
   );
 };
 
